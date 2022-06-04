@@ -1,6 +1,7 @@
 # Twitch-chat-pioneers
 Utilize Twitch chats and perform sentiment analysis for marketing
 
+
 .
 ├── README.md           <- The top-level README for developers using this project.
 ├── data
@@ -17,5 +18,6 @@ Utilize Twitch chats and perform sentiment analysis for marketing
     ├── adhoc
     ├── config
     └── lib
+
 
 12 directories, 1 file
