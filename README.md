@@ -1,2 +1,2 @@
 # Twitch-chat-pioneers
-Want to utilize the Twitch chat and perform sentiment analysis for marketing
+Utilize Twitch chats and perform sentiment analysis for marketing
