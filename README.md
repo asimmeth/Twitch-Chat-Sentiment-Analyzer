@@ -52,4 +52,3 @@ Project Organization
 
 
 --------
-12 directories, 1 file
