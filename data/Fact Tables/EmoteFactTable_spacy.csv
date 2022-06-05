@@ -1,0 +1,69 @@
+,ID,Emote,Definition 1,Racism Implication?,spacy_polarity
+0,1,Kappa,"Kappa is a Twitch emote that is generally used to relay sarcasm or as an “eye-roll” response to something the Twitch streamer says or does on screen. Known as a “troll” emote, Kappa is often spammed in chat when someone is sarcastic or checking to see if they have the Golden Kappa.",0,0.15
+1,2,LUL,"The acronym LUL stands for “Lame Uncomfortable Laugh.” The LUL Twitch emote is used to express laughter and joy and depicts the late streamer, TotalBuscuit. It is often used on Twitch in the same way that you would use a laugh emote when messaging friends on other platforms.",0,-0.003124999999999989
+2,3,TriHard,The TriHard Twitch emote was created to be used when something exciting is happening on the screen or to help generate hype in a channel. It is the image of the streamer Trihex smiling. Use it when you’re hyped or when the streamer does something exciting.,1,0.3
+3,4,PogChamp,The PogChamp emote is used to express surprise or excitement,0,0.0
+4,5,Pog,The PogChamp emote is used to express surprise or excitement,0,0.0
+5,6,Poggers,The PogChamp emote is used to express surprise or excitement,0,0.0
+6,7,MonkaS,MonkaS is an emote that is often used in Twitch chat when the streamer is going through intense or stressful gameplay moments. It is often spammed to express anxiety when the streamer is upset or worried.,0,0.2
+7,8,VoHiYo,VoHiYo is known by Twitch viewers as the “Weeb” (Weeaboo) emote. VoHiYo has often been used to either refer to someone as a weeb or in reference to anime in general. Others use it to say “Hello” as it was originally intended or at the end of a technical explanation.,0,0.1416666666666667
+8,9,KEKW,The emote is used as a laugh emote on Twitch.,0,0.3
+9,10,PepeLaugh,The PepeLaugh emote is often accompanied by the phrase “Here it comes.” It is used as a laugh emote similar to LUL or the crying laughter emoji due to the image’s teary eyes.,0,-0.0062500000000000056
+10,11,4Head,The 4Head emote is used in response to jokes or memes. It can be used in both a sincere and in a sarcastic way and is often used after someone uses a dad joke or says something cheesy. People should be able to tell its usage with context.,0,0.15
+11,12,5Head,"The 5Head emote is used when the chat, or viewers of a Twitch channel, want to tell the streamer that his statement or gameplay is very smart.",0,0.2785714285714286
+12,13,CmonBruh,The CmonBruh emote is used as a look of confusion or as a response to racist comments. It is often used when someone in Twitch chat says something controversial or confusing.,0,0.12500000000000003
+13,14,Booba,The term is often used when boobs are showcased on the screen or as a way to call out or mock people who are hornyposting.,0,0.0
+14,15,<3,"The Twitch heart emote is a “Twitch purple” colored heart. It is used to express love, happiness, unity, gratitude, or empathy.",0,0.6
+15,16,haHaa,It is commonly used on Twitch to express cringe or nervous laughter when something strangely weird happens on stream or in Twitch chat.,0,-0.4
+16,17,SourPLS,The SourPLS emote is used on Twitch to represent dancing or celebration. It is usually posted when someone is excited or happy about an event. It is also used as a hype emote. The happiness and joy presented in the emote are contagious.,0,0.485
+17,18,MonkaW,Often spammed when a streamer finds themself in an intense situation. It can also be used as mock worry.,0,0.2
+18,19,PauseChamp,This emote is used in Twitch chat when the streamer chooses to build up suspense or there is a feeling of anticipation in the chat.,0,0.0
+19,20,4Weird,"4Weird is used when something strange is happening that causes you to feel weird or become weirded out. It is typically used when someone says something that seems odd, stupid, or disturbing.",0,-0.3638888888888889
+20,21,Sadge,The Sadge meaning is no different. It can be used when another member of the community types that a loved one died yesterday or it can be used at the end of a statement that is a bit cringe mixed with an ironic sense of humor.,0,0.22499999999999998
+21,22,gachiGASM,The gachiGASM emote is used when someone is intensely satisfied or pleased with an event on stream. It is also used as a meme reaction to attraction or suggestive content.,0,0.5
+22,23,Pepehands,The PepeHands emote is used on Twitch when a user is trying to signify sadness (or pretending to be sad) or when the streamer seems upset about something. It is used in the same ways that a sad emote can be used.,0,-0.3333333333333333
+23,24,Jebaited,The Jebaited emote is used when people are baiting for gaming tips or other information. It is also used after a streamer has been Rick-Rolled or when someone trolls the streamer into an obvious joke.,0,-0.0625
+24,25,COGGERS,It is used when a streamer does something cool or exciting.,0,0.32499999999999996
+25,26,MingLee,The MingLee emote is used on Twitch to insinuate laughter or general sassiness. It can also be used in the same way that a general smiling or laughing emote can be used.,1,0.03333333333333335
+26,27,WeirdChamp,"The WeirdChamp emote is used when someone is disappointed or feels let down, usually from something the streamer has said or done. It is also used when somebody says something that seems unbelievable.",0,-0.35138888888888886
+27,28,MonkaGIGA,"Used when someone is trying to convey anxiety, horror, or shock due to something that is happening on stream or in chat.",0,-0.125
+28,29,GayPride,Is used to identify oneself as either a part of the LGBTQ+ community or in support of it.,0,0.0
+29,30,PJSalt,"This means they are upset, frustrated, or bitter about an event that happened on stream, in the chat, or even in a real-life situation.",0,-0.39999999999999997
+30,31,MonkaH,It is generally used when someone surrenders after an argument or sees that the streamer has been beaten when it comes to strategy.,0,0.05000000000000002
+31,32,BlessRNG,Is used on Twitch to “bless a stream” in a tongue-in-cheek way or along with a religious reference.,0,0.0
+32,33,NotLikeThis,Is used on Twitch when something on the stream is going terribly wrong or if a chatter tells a story about a rough event in their real-life or in their own gameplay. It is the perfect emote to use when things just seem to not be going your way.,0,0.25
+33,34,BibleThump,"Is used to express sadness or disappointment, either when the user is truly sad or meming.",0,-0.55
+34,35,SMOrc,"Used on Twitch when someone is being obnoxious, mean, or speaking in all caps.",0,-0.3125
+35,36,MrDestructoid,Is used on Twitch if a channel is suspected of view botting or bringing in fake followers to the channel.,0,-0.5
+36,37,MonkaHmm,Is used when someone is expressing that they are thinking about something or contemplating a decision.,0,0.0
+37,38,FailFish,Is used when someone fails at a task or fails in general. It is often used when the streamer makes a mistake in the game that results in a death or having to redo a portion of the work.,0,-0.3375
+38,39,HeyGuys,Is used on Twitch as a greeting to say “hello” or “Hey Guys.” Many people use it when they first arrive at a channel to greet the streamer and other viewers in the chat.,0,0.20833333333333334
+39,40,SquadW,"Is typically used on Twitch when a streamer or chat user is going on about the double standards in society, getting special favors due to their gender, or acting like a simp. It is typically seen as an anti-sjw emote.",0,-0.01686507936507936
+40,41,gachiBASS,It is used when someone is very happy with something they have just witnessed on the stream.,0,1.0
+41,42,PRChase,"It is generally used in relation to talking about Twitch, as it is the image of the PR director of Twitch, a man named Chase. It can also be used as a general smiling emote.",0,0.05000000000000002
+42,43,CurseLit,"Is used on Twitch to state that something is hot (really, really cool). You will often see it spammed as part of a hype situation along with other hype emotes.",0,0.15833333333333333
+43,44,FeelsBadMan,Is used when something sad or discouraging happens or if you are disappointed or failed at a small task.,0,-0.5
+44,45,FeelsGoodMan,It is used when something good is happening on stream or when your opponent fails.,0,0.09999999999999998
+45,46,Kreygasm,"The Kreygasm Twitch emote is used as a shocked, surprised, or as an excited expression, such as “Wow” or “Holy Crap.” It is also used when something suggestive is said on stream or in chat. It is typically used as a reaction to amazing gameplay.",0,-0.06145833333333334
+46,47,SwiftRage,"The SwiftRage Twitch emote is often used when someone is raging (either from excitement or anger). Viewers will spam it when something frustrating happens on the stream. It is seen as a passionate rage, rather than a tantrum.",0,-0.38333333333333336
+47,48,PogU,"PogU is generally used when a streamer does something cool or exciting, like beat a hard boss in a game. It can also be used to express surprise or shock.",0,0.0016666666666666496
+48,49,TheIlluminati,Is used when people reference or create conspiracy theories or make “Illuminati signs.” It can also be used when something seems sneaky or suspicious on screen.,0,0.0
+49,50,DansGame,Is usually used on Twitch when someone is disgusted or annoyed with something the streamer or chat says or does.,0,-0.5499999999999999
+50,51,BabyRage,Is used to mock someone who is throwing a tantrum for no reason,0,0.0
+51,52,SabaPing,Is used when a server is suffering from ping or low latency.,0,0.0
+52,53,MorphinTime,It is often used in waves of nostalgia or when someone has a fantastic idea.,0,0.4
+53,54,ResidentSleeper,The ResidentSleeper emote is often used on Twitch when a stream or topic is boring.,0,-1.0
+54,55,Seemsgood,"The Seemsgood emote is used on Twitch as a thumbs up emote either when someone does something good, or in a sarcastic way.",0,0.39999999999999997
+55,56,monkaOMEGA,It is used when someone is expressing that they are under a lot of pressure or experiencing anxiety.,0,0.0
+56,57,Wutface,"The Wutface Twitch emote is used to express disbelief or shock. Most often, it is spammed when something surprising happens on stream. ",0,0.6
+57,58,AYAYA,The AYAYA emote is typically used on Twitch as a sign of excitement or pleasure.,0,-0.16666666666666666
+58,59,TheThing,TheThing emote is used on Twitch when someone wants to make a funny face,0,0.225
+59,60,Keepo,"The Keepo emote is used on Twitch in the same way that Kappa is used, to indicate sarcasm.",0,0.0
+60,61,BrokeBack,The BrokeBack emote is used on Twitch when someone does something dopey or if the streamer has a stroke of dumb luck.,0,-0.375
+61,62,widepeepoHappy,This emote is based on the peepoHappy emote and expresses an intenisfied happiness.,0,0.7
+62,63,CoolStoryBob,The CoolStoryBob Twitch emote is used in the celebration of Bob Ross or when someone tells a “cool story.”,0,0.35
+63,64,3Head,"Used when someone says something cheesy, such as a Dad joke.",0,-0.25
+64,65,YEP,An insincere smile that many people use in situations where they want to appear friendly but not be overly social.,0,0.30208333333333337
+65,66,Pepega,It is based on the Pepe the Frog character and is often spammed ironically when someone is perceived as stupid or as having a mental disability. It can also be used when someone does something odd or out of place on the platform.,0,-0.35555555555555557
+66,67,KKona,The KKona Twitch emote is most commonly used as slang for “American” or “Redneck” when someone does something stereotypically American. It can often be seen spammed in a chat where the streamer frequently does things that seem over-the-top to the rest of the world.,0,-0.033333333333333326
+67,68,FeelsBirthdayMan,The FeelsBirthdayMan emote is used when celebrating someone’s birthday or when announcing your own birthday. It is also sometimes used in mock celebration.,0,0.6
