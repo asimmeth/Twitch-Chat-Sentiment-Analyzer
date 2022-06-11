@@ -1,0 +1,5 @@
+##########################
+#system files
+.DS_Store
+notebooks/.DS_Store
+data/.DS_Store
