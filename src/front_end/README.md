@@ -6,6 +6,7 @@ create virtual env using this link (https://packaging.python.org/en/latest/guide
 - python3 -m venv env
 - source env/bin/activate
 - which python
+
 Then run instructions from here (https://dev.to/sm0ke/adminkit-a-modern-bootstrap-5-template-now-available-in-flask-and-django-5aj4) and more info here (https://github.com/app-generator/flask-adminkit)
 - git clone https://github.com/app-generator/flask-adminkit.git
 - cd flask-adminkit
