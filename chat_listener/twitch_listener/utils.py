@@ -1,10 +1,22 @@
 import logging
 import requests
 import json
+from twitch_listener import sqlite_handler
 
 def setup_loggers(name, log_file, level=logging.INFO):
         formatter = logging.Formatter('%(asctime)s — %(message)s')
         handler = logging.FileHandler(log_file)        
+        handler.setFormatter(formatter)
+    
+        logger = logging.getLogger(name)
+        logger.setLevel(level)
+        logger.addHandler(handler)
+
+        return logger
+
+def setup_sqllite_loggers(name, log_file, level=logging.INFO):
+        formatter = logging.Formatter('%(asctime)s — %(message)s')
+        handler = logging.FileHandler(SQLiteHandler('debug_log.sqlite'))        
         handler.setFormatter(formatter)
     
         logger = logging.getLogger(name)

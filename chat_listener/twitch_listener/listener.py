@@ -7,6 +7,7 @@ import re
 import codecs
 from pathlib import Path
 import os
+from twitch_listener import utils
 
 class connect_twitch(socket):
     
@@ -73,6 +74,11 @@ class connect_twitch(socket):
         
         # Collect data while duration not exceeded and channels are live
         while (time() - startTime) < duration: 
+            
+            if len(utils.is_live(channels)) == 0:
+                print("Channels Offline")
+                break
+                
             now = time() # Track loop time for adaptive rate limiting
             ready_socks,_,_ = select.select(self._sockets.values(), [], [], 1)
             for channel in self.joined:
@@ -94,6 +100,8 @@ class connect_twitch(socket):
                         sleep( (60/800) - elapsed) # Rate limit
                 else: # if not in ready_socks
                     pass
+                
+
         if debug:
             print("Collected for " + str(time()-startTime) + " seconds")
         # Close sockets once not collecting data
