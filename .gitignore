@@ -4,3 +4,4 @@
 notebooks/.DS_Store
 data/.DS_Store
 data/*.log
+.ipynb_checkpoints
