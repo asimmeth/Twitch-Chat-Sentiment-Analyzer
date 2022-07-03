@@ -14,9 +14,20 @@
 			<div class="row mb-2 mb-xl-3">
 				<div class="col-auto d-none d-sm-block">
 					<h3><strong>Twitch Sentiment Analytics</strong> Dashboard</h3>
+			<div class="dropdown">
+				  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    Twitch Streamer
+				  </button>
+				  <div class="dropdown-menu" aria-labelledby="Twitch Streamer">
+				    <a class="dropdown-item" href="#">xQcOW</a>
+				    <a class="dropdown-item" href="#">Summit1G</a>
+				    <a class="dropdown-item" href="#">Shroud</a>
+			  </div>
+		</div>
+
 				</div>
 
-				<div class="col-auto ml-auto text-right mt-n1">
+				<!-- <div class="col-auto ml-auto text-right mt-n1">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
 							<li class="breadcrumb-item"><a href="#">AdminKit</a></li>
@@ -25,7 +36,7 @@
 						</ol>
 					</nav>
 				</div>
-			</div>
+			</div> -->
 			<div class="row">
 				<div class="col-xl-6 col-xxl-5 d-flex">
 					<div class="w-100">
@@ -426,6 +437,8 @@
 			});
 		});
 	</script>
+
+	# map graph with coordinates highlighted
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			var markers = [{
@@ -502,7 +515,7 @@
 		});
 	</script>
 
-
+	# adds d3 graph for Twitch listener real time graph(right now random numbers)
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script>
 	function realTimeLineChart() {
@@ -716,6 +729,7 @@
 		d3.select(window).on('resize', resize);
 	});
 	</script>
+
 
 
 
