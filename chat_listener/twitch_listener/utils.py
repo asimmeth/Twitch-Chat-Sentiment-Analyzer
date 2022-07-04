@@ -16,12 +16,19 @@ def setup_loggers(name, log_file, level=logging.INFO):
 
 def setup_sqllite_loggers(name, log_file, level=logging.INFO):
         formatter = logging.Formatter('%(asctime)s — %(message)s')
-        handler = logging.FileHandler(SQLiteHandler('debug_log.sqlite'))        
+        handler = logging.FileHandler(sqlite_handler.SQLiteHandler('db.sqlite3'))        
         handler.setFormatter(formatter)
     
         logger = logging.getLogger(name)
         logger.setLevel(level)
         logger.addHandler(handler)
+        
+        logger = logging.getLogger('someLoggerNameLikeDebugOrWhatever')
+        logger.setLevel(logging.DEBUG)
+        logger.addHandler(SQLiteHandler('db.sqlite3'))
+        logger.debug('Test 1')
+        logger.warning('Some warning')
+        logger.error('Alarma!')
 
         return logger
     

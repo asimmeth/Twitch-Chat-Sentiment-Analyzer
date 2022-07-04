@@ -49,7 +49,8 @@ class connect_twitch(socket):
             
             joinString = f"JOIN #" + channel.lower() + f"\n"
             self._sockets[channel].send(joinString.encode('utf-8'))
-            self._loggers[channel] = utils.setup_loggers(channel, os.getcwd() + '/logs/' + channel + '.log')
+            #self._loggers[channel] = utils.setup_loggers(channel, os.getcwd() + '/logs/' + channel + '.log')
+            self._loggers[channel] = utils.setup_sqllite_loggers(channel, os.getcwd() + '/logs/' + channel + '.log')
             
             self.joined.append(channel)
         
