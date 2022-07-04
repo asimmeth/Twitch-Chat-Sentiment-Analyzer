@@ -69,8 +69,7 @@ def testfn():
 
 @blueprint.route('/recieve_streamer_visitors')
 @login_required
-def get_id():
-   # the_id = request.args.get('button_id')
+def recieve_streamer_visitors():
    streamer_choose_id = request.args.get('streamer_choose_id')
    print(streamer_choose_id)
    if streamer_choose_id == 'xQcOW':
@@ -79,8 +78,92 @@ def get_id():
     return "<p> 2,345,453 </p>"
    elif streamer_choose_id == 'Shroud':
     return "<p> 685,765 </p>" 
-   
-   #return "<p> Select a stream </p>" 
+
+@blueprint.route('/streamer_visitors_perc')
+@login_required
+def streamer_visitors_perc():
+   streamer_choose_id = request.args.get('streamer_choose_id')
+   print(streamer_choose_id)
+   if streamer_choose_id == 'xQcOW':
+    return "<p> 5.25 </p>"
+   elif streamer_choose_id == 'Summit1G':
+    return "<p> -1.25% </p>"
+   elif streamer_choose_id == 'Shroud':
+    return "<p> 0.8% </p>" 
+
+@blueprint.route('/streamer_visitors_earnings')
+@login_required
+def streamer_visitors_earnings():
+   streamer_choose_id = request.args.get('streamer_choose_id')
+   print(streamer_choose_id)
+   if streamer_choose_id == 'xQcOW':
+    return "<p> $21.30 </p>"
+   elif streamer_choose_id == 'Summit1G':
+    return "<p> $1.91 </p>"
+   elif streamer_choose_id == 'Shroud':
+    return "<p> $9.87 </p>" 
+
+@blueprint.route('/streamer_visitors_earnings_perc')
+@login_required
+def streamer_visitors_earnings_perc():
+   streamer_choose_id = request.args.get('streamer_choose_id')
+   print(streamer_choose_id)
+   if streamer_choose_id == 'xQcOW':
+    return "<p> 6.65% </p>"
+   elif streamer_choose_id == 'Summit1G':
+    return "<p> 0.1% </p>"
+   elif streamer_choose_id == 'Shroud':
+    return "<p> 1.34% </p>" 
+
+@blueprint.route('/livestreamed_min')
+@login_required
+def livestreamed_min():
+   streamer_choose_id = request.args.get('streamer_choose_id')
+   print(streamer_choose_id)
+   if streamer_choose_id == 'xQcOW':
+    return "<p>234.83</p>"
+   elif streamer_choose_id == 'Summit1G':
+    return "<p> 12.89</p>"
+   elif streamer_choose_id == 'Shroud':
+    return "<p> 135.30</p>" 
+
+@blueprint.route('/livestreamed_min_perc')
+@login_required
+def livestreamed_min_perc():
+   streamer_choose_id = request.args.get('streamer_choose_id')
+   print(streamer_choose_id)
+   if streamer_choose_id == 'xQcOW':
+    return "<p> 3.65% </p>"
+   elif streamer_choose_id == 'Summit1G':
+    return "<p> -5.3%</p>"
+   elif streamer_choose_id == 'Shroud':
+    return "<p> 2.34% </p>"     
+
+@blueprint.route('/streamer_chats_count')
+@login_required
+def streamer_chats_count():
+   streamer_choose_id = request.args.get('streamer_choose_id')
+   print(streamer_choose_id)
+   if streamer_choose_id == 'xQcOW':
+    return "<p>123.83</p>"
+   elif streamer_choose_id == 'Summit1G':
+    return "<p> 76.89</p>"
+   elif streamer_choose_id == 'Shroud':
+    return "<p> 199.30</p>" 
+
+@blueprint.route('/streamer_chats_perc')
+@login_required
+def streamer_chats_perc():
+   streamer_choose_id = request.args.get('streamer_choose_id')
+   print(streamer_choose_id)
+   if streamer_choose_id == 'xQcOW':
+    return "<p> 5.65% </p>"
+   elif streamer_choose_id == 'Summit1G':
+    return "<p> -0.3%</p>"
+   elif streamer_choose_id == 'Shroud':
+    return "<p> 9.34% </p>"   
+
+
 
 
 @blueprint.route('/refresh_sentiments')
@@ -89,14 +172,7 @@ def get_sentiments():
    num = random.uniform(0, 1)
    print('Hello from refresh_sentiments: ', num)
    return str(num)
-    #    streamer_choose_id = request.args.get('streamer_choose_id')
-    #    print(streamer_choose_id)
-    #    if streamer_choose_id == 'xQcOW':
-    #     return "<p> 1,334,452 </p>"
-    #    elif streamer_choose_id == 'Summit1G':
-    #     return "<p> 2,345,453 </p>"
-    #    elif streamer_choose_id == 'Shroud':
-    #     return "<p> 685,765 </p>"    
+
 
 
 @blueprint.route('/index')

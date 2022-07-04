@@ -54,10 +54,10 @@
 							<div class="col-sm-6">
 								<div class="card">
 									<div class="card-body">
-										<h5 class="card-title mb-4">Sales</h5>
-										<h1 class="mt-1 mb-3">2.382</h1>
+										<h5 class="card-title mb-4">Livestreamed minutes (in '000s)</h5>
+										<h1 class="mt-1 mb-3"><div id='livestreamed_min'></div></h1>
 										<div class="mb-1">
-											<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
+											<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i><div id='livestreamed_min_perc'></div></span>
 											<span class="text-muted">Since last week</span>
 										</div>
 									</div>
@@ -78,7 +78,6 @@
 										
 										<h1 class="mt-1 mb-3"><div id='visitor_count'></div> <div id='streamer_visitors'></div></h1>
 										<!-- <button id="socks.shirt.pants" type='button'> dummy text here</button> -->
-										
 										<!-- <script>
 											$(document).ready(function() {
 											   $("button").click(function(event){
@@ -121,31 +120,8 @@
 													});
 												});
 										    </script> -->
-
-										<script>
-											$(document).ready(function() {
-												$('#streamer_choose').change(function(){
-												  var selVal = $(this).val();
-        										  sessionStorage.setItem("SelItem", selVal);												  
-												  console.log(selVal);
-												  $.ajax({
-													 url: "/recieve_streamer_visitors",
-													 type: "get",
-													 data: {streamer_choose_id: selVal},
-													success: function(response) {
-													$("#streamer_visitors").html(response);
-												  },
-												   error: function(xhr) {
-												 //Do Something to handle error
-												 }
-												});
-											  });
-											});
-										   </script>											
-											
-
 										<div class="mb-1">
-											<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
+											<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> <div id='streamer_visitors_perc'></div></span>
 											<span class="text-muted">Since last week</span>
 										</div>
 									</div>
@@ -155,19 +131,19 @@
 								<div class="card">
 									<div class="card-body">
 										<h5 class="card-title mb-4">Earnings</h5>
-										<h1 class="mt-1 mb-3">$21.300</h1>
+										<h1 class="mt-1 mb-3"><div id='streamer_visitors_earnings'></div></h1>
 										<div class="mb-1">
-											<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
+											<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> <div id='streamer_visitors_earnings_perc'></div></span>
 											<span class="text-muted">Since last week</span>
 										</div>
 									</div>
 								</div>
 								<div class="card">
 									<div class="card-body">
-										<h5 class="card-title mb-4">Orders</h5>
-										<h1 class="mt-1 mb-3">64</h1>
+										<h5 class="card-title mb-4">Total chats</h5>
+										<h1 class="mt-1 mb-3"><div id='streamer_chats_count'></div></h1>
 										<div class="mb-1">
-											<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
+											<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> <div id='streamer_chats_perc'></div></span>
 											<span class="text-muted">Since last week</span>
 										</div>
 									</div>
@@ -1001,7 +977,151 @@
 		
 		
 		</script>
+		<script>
+			$(document).ready(function() {
+				$('#streamer_choose').change(function(){
+					var selVal = $(this).val();
+					sessionStorage.setItem("SelItem", selVal);												  
+					console.log(selVal);
+					$.ajax({
+						url: "/recieve_streamer_visitors",
+						type: "get",
+						data: {streamer_choose_id: selVal},
+					success: function(response) {
+					$("#streamer_visitors").html(response);
+					},
+					error: function(xhr) {
+					//Do Something to handle error
+					}
+				});
+				});
+			});
 
+			$(document).ready(function() {
+				$('#streamer_choose').change(function(){
+					var selVal = $(this).val();
+					sessionStorage.setItem("SelItem", selVal);												  
+					$.ajax({
+						url: "/streamer_visitors_perc",
+						type: "get",
+						data: {streamer_choose_id: selVal},
+					success: function(response) {
+					$("#streamer_visitors_perc").html(response);
+					},
+					error: function(xhr) {
+					//Do Something to handle error
+					}
+				});
+				});
+			});
+			$(document).ready(function() {
+				$('#streamer_choose').change(function(){
+					var selVal = $(this).val();
+					sessionStorage.setItem("SelItem", selVal);												  
+					$.ajax({
+						url: "/streamer_visitors_earnings",
+						type: "get",
+						data: {streamer_choose_id: selVal},
+					success: function(response) {
+					$("#streamer_visitors_earnings").html(response);
+					},
+					error: function(xhr) {
+					//Do Something to handle error
+					}
+				});
+				});
+			});
+			$(document).ready(function() {
+				$('#streamer_choose').change(function(){
+					var selVal = $(this).val();
+					sessionStorage.setItem("SelItem", selVal);												  
+					$.ajax({
+						url: "/streamer_visitors_earnings_perc",
+						type: "get",
+						data: {streamer_choose_id: selVal},
+					success: function(response) {
+					$("#streamer_visitors_earnings").html(response);
+					},
+					error: function(xhr) {
+					//Do Something to handle error
+					}
+				});
+				});
+			});			
+			$(document).ready(function() {
+				$('#streamer_choose').change(function(){
+					var selVal = $(this).val();
+					sessionStorage.setItem("SelItem", selVal);												  
+					$.ajax({
+						url: "/livestreamed_min",
+						type: "get",
+						data: {streamer_choose_id: selVal},
+					success: function(response) {
+					$("#livestreamed_min").html(response);
+					},
+					error: function(xhr) {
+					//Do Something to handle error
+					}
+				});
+				});
+			});					
+			$(document).ready(function() {
+				$('#streamer_choose').change(function(){
+					var selVal = $(this).val();
+					console.log(selVal)
+					sessionStorage.setItem("SelItem", selVal);												  
+					$.ajax({
+						url: "/livestreamed_min_perc",
+						type: "get",
+						data: {streamer_choose_id: selVal},
+					success: function(response) {
+					$("#livestreamed_min_perc").html(response);
+					},
+					error: function(xhr) {
+					//Do Something to handle error
+					}
+				});
+				});
+			});		
+
+			$(document).ready(function() {
+				$('#streamer_choose').change(function(){
+					var selVal = $(this).val();
+					console.log(selVal)
+					sessionStorage.setItem("SelItem", selVal);												  
+					$.ajax({
+						url: "/streamer_chats_count",
+						type: "get",
+						data: {streamer_choose_id: selVal},
+					success: function(response) {
+					$("#streamer_chats_count").html(response);
+					},
+					error: function(xhr) {
+					//Do Something to handle error
+					}
+				});
+				});
+			});		
+			
+			$(document).ready(function() {
+				$('#streamer_choose').change(function(){
+					var selVal = $(this).val();
+					console.log(selVal)
+					sessionStorage.setItem("SelItem", selVal);												  
+					$.ajax({
+						url: "/streamer_chats_perc",
+						type: "get",
+						data: {streamer_choose_id: selVal},
+					success: function(response) {
+					$("#streamer_chats_perc").html(response);
+					},
+					error: function(xhr) {
+					//Do Something to handle error
+					}
+				});
+				});
+			});					
+			</script>	
 
 
 
