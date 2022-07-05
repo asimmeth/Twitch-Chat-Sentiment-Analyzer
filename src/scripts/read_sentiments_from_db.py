@@ -2,7 +2,7 @@ import torch
 import sqlite3
 
 def read_sentiments(model, tokenizer):
-	conn = sqlite3.connect('/Users/Vaibhav_Beohar/Documents/VB_Mck_Docs/MIDS/W210/final_proj/Twitch-chat-pioneers/src/front_end/db.sqlite3')
+	conn = sqlite3.connect('/home/w210/Twitch-chat-pioneers/src/front_end/db.sqlite3')
 
 	MAX_LEN = 160
 	class_names = ['Negative', 'Neutral', 'Positive']
