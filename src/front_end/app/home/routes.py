@@ -174,9 +174,7 @@ def streamer_chats_perc():
 @blueprint.route('/read_random_sentiments')
 @login_required
 def get_rand_sentiments():
-   result = read_sentiments(load_model(), tokenizer)
-   print('Hello from refresh_sentiments: ', result)
-   return result
+   return read_sentiments(load_model(), tokenizer)
 
 
 @blueprint.route('/refresh_sentiments')
