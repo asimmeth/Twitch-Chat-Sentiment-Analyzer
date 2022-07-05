@@ -2,8 +2,10 @@ from load_sentiment_model import load_model
 from transformers import BertTokenizer
 import torch
 import time
-import random
-import string
+# import random
+# import string
+import sqlite3
+import os
 
 begin = time.time()
 PRE_TRAINED_MODEL_NAME = "veb/twitch-bert-base-cased-pytorch" #'models/veb/twitch-bert-base-cased-finetuned'
@@ -42,3 +44,17 @@ print(f'Sentiment  : {class_names[prediction]}')
 
 end = time.time()
 print('Time taken for execution --> ', (end - begin))
+
+
+print(os.getcwd()+'/src/front_end/db.sqlite3')
+connection_obj = sqlite3.connect(os.getcwd()+'/src/front_end/db.sqlite3')
+cursor_obj = connection_obj.cursor()
+cursor_obj.execute("select text, username from streamer_data_sqlite_chats order by RANDOM() limit 1")
+output = cursor_obj.fetchall()
+print(output[0][0])
+print(output[0][1])
+for row in output:
+  print(row[0])
+  print(row[1])
+connection_obj.commit()
+connection_obj.close()  

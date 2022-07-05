@@ -149,6 +149,17 @@
 									</div>
 								</div>
 							</div>
+							<!-- temporary card to show emotions -->
+							<div class="card flex-fill">
+								<div class="card-header">
+			
+									<h5 class="card-title mb-0">Chats and their emotions</h5>
+								</div>
+								<div class="card-body d-flex">
+									<div id='read_random_sentiments'></div>
+								</div>
+							</div>
+							<!-- temporary card to show emotions -->
 						</div>
 					</div>
 				</div>
@@ -167,6 +178,8 @@
 					</div>
 				</div>
 			</div> -->
+
+
 
 
 				<style>
@@ -1120,7 +1133,41 @@
 					}
 				});
 				});
-			});					
+			});
+
+			setInterval(function(){ 
+				//code goes here that will be run every 5 seconds.    
+				$.ajax({
+						url: "/read_random_sentiments",
+						type: "get",
+						data: {},
+					success: function(response) {
+					$("#read_random_sentiments").html(response);
+					},
+					error: function(xhr) {
+					//Do Something to handle error
+					}
+				});
+			}, 3000);
+
+			// $(document).ready(function(){
+			// 	//   refreshTable();
+			// 	//   refresh_sentiments_using_d3();
+			// 	read_random_sentiments();
+			// });
+			
+			// function read_random_sentiments(){
+			// 	$.ajax({
+			// 		url: "/read_random_sentiments",
+			// 		type: "get",
+			// 		success:function(data){
+			// 			$("#read_random_sentiments").html(response);
+			// 			setTimeout(function(){
+			// 				read_random_sentiments(); //this will send request again and again;
+			// 			}, 5000);
+			// 		}
+			// 	});
+			// }
 			</script>	
 
 

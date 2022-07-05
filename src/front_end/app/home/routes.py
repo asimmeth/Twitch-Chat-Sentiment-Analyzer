@@ -9,6 +9,12 @@ from flask_login import login_required, current_user
 from app import login_manager
 from jinja2 import TemplateNotFound
 import random
+import os
+import sqlite3
+
+from src.scripts.load_sentiment_model import load_model, tokenizer
+from scripts.read_sentiments_from_db import read_sentiments
+# connection_obj = sqlite3.connect(os.getcwd()+'/src/front_end/db.sqlite3')
 
 @blueprint.route('/index')
 @login_required
@@ -164,6 +170,13 @@ def streamer_chats_perc():
     return "<p> 9.34% </p>"   
 
 
+
+@blueprint.route('/read_random_sentiments')
+@login_required
+def get_rand_sentiments():
+   result = read_sentiments(load_model(), tokenizer)
+   print('Hello from refresh_sentiments: ', result)
+   return result
 
 
 @blueprint.route('/refresh_sentiments')
