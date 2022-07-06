@@ -14,7 +14,7 @@ def setup_loggers(name, log_file, level=logging.INFO):
 
         return logger
 
-def setup_sqllite_loggers(channel_name, log_file, level=logging.INFO):
+def setup_sqllite_loggers(channel_name, level=logging.INFO):
         formatter = logging.Formatter('%(asctime)s — %(message)s')
         #handler = logging.FileHandler(sqlite_handler.SQLiteHandler('db.sqlite3'))        
         #handler.setFormatter(formatter)

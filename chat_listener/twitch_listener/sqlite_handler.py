@@ -3,6 +3,8 @@ import os
 import sqlite3
 from datetime import datetime
 import re
+import codecs
+import uuid
 
 class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
     """
@@ -11,29 +13,31 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
     def __init__(self, filename, channel_name):
         global db
         self.channel_name = channel_name
+        self.stream_id = str(uuid.uuid4())
+        print(self.stream_id)
+        self.botlist = ['moobot' 'nightbot', 'ohbot',
+                        'deepbot', 'ankhbot', 'vivbot',
+                        'wizebot', 'coebot', 'phantombot',
+                        'xanbot', 'hnlbot', 'streamlabs',
+                        'stay_hydrated_bot', 'botismo', 'streamelements',
+                        'slanderbot', 'fossabot']
+        
         # run the regular Handler __init__
         logging.Handler.__init__(self)
         # Our custom argument
         db = sqlite3.connect(filename) # might need to use self.filename
         
-#         create_query = '''CREATE TABLE IF NOT EXISTS 
-#                             {}(date datetime,
-#                                loggername text,
-#                                filename,
-#                                srclineno integer, 
-#                                func text,
-#                                level text,
-#                                msg text)'''.format(self.channel_name)
         
         create_query = '''CREATE TABLE IF NOT EXISTS 
-                            {}(date datetime,
+                            chats_table(date datetime,
                                username text,
                                message_text text,
-                               channel_name text)'''.format(self.channel_name)
+                               channel_name text,
+                               stream_id text)'''
         db.execute(create_query)
         db.commit()
 
-    def emit(self, record):
+    def emit(self, record, remove_bots = True):
         
          # Set up regex for hex decoding
         ESCAPE_SEQUENCE_RE = re.compile(r'''
@@ -43,11 +47,13 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
             | \\[0-7]{1,3}     # Octal escapes
             | \\N\{[^}]+\}     # Unicode characters by name
             | \\[\\'"abfnrtv]  # Single-character escapes
+            | \\r\\n
             )''', re.UNICODE | re.VERBOSE)
         
         def decode_escapes(s):
             def decode_match(match):
                 return codecs.decode(match.group(0), 'unicode-escape')
+            return ESCAPE_SEQUENCE_RE.sub(decode_match, s)
             
         def _split_line(line, firstLine = False):
 
@@ -62,7 +68,7 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
 
             return splits
         # record.message is the log message
-#         thisdate = datetime.now()
+        thisdate = datetime.now()
         
 #         #parse message
 #         username = None
@@ -99,7 +105,7 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
         elif count == 0:
             pass
         elif count == 1 and not entryInfo:
-            if line.endswith('\\r\\n\'\n'):
+            if line.endswith('\\r\\n\'\n') | line.endswith('\\r\\n\''):
                 split_messages.append(line[:-6])
             else:
                 split_messages.append(line)     
@@ -108,19 +114,21 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
                 split_messages.append(msg)
         # Parse username, message text and (optional) datetime
         data = []          
-
         for message in split_messages:
             username = None
             message_text = None
             row = {}
 
             # Parse message text
-            hash_channel_point = message.find("PRIVMSG #" + channel)
+            hash_channel_point = message.find("PRIVMSG #" + self.channel_name)
             slice_ = message[hash_channel_point:]
 
             slice_point = slice_.find(":") + 1
             message_text = slice_[slice_point:]
-            decoded_txt = decode_escapes(message_text).encode('latin1').decode('utf-8')
+            try:
+                decoded_txt = decode_escapes(message_text).encode('latin1').decode('utf-8')
+            except:
+                decoded_txt = "decoding failure"
             row['text'] = decoded_txt
 
             # Parse username
@@ -136,21 +144,23 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
             else:
                 data.append(row)
          
-        insert_query = '''INSERT INTO {}(
+            insert_query = '''INSERT INTO chats_table(
                                           date, 
                                           username, 
                                           message_text, 
-                                          channel_name) VALUES(?,?,?,?)'''.format(self.channel_name)
-        db.execute(insert_query,
+                                          channel_name,
+                                          stream_id) VALUES(?,?,?,?,?)'''
+            db.execute(insert_query,
             
             (
-                'test',
-                username,
-                decoded_message,
-                record.name
+                thisdate,
+                row['username'],
+                row['text'],
+                self.channel_name,
+                self.stream_id
             )
         )
-        db.commit()
+            db.commit()
 
 
 if __name__ == '__main__':
