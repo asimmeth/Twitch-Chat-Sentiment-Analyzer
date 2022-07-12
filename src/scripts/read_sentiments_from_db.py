@@ -1,8 +1,9 @@
 import torch
 import sqlite3
+import json
 
 def read_sentiments(model, tokenizer):
-	conn = sqlite3.connect('/home/w210/Twitch-chat-pioneers/src/front_end/db.sqlite3')
+	conn = sqlite3.connect('/Users/Vaibhav_Beohar/Documents/VB_Mck_Docs/MIDS/W210/final_proj/Twitch-chat-pioneers/src/front_end/db.sqlite3')
 
 	MAX_LEN = 160
 	class_names = ['Negative', 'Neutral', 'Positive']
@@ -28,9 +29,17 @@ def read_sentiments(model, tokenizer):
 	attention_mask = encoded_review['attention_mask']
 
 	output = model(input_ids, attention_mask)
+
+	prob = torch.nn.functional.softmax(output, dim=1)
+	top_prob = prob.topk(1, dim=1)[0].data[0].numpy()
 	_, prediction = torch.max(output, dim=1)
 
+	pred_class = class_names[prediction]
+	pred_proba = format(top_prob[0], '.6f') if pred_class=='Positive' else format(top_prob[0] * -1, '.6f') if pred_class=='Negative' else 0
 	# print(f'Review text: {msg}')
 	# print(f'Sentiment  : {class_names[prediction]}')
 
-	return '<p>Sentiment for: <B>'+ msg + '</B> sent by user: <B>'+ uname + '</B> is: <B>' + class_names[prediction] + '</B></p>'
+	return json.dumps([{
+		'sentiment_display': '<p>Sentiment for: <B>'+ msg + '</B> sent by user: <B>'+ uname + '</B> is: <B>' + pred_class + '</B></p>', 
+		'prob_score' : pred_proba
+	}])
