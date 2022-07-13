@@ -69,32 +69,8 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
             return splits
         # record.message is the log message
         thisdate = datetime.now()
-        
-#         #parse message
-#         username = None
-#         decoded_message = None
-#         row = {}
-        
-#         # Parse message text
-#         message_text = str(record.msg)
-#         if '.tmi.twitch.tv PRIVMSG #' in message_text:
-#             hash_channel_point = message_text.find("PRIVMSG #" + self.channel_name)
-#             slice_ = message_text[hash_channel_point:]
 
-#             slice_point = slice_.find(":") + 1
-#             message_text = slice_[slice_point:]
-#             try:
-#                 decoded_message = decode_escapes(message_text).encode('latin1').decode('utf-8')
-#             except:
-#                 decoded_message = ''
-
-#             # Parse username
-#             b = message_text.find("b")
-#             exclam = message_text.find("!")
-#             username = message_text[b:exclam][3:]
-
-
- # Separate the raw strings into separate messages
+         # Separate the raw strings into separate messages
         split_messages = []
         line = str(record.msg)
         count = line.count('.tmi.twitch.tv PRIVMSG #')
