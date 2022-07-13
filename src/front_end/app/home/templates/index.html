@@ -41,6 +41,7 @@
 			<div class="dropdown">
 				<label for="cars">Choose a streamer:</label>
 					<select id="streamer_choose">
+						<option value="" selected>Select</option>
 						<option value="xQcOW">xQcOW</option>
 						<option value="Summit1G">Summit1G</option>
 						<option value="Shroud">Shroud</option>
@@ -844,13 +845,9 @@
 	
 	<script>
 		var n = 40,
-			random = d3.randomNormal(0, .2),
-			data = d3.range(n).map(random);
+			random = d3.randomNormal(0, .115);
+		var data = d3.range(n).map(random);
 		
-		console.log(random);
-		// console.log(random);
-		
-
 		var svg = d3.select("svg"),
 			margin = {top: 20, right: 20, bottom: 20, left: 40},
 			width = +svg.attr("width") - margin.left - margin.right,
@@ -1135,20 +1132,32 @@
 				});
 			});
 
-			setInterval(function(){ 
-				//code goes here that will be run every 5 seconds.    
-				$.ajax({
-						url: "/read_random_sentiments",
-						type: "get",
-						data: {},
-					success: function(response) {
-					$("#read_random_sentiments").html(response);
-					},
-					error: function(xhr) {
-					//Do Something to handle error
-					}
-				});
-			}, 3000);
+			$('#streamer_choose').change(function(){
+				var selVal = $(this).val();
+				console.log('Inside the continuous looping function', selVal)
+				// if (selVal == ""){
+						setInterval(function(){ 
+						//code goes here that will be run every 5 seconds.    
+						$.ajax({
+								url: "/read_random_sentiments",
+								type: "get",
+								data: {},
+								dataType:"JSON",
+							success: function(response) {
+								// console.log(response);
+           						console.log(response[0].sentiment_display);
+								console.log(response[0].prob_score);
+								$("#read_random_sentiments").html(response[0].sentiment_display);
+								data.push(response[0].prob_score);
+								// $("#data").html(data[0].sentiment_display);
+							},
+							error: function(xhr) {
+							//Do Something to handle error
+							}
+						});
+					}, 3000);
+				// }
+			});
 
 			// $(document).ready(function(){
 			// 	//   refreshTable();
