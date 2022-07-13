@@ -54,7 +54,7 @@ class connect_twitch(socket):
             
             self.joined.append(channel)
         
-    def listen(self, channels, duration, debug = False, file_path = ''):
+    def listen(self, channels, duration = 1000, until_offline = False, debug = False, file_path = ''):
 
         """
         Method for scraping chat data from Twitch channels.
@@ -73,36 +73,66 @@ class connect_twitch(socket):
         self._join_channels(channels)
         startTime = time()
         
-        # Collect data while duration not exceeded and channels are live
-        while (time() - startTime) < duration: 
-            
-            if len(utils.is_live(channels)) == 0:
-                print("Channels Offline")
-                break
-                
-            now = time() # Track loop time for adaptive rate limiting
-            ready_socks,_,_ = select.select(self._sockets.values(), [], [], 1)
-            for channel in self.joined:
-                sock = self._sockets[channel]
-                if sock in ready_socks:
-                    response = sock.recv(16384)
-                    if b"PING :tmi.twitch.tv\r\n" in response:
-                        sock.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
-                        if debug:
-                            print("\n\n!!Look, a ping: \n")
-                            print(response)
-                            print("\n\n")
-                    else:
-                        self._loggers[channel].info(response)
-                        if debug:
-                            print(response)
-                    elapsed = time() - now
-                    if elapsed < 60/800:
-                        sleep( (60/800) - elapsed) # Rate limit
-                else: # if not in ready_socks
-                    pass
-                
+        if until_offline is False:
+            # Collect data while duration not exceeded and channels are live
+            while (time() - startTime) < duration: 
 
+                if len(utils.is_live(channels)) == 0:
+                    print("Channels Offline")
+                    break
+
+                now = time() # Track loop time for adaptive rate limiting
+                ready_socks,_,_ = select.select(self._sockets.values(), [], [], 1)
+                for channel in self.joined:
+                    sock = self._sockets[channel]
+                    if sock in ready_socks:
+                        response = sock.recv(16384)
+                        if b"PING :tmi.twitch.tv\r\n" in response:
+                            sock.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
+                            if debug:
+                                print("\n\n!!Look, a ping: \n")
+                                print(response)
+                                print("\n\n")
+                        else:
+                            self._loggers[channel].info(response)
+                            if debug:
+                                print(response)
+                        elapsed = time() - now
+                        if elapsed < 60/800:
+                            sleep( (60/800) - elapsed) # Rate limit
+                    else: # if not in ready_socks
+                        pass
+                
+        else:
+            online = True
+            while online: 
+
+                if len(utils.is_live(channels)) == 0:
+                    online = False
+                    print("Channels Offline")
+                    break
+
+                now = time() # Track loop time for adaptive rate limiting
+                ready_socks,_,_ = select.select(self._sockets.values(), [], [], 1)
+                for channel in self.joined:
+                    sock = self._sockets[channel]
+                    if sock in ready_socks:
+                        response = sock.recv(16384)
+                        if b"PING :tmi.twitch.tv\r\n" in response:
+                            sock.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
+                            if debug:
+                                print("\n\n!!Look, a ping: \n")
+                                print(response)
+                                print("\n\n")
+                        else:
+                            self._loggers[channel].info(response)
+                            if debug:
+                                print(response)
+                        elapsed = time() - now
+                        if elapsed < 60/800:
+                            sleep( (60/800) - elapsed) # Rate limit
+                    else: # if not in ready_socks
+                        pass
         if debug:
             print("Collected for " + str(time()-startTime) + " seconds")
         # Close sockets once not collecting data
