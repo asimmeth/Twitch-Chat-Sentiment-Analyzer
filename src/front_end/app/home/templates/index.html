@@ -12,30 +12,39 @@
 
 		<div class="container-fluid p-0">
 
-			<div class="row mb-2 mb-xl-3">
-				<div class="col-auto d-none d-sm-block">
+			<!-- <div class="row mb-2 mb-xl-3"> -->
+				<!-- <div class="col-auto d-none d-sm-block"> -->
 					<h3><strong>Twitch Sentiment Analytics</strong> Dashboard</h3>
-			<!-- <div class="dropdown">
-				  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    Twitch Streamer
-				  </button>
-				  <div class="dropdown-menu" aria-labelledby="Twitch Streamer">
-				    <a class="dropdown-item" href="#">xQcOW</a>
-				    <a class="dropdown-item" href="#">Summit1G</a>
-				    <a class="dropdown-item" href="#">Shroud</a>
-			  	  </div>
-			</div> -->
-				<div class="dropdown">
-					<label for="cars">Choose a streamer:</label>
-						<select id="streamer_choose">
-							<option value="" selected>Select</option>
-							<option value="xQcOW">xQcOW</option>
-							<option value="Summit1G">Summit1G</option>
-							<option value="Shroud">Shroud</option>
-					</select>
-				</div>
-				<div><input class="historic_or_live_feed" type="checkbox" name="historic_or_live_feed" value="1" onchange="valueChanged()"/></div>
-				</div>
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-5 col-md-6" class="p-3 border bg-light">
+								<div class="dropdown">
+									<label for="cars">Choose a streamer:</label>
+										<select id="streamer_choose">
+											<option value="" selected>Select</option>
+											<option value="xQcOW">xQcOW</option>
+											<option value="Summit1G">Summit1G</option>
+											<option value="Shroud">Shroud</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0" class="p-3 border bg-light">
+								<div>
+									<input class="historic_or_live_feed" type="checkbox" name="historic_or_live_feed" value="1" onchange="valueChanged()"/>
+
+									<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+										<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
+										<label class="btn btn-outline-primary" for="btnradio1">Live</label>
+
+										<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+										<label class="btn btn-outline-primary" for="btnradio2">Historic</label>
+									  </div>
+								</div>
+							</div>
+						</div>
+					</div>	
+				
+				<!-- </div> -->
 				<!-- <div class="col-auto ml-auto text-right mt-n1">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
@@ -44,18 +53,8 @@
 							<li class="breadcrumb-item active" aria-current="page">Analytics</li>
 						</ol>
 					</nav>
-				</div>
-			</div> -->
-			<!-- <div class="dropdown">
-				<label for="cars">Choose a streamer:</label>
-					<select id="streamer_choose">
-						<option value="" selected>Select</option>
-						<option value="xQcOW">xQcOW</option>
-						<option value="Summit1G">Summit1G</option>
-						<option value="Shroud">Shroud</option>
-				</select>
-			</div> -->
-
+				</div> -->
+			<!-- </div> -->
 			<div class="row">
 				<div class="col-xl-6 col-xxl-5 d-flex">
 					<div class="w-100">
@@ -245,13 +244,15 @@
 								div.video-background video {
 									z-index: 1 !important;
 								}
-							</style>							
-							<video controls width="800" height="600" loop autoplay>
-								<source src={{ url_for('static', filename="supcaitlin_twitch_recording_2022-07-15.mp4") }} type="video/mp4">
-								<source src={{ url_for('static', filename="supcaitlin_twitch_recording_2022-07-15 at 1.17.29 AM_2.mp4") }} type="video/mp4">
-								<source src={{ url_for('static', filename="criticalrole_twitch_recording_2022-07-15 at 1.14.40 AM.mp4") }} type="video/mp4">
-    							Your browser does not support the video tag.
-							</video>	
+							</style>
+							<div class="ratio ratio-16x9">
+								<video controls width="800" height="600" loop autoplay>
+									<source src={{ url_for('static', filename="supcaitlin_twitch_recording_2022-07-15.mp4") }} type="video/mp4">
+									<source src={{ url_for('static', filename="supcaitlin_twitch_recording_2022-07-15 at 1.17.29 AM_2.mp4") }} type="video/mp4">
+									<source src={{ url_for('static', filename="criticalrole_twitch_recording_2022-07-15 at 1.14.40 AM.mp4") }} type="video/mp4">
+									Your browser does not support the video tag.
+								</video>	
+							</div>	
 						</div>
 					</div>
 				</div>
@@ -1199,17 +1200,32 @@
 			// 	});
 			// }
 
-			function valueChanged(){
-				if($('.historic_or_live_feed').is(":checked")){
-					$("#live_feed").show();
-					$("#historic_feed").hide();
-				}else{
-					$("#live_feed").hide();
-					$("#historic_feed").show();
-				}
-			}
+			// function valueChanged(){
+			// 	if($('.historic_or_live_feed').is(":checked")){
+			// 		$("#live_feed").show();
+			// 		$("#historic_feed").hide();
+			// 	}else{
+			// 		$("#live_feed").hide();
+			// 		$("#historic_feed").show();
+			// 	}
+			// }
+			// $(document).ready(valueChanged);
 
-			$(document).ready(valueChanged);
+			$(document).ready(function () {
+				$('#btnradio1').click(function () {
+					if ($(this).is(':checked')) {
+						$("#live_feed").show();
+						$("#historic_feed").hide();
+					}
+				});
+
+				$('#btnradio2').click(function () {
+					if ($(this).is(':checked')) {
+							$("#live_feed").hide();
+						$("#historic_feed").show();
+					}
+				});
+			});
 
 			</script>	
 
