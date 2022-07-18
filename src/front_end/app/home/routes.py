@@ -14,7 +14,6 @@ import sqlite3
 
 from src.scripts.load_sentiment_model import load_model, tokenizer
 from scripts.read_sentiments_from_db import read_sentiments
-# connection_obj = sqlite3.connect(os.getcwd()+'/src/front_end/db.sqlite3')
 
 @blueprint.route('/index')
 @login_required
@@ -103,11 +102,11 @@ def streamer_visitors_earnings():
    streamer_choose_id = request.args.get('streamer_choose_id')
    print(streamer_choose_id)
    if streamer_choose_id == 'xQcOW':
-    return "<p> $21.30 </p>"
+    return "<p> $21,300 </p>"
    elif streamer_choose_id == 'Summit1G':
-    return "<p> $1.91 </p>"
+    return "<p> $1,910 </p>"
    elif streamer_choose_id == 'Shroud':
-    return "<p> $9.87 </p>" 
+    return "<p> $9,870 </p>" 
 
 @blueprint.route('/streamer_visitors_earnings_perc')
 @login_required
@@ -127,11 +126,11 @@ def livestreamed_min():
    streamer_choose_id = request.args.get('streamer_choose_id')
    print(streamer_choose_id)
    if streamer_choose_id == 'xQcOW':
-    return "<p>234.83</p>"
+    return "<p>23,483</p>"
    elif streamer_choose_id == 'Summit1G':
-    return "<p> 12.89</p>"
+    return "<p> 1,289</p>"
    elif streamer_choose_id == 'Shroud':
-    return "<p> 135.30</p>" 
+    return "<p> 13,530</p>" 
 
 @blueprint.route('/livestreamed_min_perc')
 @login_required
@@ -151,11 +150,11 @@ def streamer_chats_count():
    streamer_choose_id = request.args.get('streamer_choose_id')
    print(streamer_choose_id)
    if streamer_choose_id == 'xQcOW':
-    return "<p>123.83</p>"
+    return "<p>123,830</p>"
    elif streamer_choose_id == 'Summit1G':
-    return "<p> 76.89</p>"
+    return "<p> 76,890</p>"
    elif streamer_choose_id == 'Shroud':
-    return "<p> 199.30</p>" 
+    return "<p> 199,300</p>" 
 
 @blueprint.route('/streamer_chats_perc')
 @login_required
