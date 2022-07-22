@@ -34,10 +34,22 @@ def setup_sqllite_loggers(channel_name, level=logging.INFO):
     
 def is_live(channel_list):
     
+    live_channels = []
     for channel in channel_list:
         contents = requests.get('https://www.twitch.tv/' +channel).content.decode('utf-8')
 
-        if 'isLiveBroadcast' not in contents:
-            channel_list.remove(channel)
+        if 'isLiveBroadcast' in contents:
+            live_channels.append(channel)
         
-    return channel_list
+    return live_channels
+
+def get_broadcast_id(channel_list, client_id, o_auth_api):
+    
+    id_list = {}
+    for channel in channel_list:
+        contents = requests.get('https://api.twitch.tv/helix/users?login=' + channel,
+                        headers={"Authorization":o_auth_api, "Client-Id": client_id}).content.decode('utf-8')
+        user_data = json.loads(contents)
+        id_list[channel] = user_data['data'][0]['id']  
+        
+    return id_list

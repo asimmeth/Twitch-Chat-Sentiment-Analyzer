@@ -13,7 +13,7 @@ import json
 
 class connect_twitch(socket):
     
-    def __init__(self, nickname, oauth, client_id, oauth_2):
+    def __init__(self, nickname, oauth, client_id, oauth_api):
 
         self.nickname = nickname
         
@@ -22,6 +22,11 @@ class connect_twitch(socket):
             self.oauth = oauth
         else:
             self.oauth = 'oauth:' + oauth
+        
+        if oauth_api.startswith('Bearer'):
+            self.oauth_api = oauth_api
+        else:
+            self.oauth_api = 'Bearer ' + oauth_api
         self.botlist = ['moobot' 'nightbot', 'ohbot',
                         'deepbot', 'ankhbot', 'vivbot',
                         'wizebot', 'coebot', 'phantombot',
@@ -35,10 +40,7 @@ class connect_twitch(socket):
         self._passString = f"PASS " + self.oauth + f"\n"
         self._nameString = f"NICK " + self.nickname + f"\n"
         
-        if oauth.startswith('oauth:'):
-            self.oauth_2 = oauth_2
-        else:
-            self.oauth_2 = 'Bearer ' + oauth_2
+
         
         
         
@@ -46,11 +48,11 @@ class connect_twitch(socket):
     def _join_channels(self, channels):
 
         self._sockets = {}
-        self.joined = []
+        self.joined = {}
         self._loggers = {}
         
         # Establish socket connections
-        for channel in channels:
+        for channel, broadcast_id in channels.items():
             self._sockets[channel] = socket()
             self._sockets[channel].connect((self._server, self._port))
             self._sockets[channel].send(self._passString.encode('utf-8'))
@@ -61,7 +63,7 @@ class connect_twitch(socket):
             #self._loggers[channel] = utils.setup_loggers(channel, os.getcwd() + '/logs/' + channel + '.log')
             self._loggers[channel] = utils.setup_sqllite_loggers(channel)
             
-            self.joined.append(channel)
+            self.joined[channel] = broadcast_id
         
     def listen(self, channels, duration = 1000, until_offline = False, debug = False, file_path = ''):
 
@@ -77,8 +79,7 @@ class connect_twitch(socket):
                  - Debugging feature, will likely be removed in later version.
         """
 
-        if type(channels) is str:
-            channels = [channels]
+        
         self._join_channels(channels)
         startTime = time()
         
@@ -92,7 +93,7 @@ class connect_twitch(socket):
 
                 now = time() # Track loop time for adaptive rate limiting
                 ready_socks,_,_ = select.select(self._sockets.values(), [], [], 1)
-                for channel in self.joined:
+                for channel, broadcast_id in self.joined.items():
                     sock = self._sockets[channel]
                     if sock in ready_socks:
                         response = sock.recv(16384)
@@ -103,12 +104,11 @@ class connect_twitch(socket):
                                 print(response)
                                 print("\n\n")
                         else:
-                            contents = requests.get('https://api.twitch.tv/helix/channels?broadcaster_id=59299632',
-                                        headers={"Authorization":self.oauth_2, "Client-Id": self.client_id}).content.decode('utf-8')
+                            contents = requests.get('https://api.twitch.tv/helix/channels?broadcaster_id=' + broadcast_id,
+                                        headers={"Authorization":self.oauth_api,
+                                                 "Client-Id": self.client_id}).content
 
-                            res = json.loads(contents)
-                            res['data'][0]['game_name']
-                            self._loggers[channel].info(response, contents)
+                            self._loggers[channel].info(response + contents)
                             if debug:
                                 print(response)
                         elapsed = time() - now
@@ -128,7 +128,7 @@ class connect_twitch(socket):
 
                 now = time() # Track loop time for adaptive rate limiting
                 ready_socks,_,_ = select.select(self._sockets.values(), [], [], 1)
-                for channel in self.joined:
+                for channel, broadcast_id in self.joined.items():
                     sock = self._sockets[channel]
                     if sock in ready_socks:
                         response = sock.recv(16384)
@@ -139,7 +139,11 @@ class connect_twitch(socket):
                                 print(response)
                                 print("\n\n")
                         else:
-                            self._loggers[channel].info(response)
+                            contents = requests.get('https://api.twitch.tv/helix/channels?broadcaster_id=' + broadcast_id,
+                                        headers={"Authorization":self.oauth_api,
+                                                 "Client-Id": self.client_id}).content
+
+                            self._loggers[channel].info(response + contents)
                             if debug:
                                 print(response)
                         elapsed = time() - now

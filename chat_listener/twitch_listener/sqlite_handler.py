@@ -5,6 +5,9 @@ from datetime import datetime
 import re
 import codecs
 import uuid
+import json
+import unicodedata
+
 
 class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
     """
@@ -14,7 +17,6 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
         global db
         self.channel_name = channel_name
         self.stream_id = str(uuid.uuid4())
-        print(self.stream_id)
         self.botlist = ['moobot' 'nightbot', 'ohbot',
                         'deepbot', 'ankhbot', 'vivbot',
                         'wizebot', 'coebot', 'phantombot',
@@ -33,12 +35,13 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
                                username text,
                                message_text text,
                                channel_name text,
+                               stream_topic text,
+                               stream_title text,
                                stream_id text)'''
         db.execute(create_query)
         db.commit()
 
     def emit(self, record, remove_bots = True):
-        
          # Set up regex for hex decoding
         ESCAPE_SEQUENCE_RE = re.compile(r'''
             ( \\U........      # 8-digit hex escapes
@@ -49,6 +52,7 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
             | \\[\\'"abfnrtv]  # Single-character escapes
             | \\r\\n
             )''', re.UNICODE | re.VERBOSE)
+        
         
         def decode_escapes(s):
             def decode_match(match):
@@ -72,7 +76,17 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
 
          # Separate the raw strings into separate messages
         split_messages = []
-        line = str(record.msg)
+        record_str = str(record.msg)
+ 
+        split_log = record_str.split("{\"data\":[")
+    
+        #repaired_log = split_log[1][:-3].decode('ascii')
+       # print(repaired_log)
+        repaired_log = decode_escapes(split_log[1][:-3])
+        user_log = json.loads(repaired_log)
+        line = split_log[0]
+        
+
         count = line.count('.tmi.twitch.tv PRIVMSG #')
         entryInfo = 'Your host is tmi.twitch.tv' in line or 'End of /NAMES list\\r\\n' in line
         if entryInfo:
@@ -125,7 +139,9 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
                                           username, 
                                           message_text, 
                                           channel_name,
-                                          stream_id) VALUES(?,?,?,?,?)'''
+                                          stream_topic,
+                                          stream_title,
+                                          stream_id) VALUES(?,?,?,?,?,?,?)'''
             db.execute(insert_query,
             
             (
@@ -133,6 +149,8 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
                 row['username'],
                 row['text'],
                 self.channel_name,
+                user_log['game_name'],
+                user_log['title'],
                 self.stream_id
             )
         )
