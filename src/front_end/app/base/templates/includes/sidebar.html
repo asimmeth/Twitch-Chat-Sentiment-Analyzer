@@ -2,8 +2,10 @@
 		<nav id="sidebar" class="sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="index.html">
-					<span class="align-middle">AdminKit</span>
+				<!--					<span class="align-middle">Twitch Chat Pioneers</span> -->
 				</a>
+
+				<p style="text-align:center;"><img style="max-width: 40%;max-height: 40%;" src= {{url_for('static',filename = 'twitch_logo.png')}}></p>
 
 				<ul class="sidebar-nav">
 					<li class="sidebar-header">
@@ -13,6 +15,12 @@
 					<li class="sidebar-item {% if 'index' in segment %} active {% endif %}">
 						<a class="sidebar-link" href="/">
 							<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+						</a>
+					</li>
+
+					<li class="sidebar-item {% if 'blank' in segment %} active {% endif %}">
+						<a class="sidebar-link" href="pages-purpose.html">
+							<i class="align-middle" data-feather="book"></i> <span class="align-middle">Purpose</span>
 						</a>
 					</li>
 
@@ -34,13 +42,13 @@
 						</a>
 					</li> -->
 
-					<li class="sidebar-item {% if 'blank' in segment %} active {% endif %}">
+<!-- 					<li class="sidebar-item {% if 'blank' in segment %} active {% endif %}">
 						<a class="sidebar-link" href="pages-blank.html">
 							<i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span>
 						</a>
-					</li>
+					</li> -->
 
-					<li class="sidebar-item">
+<!-- 					<li class="sidebar-item">
 						<a href="#auth" data-toggle="collapse" class="sidebar-link collapsed">
 							<i class="align-middle" data-feather="users"></i> <span class="align-middle">Auth</span>
 						</a>
@@ -48,7 +56,7 @@
 							<li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Sign In</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Sign Up</a></li>
 						</ul>
-					</li>
+					</li> -->
 
 					<!-- <li class="sidebar-header">
 						Tools & Components
@@ -68,7 +76,7 @@
 						</ul>
 					</li>
  -->
-					<li class="sidebar-item {% if 'icons' in segment %} active {% endif %}">
+					<!-- <li class="sidebar-item {% if 'icons' in segment %} active {% endif %}">
 						<a class="sidebar-link" href="icons-feather.html">
               				<i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Icons</span>
             			</a>
@@ -88,7 +96,7 @@
 						<a class="sidebar-link" href="tables-bootstrap.html">
               				<i class="align-middle" data-feather="list"></i> <span class="align-middle">Tables</span>
             			</a>
-					</li>
+					</li> -->
 
 					<!-- <li class="sidebar-header">
 						Plugins & Addons
@@ -106,9 +114,9 @@
             			</a>
 					</li>
  -->
-					<li class="sidebar-header">
+					<!-- <li class="sidebar-header">
 						Auth
-					</li>
+					</li> -->
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="{{ url_for('base_blueprint.logout') }}">
               				<i class="align-middle" data-feather="log-out"></i>

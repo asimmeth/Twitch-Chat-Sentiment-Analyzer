@@ -4,7 +4,8 @@
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
-
+	<style>
+	</style>
 {% block content %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
@@ -15,12 +16,26 @@
 			<!-- <div class="row mb-2 mb-xl-3"> -->
 				<!-- <div class="col-auto d-none d-sm-block"> -->
 					<h3><strong>Twitch Sentiment Analytics</strong> Dashboard</h3>
-					<div class="container">
+					<label for="cars">Choose a streamer:</label>
+									<select id="streamer_choose" style="width:200px;">
+										<option value="" selected>Select</option>
+										<option value="xQcOW">xQcOW</option>
+										<option value="Summit1G">Summit1G</option>
+										<option value="Shroud">Shroud</option>
+									</select>
+									<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+										<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
+										<label class="btn btn-outline-primary" for="btnradio1">Live</label>
+
+										<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+										<label class="btn btn-outline-primary" for="btnradio2">Recorded</label>
+									</div>									
+					<!-- <div class="container">
 						<div class="row">
 							<div class="col-sm-5 col-md-6" class="p-3 border bg-light">
-								<div class="dropdown">
+								<div class="select">
 									<label for="cars">Choose a streamer:</label>
-										<select id="streamer_choose">
+										<select id="streamer_choose" style="width:200px;">
 											<option value="" selected>Select</option>
 											<option value="xQcOW">xQcOW</option>
 											<option value="Summit1G">Summit1G</option>
@@ -37,12 +52,12 @@
 										<label class="btn btn-outline-primary" for="btnradio1">Live</label>
 
 										<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-										<label class="btn btn-outline-primary" for="btnradio2">Historic</label>
+										<label class="btn btn-outline-primary" for="btnradio2">Recorded</label>
 									  </div>
 								</div>
 							</div>
 						</div>
-					</div>	
+					</div>	 -->
 				
 				<!-- </div> -->
 				<!-- <div class="col-auto ml-auto text-right mt-n1">
@@ -85,25 +100,6 @@
 
 										
 										<h1 class="mt-1 mb-3"><div id='visitor_count'></div> <div id='streamer_visitors'></div></h1>
-										<!-- <button id="socks.shirt.pants" type='button'> dummy text here</button> -->
-										<!-- <script>
-											$(document).ready(function() {
-											   $("button").click(function(event){
-												  var the_id = event.target.id;
-												  $.ajax({
-													 url: "/recieve_data",
-													 type: "get",
-													 data: {button_id: the_id},
-													success: function(response) {
-													$("#response").html(response);
-												  },
-												   error: function(xhr) {
-												 //Do Something to handle error
-												 }
-												});
-											  });
-											});
-										   </script> -->
 										   <script>
 											window.onload = function() {
 												var selItem = sessionStorage.getItem("selItem");  
@@ -188,7 +184,7 @@
 				<style>
 					.line {
 						fill: none;
-						stroke: #000;
+						stroke: rgb(0, 0, 0);
 						stroke-width: 1.5px;
 					}
 				</style>
@@ -221,10 +217,26 @@
 											}
 										});
 									}
-									</script>
+								</script>
 								<!-- <canvas id="chartjs-dashboard-line"></canvas> -->
 								<!-- <div id="chart"></div> -->
-								<svg width="800" height="500"></svg>
+								<style>
+									div.video-background {
+										z-index: 99999;
+									}
+									div.video-background video {
+										z-index: 1 !important;
+									}
+								</style>
+								<div class="ratio ratio-16x9">
+									<video controls width="800" height="600" loop autoplay>
+										<source src={{ url_for('static', filename="supcaitlin_twitch_recording_2022-07-15.mp4") }} type="video/mp4">
+										<source src={{ url_for('static', filename="supcaitlin_twitch_recording_2022-07-15 at 1.17.29 AM_2.mp4") }} type="video/mp4">
+										<source src={{ url_for('static', filename="criticalrole_twitch_recording_2022-07-15 at 1.14.40 AM.mp4") }} type="video/mp4">
+										Your browser does not support the video tag.
+									</video>	
+								</div>
+								<svg width="800" height="200" id="svg1"></svg>
 							</div>
 						</div>
 					</div>
@@ -252,7 +264,8 @@
 									<source src={{ url_for('static', filename="criticalrole_twitch_recording_2022-07-15 at 1.14.40 AM.mp4") }} type="video/mp4">
 									Your browser does not support the video tag.
 								</video>	
-							</div>	
+							</div>
+							<svg width="800" height="200" id="chart"></svg>							
 						</div>
 					</div>
 				</div>
@@ -260,8 +273,8 @@
 			</div>
 
 
-
-			<div class="row">
+<!-- Commenting out Browser usage card -->
+<!-- 			<div class="row">
 				<div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
 					<div class="card flex-fill w-100">
 						<div class="card-header">
@@ -295,8 +308,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+				</div> -->
+<!-- Commenting out most active streams card -->
+<!-- 				<div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
 					<div class="card flex-fill w-100">
 						<div class="card-header">
 
@@ -322,9 +336,9 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 
-			<div class="row">
+<!-- 			<div class="row">
 				<div class="col-12 col-lg-8 col-xxl-9 d-flex">
 					<div class="card flex-fill">
 						<div class="card-header">
@@ -418,14 +432,14 @@
 			</div>
 
 		</div>
-	</main>
+	</main> -->
 
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
 
-	<script>
+<!-- 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
 			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
@@ -494,8 +508,8 @@
 				}
 			});
 		});
-	</script>
-	<script>
+	</script> -->
+<!-- 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			// Pie chart
 			new Chart(document.getElementById("chartjs-dashboard-pie"), {
@@ -522,8 +536,8 @@
 				}
 			});
 		});
-	</script>
-	<script>
+	</script> -->
+<!-- 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			// Bar chart
 			new Chart(document.getElementById("chartjs-dashboard-bar"), {
@@ -566,10 +580,10 @@
 				}
 			});
 		});
-	</script>
+	</script> -->
 
-	# map graph with coordinates highlighted
-	<script>
+	 <!-- map graph with coordinates highlighted -->
+	<!-- <script>
 		document.addEventListener("DOMContentLoaded", function() {
 			var markers = [{
 					coords: [31.230391, 121.473701],
@@ -643,9 +657,9 @@
 				nextArrow: "<span class=\"fas fa-chevron-right\" title=\"Next month\"></span>",
 			});
 		});
-	</script>
+	</script> -->
 
-	# adds d3 graph for Twitch listener real time graph(right now random numbers)
+	<!-- # adds d3 graph for Twitch listener real time graph(right now random numbers) -->
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<!-- <script>
 	function realTimeLineChart() {
@@ -803,9 +817,6 @@
 		return chart;
 	}
 
-
-
-
 	var lineArr = [];
 	var MAX_LENGTH = 100;
 	var duration = 500;
@@ -860,8 +871,6 @@
 	});
 	</script> -->
 
-
-
 	
 	<script>
 		// https://bl.ocks.org/mbostock/1642874
@@ -870,7 +879,7 @@
 			random = d3.randomNormal(0, .115);
 		var data = d3.range(n).map(random);
 		
-		var svg = d3.select("svg"),
+		var svg = d3.select("#svg1"),
 			margin = {top: 20, right: 20, bottom: 20, left: 40},
 			width = +svg.attr("width") - margin.left - margin.right,
 			height = +svg.attr("height") - margin.top - margin.bottom,
@@ -893,11 +902,13 @@
 		.append("rect")
 			.attr("width", width)
 			.attr("height", height);
-		
+
 		g.append("g")
 			.attr("class", "axis axis--x")
 			.attr("transform", "translate(0," + y(0) + ")")
-			.call(d3.axisBottom(x));
+			.call(d3.axisBottom(x))
+			.append("line")
+    		.attr("x1", "100%");
 		
 		g.append("g")
 			.attr("class", "axis axis--y")
@@ -912,7 +923,7 @@
 			.duration(500)
 			.ease(d3.easeLinear)
 			.on("start", tick);
-		
+
 		function tick() {
 				// Push a new data point onto the back.
 				data.push(random());
@@ -933,81 +944,115 @@
 				data.shift();
 			}
 
-		// https://bl.ocks.org/mbostock/1642874
-		// function refresh_sentiments_using_d3(){
-		// 	// console.log(' ===> ', data_point);
-			
-		// 	var n = 40,
-		// 	random = d3.randomNormal(0, .2),
-		// 	data = d3.range(n).map(random);
-		
-		// 	console.log(' ===> ', data);
 
-		// 	var svg = d3.select("svg"),
-		// 		margin = {top: 20, right: 20, bottom: 20, left: 40},
-		// 		width = +svg.attr("width") - margin.left - margin.right,
-		// 		height = +svg.attr("height") - margin.top - margin.bottom,
-		// 		g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-			
-		// 	var x = d3.scaleLinear()
-		// 		.domain([0, n - 1])
-		// 		.range([0, width]);
-			
-		// 	var y = d3.scaleLinear()
-		// 		.domain([-1, 1])
-		// 		.range([height, 0]);
-			
-		// 	var line = d3.line()
-		// 		.x(function(d, i) { return x(i); })
-		// 		.y(function(d, i) { return y(d); });
-			
-		// 	g.append("defs").append("clipPath")
-		// 		.attr("id", "clip")
-		// 	.append("rect")
-		// 		.attr("width", width)
-		// 		.attr("height", height);
-			
-		// 	g.append("g")
-		// 		.attr("class", "axis axis--x")
-		// 		.attr("transform", "translate(0," + y(0) + ")")
-		// 		.call(d3.axisBottom(x));
-			
-		// 	g.append("g")
-		// 		.attr("class", "axis axis--y")
-		// 		.call(d3.axisLeft(y));
-			
-		// 	g.append("g")
-		// 		.attr("clip-path", "url(#clip)")
-		// 	.append("path")
-		// 		.datum(data)
-		// 		.attr("class", "line")
-		// 	.transition()
-		// 		.duration(500)
-		// 		.ease(d3.easeLinear)
-		// 		.on("start", tick);
 
-		// 	function tick() {
-		// 		// Push a new data point onto the back.
-		// 		data.push(random());
-		// 		// data.push(data_point);
-				
-		// 		// Redraw the line.
-		// 		d3.select(this)
-		// 			.attr("d", line)
-		// 			.attr("transform", null);
-				
-		// 		// Slide it to the left.
-		// 		d3.active(this)
-		// 			.attr("transform", "translate(" + x(-1) + ",0)")
-		// 			.transition()
-		// 			.on("start", tick);
-				
-		// 		// Pop the old data point off the front.
-		// 		data.shift();
-		// 	}
-		// }	
-		
-		
+		////////////////////////////////////////////////////////////
+		////////////////////// Set-up  /////////////////////////////
+		////////////////////////////////////////////////////////////
+		const margin_chart = {
+		left: 80,
+		right: 80,
+		top: 30,
+		bottom: 30
+		};
+
+		//Actual graph smaller than svg container 
+		var width = $('#chart').width() - margin_chart.left - margin_chart.right;
+		var height = $('#chart').height() - margin_chart.top - margin_chart.bottom;
+
+		//yAxis
+		const yDomain = [0, 70];
+		const yTickValues = [0, 10, 20, 30, 40, 50, 60, 70];
+
+		const TIME_INTERVAL = 1000;
+
+		//xAxis domain-> 10 seconds 
+		const originalTime1 = "1970-01-01T00:00:00",
+		originalTime2 = "1970-01-01T00:00:10";
+
+		var date1 = new Date(originalTime1).getTime(),
+		date2 = new Date(originalTime2).getTime();
+
+		////////////////////////////////////////////////////////////
+		///////////////////////// SVG //////////////////////////////
+		//////////////////////////////////////////////////////////// 
+
+		const svg_chart = d3.select("#chart")
+		.append("svg")
+		.attr("width", width + margin_chart.left + margin_chart.right)
+		.attr("height", height + margin_chart.top + margin_chart.bottom);
+
+		const g_chart = svg_chart.append("g")
+		.attr("transform", "translate(" + margin_chart.left + ", " + margin_chart.top + ")");
+
+		////////////////////////////////////////////////////////////
+		///////////////////// Axes & Scales ////////////////////////
+		////////////////////////////////////////////////////////////
+
+		var xAxisGroup = g_chart.append("g")
+		.attr("class", "x-axis");
+
+		// HACK: draw white rectangle over the fading axis
+		g_chart.append('rect')
+		.attr('fill', 'white')
+		.attr('width', margin_chart.left)
+		.attr('height', margin_chart.bottom)
+		.attr('x', -margin_chart.left)
+		.attr('y', height - margin_chart.bottom);
+
+		var yAxisGroup = g_chart.append("g")
+		.attr("class", "y-axis");
+
+		//Dynamic
+		var xScale = d3.scaleTime();
+
+		//Fixed
+		var yScale = d3.scaleLinear()
+		.domain([yDomain[0], yDomain[1]])
+		.range([height - margin_chart.bottom, 0]);
+
+		const xAxis = d3.axisBottom(xScale)
+		.ticks(d3.timeSecond.every(1))
+		.tickSizeInner(15)
+		.tickFormat(d3.timeFormat("%M:%S"));
+
+		const yAxis = d3.axisLeft()
+		.scale(yScale)
+		.tickValues(yTickValues)
+		.tickFormat(d3.format(".0f"));
+
+		////////////////////////////////////////////////////////////
+		/////////////////////// Function ///////////////////////////
+		////////////////////////////////////////////////////////////
+
+		function draw() {
+
+		//Update xAxis scale
+		xScale.domain([date1, date2])
+			.range([0, width]);
+
+		//Call axes
+		xAxisGroup.attr("transform", "translate(0," + (height - margin_chart.bottom) + ")")
+			.transition()
+			.duration(1000)
+			// See here for the change:
+			.ease(d3.easeLinear)
+			.call(xAxis);
+
+		yAxisGroup.call(yAxis);
+
+		date1 += TIME_INTERVAL;
+		date2 += TIME_INTERVAL;
+
+		};
+
+		////////////////////////////////////////////////////////////
+		///////////////////////// Main /////////////////////////////
+		////////////////////////////////////////////////////////////
+		$(document).ready(function() {
+			setInterval(draw, 3000);
+		});
+
 		</script>
 		<script>
 			$(document).ready(function() {
@@ -1212,15 +1257,18 @@
 			// $(document).ready(valueChanged);
 
 			$(document).ready(function () {
+				var e = document.getElementById("streamer_choose");
+				var strUser = e.value;
+				console.log(strUser)
 				$('#btnradio1').click(function () {
-					if ($(this).is(':checked')) {
+					if ($(this).is(':checked') && (strUser!=null || strUser==undefined)) {
 						$("#live_feed").show();
 						$("#historic_feed").hide();
 					}
 				});
 
 				$('#btnradio2').click(function () {
-					if ($(this).is(':checked')) {
+					if ($(this).is(':checked') && (strUser!=null || strUser==undefined)) {
 							$("#live_feed").hide();
 						$("#historic_feed").show();
 					}
