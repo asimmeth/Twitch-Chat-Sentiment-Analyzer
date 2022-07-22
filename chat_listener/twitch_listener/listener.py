@@ -8,10 +8,12 @@ import codecs
 from pathlib import Path
 import os
 from twitch_listener import utils
+import requests
+import json
 
 class connect_twitch(socket):
     
-    def __init__(self, nickname, oauth, client_id):
+    def __init__(self, nickname, oauth, client_id, oauth_2):
 
         self.nickname = nickname
         
@@ -32,6 +34,13 @@ class connect_twitch(socket):
         self._port = 6667
         self._passString = f"PASS " + self.oauth + f"\n"
         self._nameString = f"NICK " + self.nickname + f"\n"
+        
+        if oauth.startswith('oauth:'):
+            self.oauth_2 = oauth_2
+        else:
+            self.oauth_2 = 'Bearer ' + oauth_2
+        
+        
         
 
     def _join_channels(self, channels):
@@ -94,7 +103,12 @@ class connect_twitch(socket):
                                 print(response)
                                 print("\n\n")
                         else:
-                            self._loggers[channel].info(response)
+                            contents = requests.get('https://api.twitch.tv/helix/channels?broadcaster_id=59299632',
+                                        headers={"Authorization":self.oauth_2, "Client-Id": self.client_id}).content.decode('utf-8')
+
+                            res = json.loads(contents)
+                            res['data'][0]['game_name']
+                            self._loggers[channel].info(response, contents)
                             if debug:
                                 print(response)
                         elapsed = time() - now
