@@ -16,13 +16,13 @@ from src.scripts.load_sentiment_model import load_model, tokenizer
 from scripts.read_sentiments_from_db import read_sentiments
 
 @blueprint.route('/index')
-@login_required
+# @login_required
 def index():
 
     return render_template('index.html', segment='index')
 
 @blueprint.route('/<template>')
-@login_required
+# @login_required
 def route_template(template):
 
     try:
@@ -58,7 +58,7 @@ def get_segment( request ):
         return None  
 
 @blueprint.route('/test')
-@login_required
+# @login_required
 def testfn():
     # GET request
     if request.method == 'GET':
@@ -73,7 +73,7 @@ def testfn():
 
 
 @blueprint.route('/recieve_streamer_visitors')
-@login_required
+# @login_required
 def recieve_streamer_visitors():
    streamer_choose_id = request.args.get('streamer_choose_id')
    print(streamer_choose_id)
@@ -85,7 +85,7 @@ def recieve_streamer_visitors():
     return "<p> 685,765 </p>" 
 
 @blueprint.route('/streamer_visitors_perc')
-@login_required
+# @login_required
 def streamer_visitors_perc():
    streamer_choose_id = request.args.get('streamer_choose_id')
    print(streamer_choose_id)
@@ -97,7 +97,7 @@ def streamer_visitors_perc():
     return "<p> 0.8% </p>" 
 
 @blueprint.route('/streamer_visitors_earnings')
-@login_required
+# @login_required
 def streamer_visitors_earnings():
    streamer_choose_id = request.args.get('streamer_choose_id')
    print(streamer_choose_id)
@@ -109,7 +109,7 @@ def streamer_visitors_earnings():
     return "<p> $9,870 </p>" 
 
 @blueprint.route('/streamer_visitors_earnings_perc')
-@login_required
+# @login_required
 def streamer_visitors_earnings_perc():
    streamer_choose_id = request.args.get('streamer_choose_id')
    print(streamer_choose_id)
@@ -121,7 +121,7 @@ def streamer_visitors_earnings_perc():
     return "<p> 1.34% </p>" 
 
 @blueprint.route('/livestreamed_min')
-@login_required
+# @login_required
 def livestreamed_min():
    streamer_choose_id = request.args.get('streamer_choose_id')
    print(streamer_choose_id)
@@ -133,7 +133,7 @@ def livestreamed_min():
     return "<p> 13,530</p>" 
 
 @blueprint.route('/livestreamed_min_perc')
-@login_required
+# @login_required
 def livestreamed_min_perc():
    streamer_choose_id = request.args.get('streamer_choose_id')
    print(streamer_choose_id)
@@ -145,7 +145,7 @@ def livestreamed_min_perc():
     return "<p> 2.34% </p>"     
 
 @blueprint.route('/streamer_chats_count')
-@login_required
+# @login_required
 def streamer_chats_count():
    streamer_choose_id = request.args.get('streamer_choose_id')
    print(streamer_choose_id)
@@ -157,7 +157,7 @@ def streamer_chats_count():
     return "<p> 199,300</p>" 
 
 @blueprint.route('/streamer_chats_perc')
-@login_required
+# @login_required
 def streamer_chats_perc():
    streamer_choose_id = request.args.get('streamer_choose_id')
    print(streamer_choose_id)
@@ -171,13 +171,13 @@ def streamer_chats_perc():
 
 
 @blueprint.route('/read_random_sentiments')
-@login_required
+# @login_required
 def get_rand_sentiments():
    return read_sentiments(load_model(), tokenizer)
 
 
 @blueprint.route('/refresh_sentiments')
-@login_required
+# @login_required
 def get_sentiments():
    num = random.uniform(0, 1)
    print('Hello from refresh_sentiments: ', num)
@@ -186,6 +186,6 @@ def get_sentiments():
 
 
 @blueprint.route('/index')
-@login_required
+# @login_required
 def home():
    return render_template('index.html')

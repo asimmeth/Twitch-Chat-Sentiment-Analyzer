@@ -258,14 +258,16 @@
 								}
 							</style>
 							<div class="ratio ratio-16x9">
-								<video controls width="800" height="600" loop autoplay>
+								<video controls width="800" height="300" loop autoplay>
 									<source src={{ url_for('static', filename="supcaitlin_twitch_recording_2022-07-15.mp4") }} type="video/mp4">
 									<source src={{ url_for('static', filename="supcaitlin_twitch_recording_2022-07-15 at 1.17.29 AM_2.mp4") }} type="video/mp4">
 									<source src={{ url_for('static', filename="criticalrole_twitch_recording_2022-07-15 at 1.14.40 AM.mp4") }} type="video/mp4">
 									Your browser does not support the video tag.
 								</video>	
 							</div>
-							<svg width="800" height="200" id="chart"></svg>							
+							<!-- <svg width="800" height="200" id="chart"></svg>-->
+							<div id="observablehq-chart-a3cd3ab6"></div>
+							
 						</div>
 					</div>
 				</div>
@@ -1274,9 +1276,15 @@
 					}
 				});
 			});
-
-			</script>	
-
-
+		</script>	
+		
+		<script type="module">
+		import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+		import define from "https://api.observablehq.com/@vbeohar/line-chart-tooltip.js?v=3";
+		new Runtime().module(define, name => {
+		  if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-a3cd3ab6"));
+		  return ["focus"].includes(name);
+		});
+		</script>
 
 {% endblock javascripts %}
