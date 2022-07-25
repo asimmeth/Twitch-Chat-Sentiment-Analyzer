@@ -32,11 +32,16 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
         
         create_query = '''CREATE TABLE IF NOT EXISTS 
                             chats_table(date datetime,
+                               stream_date datetime,
+                               stream_length INTEGER,
                                username text,
                                message_text text,
                                channel_name text,
                                stream_topic text,
                                stream_title text,
+                               chatter_count INTEGER,
+                               viewer_count INTEGER,
+                               follower_count INTEGER,
                                stream_id text)'''
         db.execute(create_query)
         db.commit()
@@ -78,14 +83,17 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
         split_messages = []
         record_str = str(record.msg)
  
-        split_log = record_str.split("{\"data\":[")
+        split_log = record_str.split("||||")
     
-        #repaired_log = split_log[1][:-3].decode('ascii')
-       # print(repaired_log)
-        repaired_log = decode_escapes(split_log[1][:-3])
-        user_log = json.loads(repaired_log)
+        repaired_names = decode_escapes(split_log[1])
+        user_log = json.loads(repaired_names)
+        followers = decode_escapes(split_log[2])
+        followers_log = json.loads(followers)
         line = split_log[0]
-        
+        chatter_count = int(split_log[3])
+        viewer_count = int(split_log[4])
+        stream_date = split_log[5]
+        stream_length = int(split_log[6][:-1])
 
         count = line.count('.tmi.twitch.tv PRIVMSG #')
         entryInfo = 'Your host is tmi.twitch.tv' in line or 'End of /NAMES list\\r\\n' in line
@@ -136,21 +144,31 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
          
             insert_query = '''INSERT INTO chats_table(
                                           date, 
+                                          stream_date,
+                                          stream_length,
                                           username, 
                                           message_text, 
                                           channel_name,
                                           stream_topic,
                                           stream_title,
-                                          stream_id) VALUES(?,?,?,?,?,?,?)'''
+                                          chatter_count,
+                                          viewer_count,
+                                          follower_count,
+                                          stream_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)'''
             db.execute(insert_query,
             
             (
                 thisdate,
+                stream_date,
+                stream_length,
                 row['username'],
                 row['text'],
                 self.channel_name,
-                user_log['game_name'],
-                user_log['title'],
+                user_log['data'][0]['game_name'],
+                user_log['data'][0]['title'],
+                chatter_count,
+                viewer_count,
+                followers_log['total'],
                 self.stream_id
             )
         )
