@@ -102,11 +102,11 @@ def streamer_visitors_earnings():
    streamer_choose_id = request.args.get('streamer_choose_id')
    print(streamer_choose_id)
    if streamer_choose_id == 'xQcOW':
-    return "<p> $21,300 </p>"
+    return "<p> 300 </p>"
    elif streamer_choose_id == 'Summit1G':
-    return "<p> $1,910 </p>"
+    return "<p> 910 </p>"
    elif streamer_choose_id == 'Shroud':
-    return "<p> $9,870 </p>" 
+    return "<p> 870 </p>" 
 
 @blueprint.route('/streamer_visitors_earnings_perc')
 # @login_required

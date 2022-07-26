@@ -21,7 +21,8 @@ def setup_sqllite_loggers(channel_name, level=logging.INFO):
     
         logger = logging.getLogger(channel_name)
         logger.setLevel(level)
-        logger.addHandler(sqlite_handler.SQLiteHandler('db.sqlite3', channel_name))
+        logger.addHandler(sqlite_handler.SQLiteHandler('/home/w210/Twitch-chat-pioneers/src/front_end/db.sqlite3'
+                                                       , channel_name))
         
 #         logger = logging.getLogger('someLoggerNameLikeDebugOrWhatever')
 #         logger.setLevel(logging.DEBUG)

@@ -10,6 +10,8 @@ import os
 from twitch_listener import utils
 import requests
 import json
+from datetime import datetime
+import urllib.request, json 
 
 class connect_twitch(socket):
     
@@ -39,6 +41,8 @@ class connect_twitch(socket):
         self._port = 6667
         self._passString = f"PASS " + self.oauth + f"\n"
         self._nameString = f"NICK " + self.nickname + f"\n"
+        
+        self.bytes_seperator = bytes("||||", 'utf-8')
         
 
         
@@ -82,6 +86,7 @@ class connect_twitch(socket):
         
         self._join_channels(channels)
         startTime = time()
+        start_time = datetime.now()
         
         if until_offline is False:
             # Collect data while duration not exceeded and channels are live
@@ -104,11 +109,34 @@ class connect_twitch(socket):
                                 print(response)
                                 print("\n\n")
                         else:
-                            contents = requests.get('https://api.twitch.tv/helix/channels?broadcaster_id=' + broadcast_id,
-                                        headers={"Authorization":self.oauth_api,
-                                                 "Client-Id": self.client_id}).content
+                            contents_name = requests.get('https://api.twitch.tv/helix/channels?broadcaster_id=' + broadcast_id,
+                                headers={"Authorization":self.oauth_api,
+                                         "Client-Id": self.client_id}).content
 
-                            self._loggers[channel].info(response + contents)
+                            followers = requests.get('https://api.twitch.tv/helix/users/follows?to_id=' + broadcast_id,
+                                headers={"Authorization":self.oauth_api,
+                                         "Client-Id": self.client_id}).content
+                            stream_length = datetime.now() - start_time
+                            td_mins = int(round(stream_length.total_seconds() / 60))
+                            
+                            with urllib.request.urlopen('https://tmi.twitch.tv/group/user/{}/chatters'.format(channel)) as url:
+                                chatter_count = json.loads(url.read().decode())['chatter_count']
+                                
+                            if chatter_count > 5000:
+                                viewer_count = round(chatter_count / .7)
+                            elif chatter_count < 5000:
+                                viewer_count = round(chatter_count / .8)
+                            else:
+                                viewer_count = round(chatter_count / .8)
+                                  
+                            self._loggers[channel].info(response + self.bytes_seperator 
+                                                + contents_name + self.bytes_seperator 
+                                                + followers + self.bytes_seperator
+                                                + bytes(str(chatter_count),'utf-8') + self.bytes_seperator
+                                                + bytes(str(viewer_count),'utf-8') + self.bytes_seperator 
+                                                + bytes(str(start_time),'utf-8') + self.bytes_seperator       
+                                                + bytes(str(td_mins), 'utf-8')) 
+
                             if debug:
                                 print(response)
                         elapsed = time() - now
@@ -139,11 +167,35 @@ class connect_twitch(socket):
                                 print(response)
                                 print("\n\n")
                         else:
-                            contents = requests.get('https://api.twitch.tv/helix/channels?broadcaster_id=' + broadcast_id,
+                            contents_name = requests.get('https://api.twitch.tv/helix/channels?broadcaster_id=' + broadcast_id,
+                                        headers={"Authorization":self.oauth_api,
+                                                 "Client-Id": self.client_id}).content
+                            
+                            followers = requests.get('https://api.twitch.tv/helix/users/follows?to_id=' + broadcast_id,
                                         headers={"Authorization":self.oauth_api,
                                                  "Client-Id": self.client_id}).content
 
-                            self._loggers[channel].info(response + contents)
+                            stream_length = datetime.now() - start_time
+                            td_mins = int(round(stream_length.total_seconds() / 60))
+                                  
+                            with urllib.request.urlopen('https://tmi.twitch.tv/group/user/{}/chatters'.format(channel)) as url:
+                                chatter_count = json.loads(url.read().decode())['chatter_count']
+                                
+                            if chatter_count > 5000:
+                                viewer_count = round(chatter_count / .7)
+                            elif chatter_count < 5000:
+                                viewer_count = round(chatter_count / .8)
+                            else:
+                                viewer_count = round(chatter_count / .8)
+                                  
+                            self._loggers[channel].info(response + self.bytes_seperator 
+                                                + contents_name + self.bytes_seperator 
+                                                + followers + self.bytes_seperator
+                                                + bytes(str(chatter_count),'utf-8') + self.bytes_seperator
+                                                + bytes(str(viewer_count),'utf-8') + self.bytes_seperator 
+                                                + bytes(str(start_time),'utf-8') + self.bytes_seperator       
+                                                + bytes(str(td_mins), 'utf-8')) 
+
                             if debug:
                                 print(response)
                         elapsed = time() - now
@@ -156,211 +208,4 @@ class connect_twitch(socket):
         # Close sockets once not collecting data
         for channel in self.joined:
             self._sockets[channel].close()
- 
-
-##### Deprecated #########
-    def _split_line(self, line, firstLine = False):
-        
-        prefix = line[:28]        
-        if firstLine:
-            line = line.split('End of /NAMES list\\r\\n')[1]        
-        splits = [message for ind, message in enumerate(line.split("\\r\\n")) 
-                  if 'PRIVMSG' in message or ind == 0] 
-        for i, case in enumerate(splits):
-            if firstLine or i != 0:
-                splits[i] = prefix + splits[i]
-            
-        return splits
-
-    def parse_logs(self, channels = [], timestamp = True, remove_bots = False, file_path = ''):
-
-        """
-        Method for converting raw data from text logs into .CSV format.
-
-        Parameters:
-            timestamp (boolean, optional) 
-                - Whether or not to include the timestamp of chat messages. 
-                - Note: timestamps represent when message 
-                    was retrieved, not sent
-            channels (list, optional)     
-                - List of channel usernames for whom the text logs 
-                    will be parsed into csv format.
-                - If none are specified, the channels that are 
-                    currently joined will be parsed
-            remove_bots (bool, optional)
-                - Whether or not to exclude messages sent by common bot accounts
-        """
-
-        # Check if specific list of channels is given
-        if len(channels) == 0:
-            try:
-                channels = self.joined
-            except:
-                print("Please either connect to channels, \
-                      or specify a list of log files to parse.")
-                
-        if Path(file_path).exists() is False:
-            try: 
-                os.mkdir(file_path) 
-            except OSError as error: 
-                print("Failed to make chats directory")  
-        
-        # Set up regex for hex decoding
-        ESCAPE_SEQUENCE_RE = re.compile(r'''
-            ( \\U........      # 8-digit hex escapes
-            | \\u....          # 4-digit hex escapes
-            | \\x..            # 2-digit hex escapes
-            | \\[0-7]{1,3}     # Octal escapes
-            | \\N\{[^}]+\}     # Unicode characters by name
-            | \\[\\'"abfnrtv]  # Single-character escapes
-            )''', re.UNICODE | re.VERBOSE)
-        
-        def decode_escapes(s):
-            def decode_match(match):
-                return codecs.decode(match.group(0), 'unicode-escape')
-        
-            return ESCAPE_SEQUENCE_RE.sub(decode_match, s)
-        
-        # Check if string given for channe;s
-        if type(channels) == str:
-            channels = [channels]
-            
-        # Retrieve data from logs
-        for channel in channels:
-            if not channel.endswith(".log"):
-                filename = os.getcwd() + '/logs/' + channel + ".log"
-            lines = []
-            with open(filename) as f:
-                for line in f:
-                    if line not in lines:
-                        lines.append(line)
-                        
-            # Separate the raw strings into separate messages 
-            split_messages = []
-            for line in lines:
-                count = line.count('.tmi.twitch.tv PRIVMSG #')
-                entryInfo = 'Your host is tmi.twitch.tv' in line or 'End of /NAMES list\\r\\n' in line
-                if entryInfo:
-                    pass
-                
-                elif count == 0:
-                    pass
-                elif count == 1 and not entryInfo:
-                    if line.endswith('\\r\\n\'\n'):
-                        split_messages.append(line[:-6])
-                    else:
-                        split_messages.append(line)     
-                else:
-                    for msg in self._split_line(line):
-                        split_messages.append(msg)
-            
-            # Parse username, message text and (optional) datetime
-            data = []          
-            for message in split_messages:
-                username = None
-                message_text = None
-                datetime = None
-                row = {}
-                
-                # Parse message text
-                hash_channel_point = message.find("PRIVMSG #" + channel)
-                slice_ = message[hash_channel_point:]
-                
-                slice_point = slice_.find(":") + 1
-                message_text = slice_[slice_point:]
-                decoded_txt = decode_escapes(message_text).encode('latin1').decode('utf-8')
-                row['text'] = decoded_txt
-                
-                # Parse username
-                b = message.find("b")
-                exclam = message.find("!")
-                username = message[b:exclam][3:]
-                row['username'] = username
-                
-                # Parse timestamp 
-                # (note: dates are in weirdo American format)
-                if timestamp:
-                    datetime = message[:23] 
-                    row['timestamp'] = datetime
-            
-                # Store observations
-                if remove_bots and row['username'] in self.botlist:
-                    pass
-                else:
-                    data.append(row)
-            
-            # Write data to file
-            if len(data) > 0:
-                pd.DataFrame(data).to_csv(file_path + channel + ".csv", index = False)
-                        
-    def adj_matrix(self, channels = [], weighted = True, matrix_name = None, 
-                     ignore_bots = True):
-        
-        """
-        Generates an adjacency matrix between streamers, where a tie indicates
-        that one (or more) users commented in the chats of both streamers.
-        Note: on average, the time taken to create the matrix will increase 
-        with the square of the number of chat logs being analysed. Larger
-        numbers of logs can take long periods of time to generate a matrix from.
-        
-        Parameters:
-            channels (list, optional)
-                - Indicate a list of channels to create a matrix for. If no 
-                value is given, currently joined channels will be used.
-            weighted (boolean, optional)
-                - Indicate whether ties should be weighted by the number of 
-                common users, or simply be binary.
-            filename (string, optional)
-                - Name to give the association matrix .CSV file.
-            ignore_bots (boolean, optional)
-                - Whether or not to ignore bots when finding ties between 
-                streamers.
-        """
-        
-        # Check if specific list of channels is given
-        if len(channels) == 0:
-            try:
-                channels = self.joined
-            except:
-                print("Please either connect to channels, \
-                      or specify a list of csv files to analyse.")
-        
-        # Get unique users in each stramer's chat
-        users = {}
-        for channel in channels:
-            if not channel.endswith(".csv"):
-                filename = channel + ".csv"    
-            else:
-                filename = channel
-            try:    
-                df = pd.read_csv(filename)
-                users[channel] = df.username.unique()
-            except:
-                print("Couldn't find %s" % filename)
-        
-        matrix = pd.DataFrame(columns = users.keys(), index = users.keys())
-        
-        # Finding ties in the network
-        for chan in users.keys():
-            for chan2 in users.keys():
-                if chan == chan2 :
-                    pass
-                else:
-                    value = 0
-                    for name in users[chan]:
-                        if name in users[chan2]:
-                            if not ignore_bots or name not in self.bot_list:
-                                value += 1
-                    if not weighted and value > 0:
-                        value = 1
-                    matrix[chan].loc[chan2] = value
-                    
-        # Naming the matrix 
-        if matrix_name != None:
-            if not matrix_name.endswith(".csv"):
-                matrix_name = matrix_name + ".csv"
-            matrix.to_csv(matrix_name)
-        else:
-            matrix.to_csv("twitch_association_matrix.csv")
-
         
