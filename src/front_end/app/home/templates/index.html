@@ -16,20 +16,44 @@
 			<!-- <div class="row mb-2 mb-xl-3"> -->
 				<!-- <div class="col-auto d-none d-sm-block"> -->
 					<h3><strong>Twitch Sentiment Analytics</strong> Dashboard</h3>
-					<label for="cars">Choose a streamer:</label>
-									<select id="streamer_choose" style="width:200px;">
-										<option value="" selected>Select</option>
+									<label for="cars">Choose a streamer:</label>
+									<select id="streamer_choose" style="width:150px;">
+										<option value="" selected>Select streamer</option>
 										<option value="xQcOW">xQcOW</option>
 										<option value="Summit1G">Summit1G</option>
 										<option value="Shroud">Shroud</option>
 									</select>
+									<label for="cars"></label>
+									<label for="cars"></label>
+									<label for="cars"></label>
+									<label for="cars">Choose a date:</label>
+									<select id="streamer_date" style="width:150px;">
+										<option value="" selected>Select date</option>
+										<option value="07-26-2022">Jul 26, 2022</option>
+										<option value="07-25-2022">Jul 25, 2022</option>
+										<option value="07-24-2022">Jul 24, 2022</option>
+										<option value="07-23-2022">Jul 23, 2022</option>
+										<option value="07-22-2022">Jul 22, 2022</option>
+										<option value="07-21-2022">Jul 21, 2022</option>
+										<option value="07-20-2022">Jul 20, 2022</option>
+										<option value="07-19-2022">Jul 19, 2022</option>
+										<option value="07-18-2022">Jul 18, 2022</option>
+									</select>
+									<label for="cars"></label>
+									<label for="cars"></label>
+									<label for="cars"></label>
 									<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
 										<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
 										<label class="btn btn-outline-primary" for="btnradio1">Live</label>
 
 										<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
 										<label class="btn btn-outline-primary" for="btnradio2">Recorded</label>
-									</div>									
+									</div>
+									<label for="cars"></label>
+									<label for="cars"></label>
+									<label for="cars"></label>
+									<button type="button" id="submitBtn" class="btn btn-primary">Refresh</button>
+
 					<!-- <div class="container">
 						<div class="row">
 							<div class="col-sm-5 col-md-6" class="p-3 border bg-light">
@@ -360,6 +384,7 @@
 									<th>Name</th>
 									<th class="d-none d-xl-table-cell">Start Date</th>
 									<th class="d-none d-xl-table-cell">End Date</th>
+
 									<th>Status</th>
 									<th class="d-none d-md-table-cell">Assignee</th>
 								</tr>
@@ -1064,149 +1089,149 @@
 
 		</script>
 		<script>
-			$(document).ready(function() {
-				$('#streamer_choose').change(function(){
-					var selVal = $(this).val();
-					sessionStorage.setItem("SelItem", selVal);												  
-					console.log(selVal);
-					$.ajax({
-						url: "/recieve_streamer_visitors",
-						type: "get",
-						data: {streamer_choose_id: selVal},
-					success: function(response) {
-					$("#streamer_visitors").html(response);
-					},
-					error: function(xhr) {
-					//Do Something to handle error
-					}
-				});
-				});
-			});
+			// $(document).ready(function() {
+			// 	$('#streamer_choose').change(function(){
+			// 		var selVal = $(this).val();
+			// 		sessionStorage.setItem("SelItem", selVal);												  
+			// 		console.log(selVal);
+			// 		$.ajax({
+			// 			url: "/recieve_streamer_visitors",
+			// 			type: "get",
+			// 			data: {streamer_choose_id: selVal},
+			// 		success: function(response) {
+			// 		$("#streamer_visitors").html(response);
+			// 		},
+			// 		error: function(xhr) {
+			// 		//Do Something to handle error
+			// 		}
+			// 	});
+			// 	});
+			// });
 
-			$(document).ready(function() {
-				$('#streamer_choose').change(function(){
-					var selVal = $(this).val();
-					sessionStorage.setItem("SelItem", selVal);												  
-					$.ajax({
-						url: "/streamer_visitors_perc",
-						type: "get",
-						data: {streamer_choose_id: selVal},
-					success: function(response) {
-					$("#streamer_visitors_perc").html(response);
-					},
-					error: function(xhr) {
-					//Do Something to handle error
-					}
-				});
-				});
-			});
-			$(document).ready(function() {
-				$('#streamer_choose').change(function(){
-					var selVal = $(this).val();
-					sessionStorage.setItem("SelItem", selVal);												  
-					$.ajax({
-						url: "/streamer_visitors_earnings",
-						type: "get",
-						data: {streamer_choose_id: selVal},
-					success: function(response) {
-					$("#streamer_visitors_earnings").html(response);
-					},
-					error: function(xhr) {
-					//Do Something to handle error
-					}
-				});
-				});
-			});
-			$(document).ready(function() {
-				$('#streamer_choose').change(function(){
-					var selVal = $(this).val();
-					sessionStorage.setItem("SelItem", selVal);												  
-					$.ajax({
-						url: "/streamer_visitors_earnings_perc",
-						type: "get",
-						data: {streamer_choose_id: selVal},
-					success: function(response) {
-					$("#streamer_visitors_earnings").html(response);
-					},
-					error: function(xhr) {
-					//Do Something to handle error
-					}
-				});
-				});
-			});			
-			$(document).ready(function() {
-				$('#streamer_choose').change(function(){
-					var selVal = $(this).val();
-					sessionStorage.setItem("SelItem", selVal);												  
-					$.ajax({
-						url: "/livestreamed_min",
-						type: "get",
-						data: {streamer_choose_id: selVal},
-					success: function(response) {
-					$("#livestreamed_min").html(response);
-					},
-					error: function(xhr) {
-					//Do Something to handle error
-					}
-				});
-				});
-			});					
-			$(document).ready(function() {
-				$('#streamer_choose').change(function(){
-					var selVal = $(this).val();
-					console.log(selVal)
-					sessionStorage.setItem("SelItem", selVal);												  
-					$.ajax({
-						url: "/livestreamed_min_perc",
-						type: "get",
-						data: {streamer_choose_id: selVal},
-					success: function(response) {
-					$("#livestreamed_min_perc").html(response);
-					},
-					error: function(xhr) {
-					//Do Something to handle error
-					}
-				});
-				});
-			});		
+			// $(document).ready(function() {
+			// 	$('#streamer_choose').change(function(){
+			// 		var selVal = $(this).val();
+			// 		sessionStorage.setItem("SelItem", selVal);												  
+			// 		$.ajax({
+			// 			url: "/streamer_visitors_perc",
+			// 			type: "get",
+			// 			data: {streamer_choose_id: selVal},
+			// 		success: function(response) {
+			// 		$("#streamer_visitors_perc").html(response);
+			// 		},
+			// 		error: function(xhr) {
+			// 		//Do Something to handle error
+			// 		}
+			// 	});
+			// 	});
+			// });
+			// $(document).ready(function() {
+			// 	$('#streamer_choose').change(function(){
+			// 		var selVal = $(this).val();
+			// 		sessionStorage.setItem("SelItem", selVal);												  
+			// 		$.ajax({
+			// 			url: "/streamer_visitors_earnings",
+			// 			type: "get",
+			// 			data: {streamer_choose_id: selVal},
+			// 		success: function(response) {
+			// 		$("#streamer_visitors_earnings").html(response);
+			// 		},
+			// 		error: function(xhr) {
+			// 		//Do Something to handle error
+			// 		}
+			// 	});
+			// 	});
+			// });
+			// $(document).ready(function() {
+			// 	$('#streamer_choose').change(function(){
+			// 		var selVal = $(this).val();
+			// 		sessionStorage.setItem("SelItem", selVal);												  
+			// 		$.ajax({
+			// 			url: "/streamer_visitors_earnings_perc",
+			// 			type: "get",
+			// 			data: {streamer_choose_id: selVal},
+			// 		success: function(response) {
+			// 		$("#streamer_visitors_earnings").html(response);
+			// 		},
+			// 		error: function(xhr) {
+			// 		//Do Something to handle error
+			// 		}
+			// 	});
+			// 	});
+			// });			
+			// $(document).ready(function() {
+			// 	$('#streamer_choose').change(function(){
+			// 		var selVal = $(this).val();
+			// 		sessionStorage.setItem("SelItem", selVal);												  
+			// 		$.ajax({
+			// 			url: "/livestreamed_min",
+			// 			type: "get",
+			// 			data: {streamer_choose_id: selVal},
+			// 		success: function(response) {
+			// 		$("#livestreamed_min").html(response);
+			// 		},
+			// 		error: function(xhr) {
+			// 		//Do Something to handle error
+			// 		}
+			// 	});
+			// 	});
+			// });					
+			// $(document).ready(function() {
+			// 	$('#streamer_choose').change(function(){
+			// 		var selVal = $(this).val();
+			// 		console.log(selVal)
+			// 		sessionStorage.setItem("SelItem", selVal);												  
+			// 		$.ajax({
+			// 			url: "/livestreamed_min_perc",
+			// 			type: "get",
+			// 			data: {streamer_choose_id: selVal},
+			// 		success: function(response) {
+			// 		$("#livestreamed_min_perc").html(response);
+			// 		},
+			// 		error: function(xhr) {
+			// 		//Do Something to handle error
+			// 		}
+			// 	});
+			// 	});
+			// });		
 
-			$(document).ready(function() {
-				$('#streamer_choose').change(function(){
-					var selVal = $(this).val();
-					console.log(selVal)
-					sessionStorage.setItem("SelItem", selVal);												  
-					$.ajax({
-						url: "/streamer_chats_count",
-						type: "get",
-						data: {streamer_choose_id: selVal},
-					success: function(response) {
-					$("#streamer_chats_count").html(response);
-					},
-					error: function(xhr) {
-					//Do Something to handle error
-					}
-				});
-				});
-			});		
+			// $(document).ready(function() {
+			// 	$('#streamer_choose').change(function(){
+			// 		var selVal = $(this).val();
+			// 		console.log(selVal)
+			// 		sessionStorage.setItem("SelItem", selVal);												  
+			// 		$.ajax({
+			// 			url: "/streamer_chats_count",
+			// 			type: "get",
+			// 			data: {streamer_choose_id: selVal},
+			// 		success: function(response) {
+			// 		$("#streamer_chats_count").html(response);
+			// 		},
+			// 		error: function(xhr) {
+			// 		//Do Something to handle error
+			// 		}
+			// 	});
+			// 	});
+			// });		
 			
-			$(document).ready(function() {
-				$('#streamer_choose').change(function(){
-					var selVal = $(this).val();
-					console.log(selVal)
-					sessionStorage.setItem("SelItem", selVal);												  
-					$.ajax({
-						url: "/streamer_chats_perc",
-						type: "get",
-						data: {streamer_choose_id: selVal},
-					success: function(response) {
-					$("#streamer_chats_perc").html(response);
-					},
-					error: function(xhr) {
-					//Do Something to handle error
-					}
-				});
-				});
-			});
+			// $(document).ready(function() {
+			// 	$('#streamer_choose').change(function(){
+			// 		var selVal = $(this).val();
+			// 		console.log(selVal)
+			// 		sessionStorage.setItem("SelItem", selVal);												  
+			// 		$.ajax({
+			// 			url: "/streamer_chats_perc",
+			// 			type: "get",
+			// 			data: {streamer_choose_id: selVal},
+			// 		success: function(response) {
+			// 		$("#streamer_chats_perc").html(response);
+			// 		},
+			// 		error: function(xhr) {
+			// 		//Do Something to handle error
+			// 		}
+			// 	});
+			// 	});
+			// });
 
 			$('#streamer_choose').change(function(){
 				var selVal = $(this).val();
@@ -1266,23 +1291,140 @@
 			// $(document).ready(valueChanged);
 
 			$(document).ready(function () {
-				var e = document.getElementById("streamer_choose");
-				var strUser = e.value;
-				console.log(strUser)
 				$('#btnradio1').click(function () {
-					if ($(this).is(':checked') && (strUser!=null || strUser==undefined)) {
+					var e = document.getElementById("streamer_choose");
+					var strUser = e.value;
+					var text = e.options[e.selectedIndex].text;				
+					console.log('----> ', strUser)
+					console.log('----> ', text)
+
+					var eDate = document.getElementById("streamer_date");
+					var strDate = eDate.value;
+					var strDateText = eDate.options[eDate.selectedIndex].text;				
+					console.log('----> ', strDate)
+					console.log('----> ', strDateText)					
+
+					if ($(this).is(':checked')) {
 						$("#live_feed").show();
 						$("#historic_feed").hide();
 					}
 				});
 
 				$('#btnradio2').click(function () {
-					if ($(this).is(':checked') && (strUser!=null || strUser==undefined)) {
+					// var e = document.getElementById("streamer_choose");
+					// var strUser = e.value;
+					// var text = e.options[e.selectedIndex].text;				
+					// console.log('----> ', strUser)
+					// console.log('----> ', text)
+
+					// var eDate = document.getElementById("streamer_date");
+					// var strDate = eDate.value;
+					// var strDateText = eDate.options[eDate.selectedIndex].text;				
+					// console.log('----> ', strDate)
+					// console.log('----> ', strDateText)					
+
+					// var radio_selected = document.getElementById("live_feed");
+					// var radio_selected_val = radio_selected.value;
+					// var radio_selected_text = radio_selected.options[radio_selected.selectedIndex].text;				
+					// console.log('----> ', radio_selected_val)
+					// console.log('----> ', radio_selected_text)	
+
+					
+					// if ($(this).is(':checked')) {
+					// 		$("#live_feed").hide();
+					// 		$("#historic_feed").show();
+
+					// 		$.ajax({
+					// 			url: "/streamer_chats_perc",
+					// 			type: "get",
+					// 			data: {streamer_choose_id: strDate},
+					// 		success: function(response) {
+					// 			$("#streamer_chats_perc").html(response);
+					// 		},
+					// 		error: function(xhr) {
+					// 			//Do Something to handle error
+					// 		}
+					// 	});
+					// }
+				});
+			});
+
+
+			$(document).ready(function () {
+
+				$('#submitBtn').click(function () {
+					var e = document.getElementById("streamer_choose");
+					var strUser = e.value;
+					var text = e.options[e.selectedIndex].text;				
+					console.log('----> ', strUser)
+					console.log('----> ', text)
+
+					var eDate = document.getElementById("streamer_date");
+					var strDate = eDate.value;
+					var strDateText = eDate.options[eDate.selectedIndex].text;				
+					console.log('----> ', strDate)
+					console.log('----> ', strDateText)
+
+					var radio_selected1 = document.getElementById("btnradio1");
+					var radio_selected1_val = radio_selected1.value;
+					console.log('radio_selected1_val ----> ', radio_selected1_val)
+
+					var radio_selected2 = document.getElementById("btnradio2");
+					var radio_selected2_val = radio_selected2.value;
+					console.log('radio_selected2_val ----> ', radio_selected2_val)
+
+					if (strUser=='' || strDate==''){
+						alert('Select both streamer and date!');
+						return;
+
+					}
+
+					if ($(radio_selected1).is(':checked')) {
+							$("#live_feed").show();
+							$("#historic_feed").hide();
+
+							call_streamer_func('/streamer_chats_perc', strUser, strDate, '#streamer_chats_perc');
+							call_streamer_func('/streamer_chats_count', strUser, strDate, '#streamer_chats_count');
+							call_streamer_func('/livestreamed_min_perc', strUser, strDate, '#livestreamed_min_perc');
+							call_streamer_func('/livestreamed_min', strUser, strDate, '#livestreamed_min');
+							call_streamer_func('/streamer_visitors_perc', strUser, strDate, '#streamer_visitors_perc');
+							call_streamer_func('/recieve_streamer_visitors', strUser, strDate, '#recieve_streamer_visitors');
+							call_streamer_func('/streamer_visitors_earnings', strUser, strDate, '#streamer_visitors_earnings');
+							call_streamer_func('/streamer_visitors_earnings_perc', strUser, strDate, '#streamer_visitors_earnings_perc');
+					}					
+
+					if ($(radio_selected2).is(':checked')) {
 							$("#live_feed").hide();
-						$("#historic_feed").show();
+							$("#historic_feed").show();
+
+							call_streamer_func('/streamer_chats_perc', strUser, strDate, '#streamer_chats_perc');
+							call_streamer_func('/streamer_chats_count', strUser, strDate, '#streamer_chats_count');
+							call_streamer_func('/livestreamed_min_perc', strUser, strDate, '#livestreamed_min_perc');
+							call_streamer_func('/livestreamed_min', strUser, strDate, '#livestreamed_min');
+							call_streamer_func('/streamer_visitors_perc', strUser, strDate, '#streamer_visitors_perc');
+							call_streamer_func('/recieve_streamer_visitors', strUser, strDate, '#recieve_streamer_visitors');
+							call_streamer_func('/streamer_visitors_earnings', strUser, strDate, '#streamer_visitors_earnings');
+							call_streamer_func('/streamer_visitors_earnings_perc', strUser, strDate, '#streamer_visitors_earnings_perc');
 					}
 				});
 			});
+
+
+			function call_streamer_func(api_url, streamer_id, streamer_date, div_to_refresh){
+					console.log('inside streamer function');
+					$.ajax({
+							url: api_url,
+							type: "get",
+							data: {streamer_choose_id: streamer_id, streamer_choose_dt: streamer_date},
+						success: function(response) {
+							$(div_to_refresh).html(response);
+						},
+						error: function(xhr) {
+							//Do Something to handle error
+						}
+					});				
+			}
+
 		</script>	
 		
 

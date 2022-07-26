@@ -76,7 +76,11 @@ def testfn():
 # @login_required
 def recieve_streamer_visitors():
    streamer_choose_id = request.args.get('streamer_choose_id')
+   streamer_choose_dt = request.args.get('streamer_choose_dt')
+   print('---> test recieve_streamer_visitors [START] --> ')
    print(streamer_choose_id)
+   print(streamer_choose_dt)
+   print('---> test recieve_streamer_visitors [END] --> ')
    if streamer_choose_id == 'xQcOW':
     return "<p> 1,334,452 </p>"
    elif streamer_choose_id == 'Summit1G':
