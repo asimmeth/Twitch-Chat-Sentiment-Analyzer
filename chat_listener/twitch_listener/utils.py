@@ -4,6 +4,11 @@ import json
 from twitch_listener import sqlite_handler
 import random
 
+import torch
+import sqlite3
+from load_sentiment_model import load_model
+from transformers import BertTokenizer
+
 def setup_loggers(name, log_file, level=logging.INFO):
         formatter = logging.Formatter('%(asctime)s — %(message)s')
         handler = logging.FileHandler(log_file)        
@@ -90,6 +95,42 @@ def subscriber_count(followers):
                                     
         
     return subscribers
+
+
+# import random
+# import string
+import sqlite3
+import os
+
+def message_sentiment(review_text, tokenizer, model, class_names, PRE_TRAINED_MODEL_NAME,MAX_LEN = 160):
+
+    encoded_review = tokenizer.encode_plus(
+    review_text,
+    max_length=MAX_LEN,
+    add_special_tokens=True,
+    return_token_type_ids=False,
+    pad_to_max_length=True,
+    return_attention_mask=True,
+    return_tensors='pt',
+    )
+
+    input_ids = encoded_review['input_ids']
+    attention_mask = encoded_review['attention_mask']
+
+    output = model(input_ids, attention_mask)
+    _, prediction = torch.max(output, dim=1)
+    # print(f'_____: {_}')
+
+
+    prob = torch.nn.functional.softmax(output, dim=1)
+    top_prob = prob.topk(1, dim=1)[0].data[0].numpy()
+
+    _, preds = torch.max(output, dim=1)
+
+    pred_class = class_names[prediction]
+    pred_proba = format(top_prob[0], '.6f') if pred_class=='positive' else format(top_prob[0] * -1, '.6f') if pred_class=='negative' else 0
+    
+    return pred_proba
 
     
     
