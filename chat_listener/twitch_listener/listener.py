@@ -116,25 +116,25 @@ class connect_twitch(socket):
                             followers = requests.get('https://api.twitch.tv/helix/users/follows?to_id=' + broadcast_id,
                                 headers={"Authorization":self.oauth_api,
                                          "Client-Id": self.client_id}).content
+                            
+                            followers_count = json.loads(followers)['total']
+                            
                             stream_length = datetime.now() - start_time
                             td_mins = int(round(stream_length.total_seconds() / 60))
                             
                             with urllib.request.urlopen('https://tmi.twitch.tv/group/user/{}/chatters'.format(channel)) as url:
                                 chatter_count = json.loads(url.read().decode())['chatter_count']
                                 
-                            if chatter_count > 5000:
-                                viewer_count = round(chatter_count / .7)
-                            elif chatter_count < 5000:
-                                viewer_count = round(chatter_count / .8)
-                            else:
-                                viewer_count = round(chatter_count / .8)
+                            viewer_count = utils.view_count(chatter_count)
+                            subs_count = utils.subscriber_count(followers_count)
                                   
                             self._loggers[channel].info(response + self.bytes_seperator 
                                                 + contents_name + self.bytes_seperator 
                                                 + followers + self.bytes_seperator
                                                 + bytes(str(chatter_count),'utf-8') + self.bytes_seperator
                                                 + bytes(str(viewer_count),'utf-8') + self.bytes_seperator 
-                                                + bytes(str(start_time),'utf-8') + self.bytes_seperator       
+                                                + bytes(str(start_time),'utf-8') + self.bytes_seperator
+                                                + bytes(str(subs_count),'utf-8') + self.bytes_seperator
                                                 + bytes(str(td_mins), 'utf-8')) 
 
                             if debug:
@@ -174,6 +174,8 @@ class connect_twitch(socket):
                             followers = requests.get('https://api.twitch.tv/helix/users/follows?to_id=' + broadcast_id,
                                         headers={"Authorization":self.oauth_api,
                                                  "Client-Id": self.client_id}).content
+                            
+                            followers_count = json.loads(followers)['total']
 
                             stream_length = datetime.now() - start_time
                             td_mins = int(round(stream_length.total_seconds() / 60))
@@ -181,19 +183,16 @@ class connect_twitch(socket):
                             with urllib.request.urlopen('https://tmi.twitch.tv/group/user/{}/chatters'.format(channel)) as url:
                                 chatter_count = json.loads(url.read().decode())['chatter_count']
                                 
-                            if chatter_count > 5000:
-                                viewer_count = round(chatter_count / .7)
-                            elif chatter_count < 5000:
-                                viewer_count = round(chatter_count / .8)
-                            else:
-                                viewer_count = round(chatter_count / .8)
+                            viewer_count = utils.view_count(chatter_count)
+                            subs_count = utils.subscriber_count(followers_count)
                                   
                             self._loggers[channel].info(response + self.bytes_seperator 
                                                 + contents_name + self.bytes_seperator 
                                                 + followers + self.bytes_seperator
                                                 + bytes(str(chatter_count),'utf-8') + self.bytes_seperator
                                                 + bytes(str(viewer_count),'utf-8') + self.bytes_seperator 
-                                                + bytes(str(start_time),'utf-8') + self.bytes_seperator       
+                                                + bytes(str(start_time),'utf-8') + self.bytes_seperator
+                                                + bytes(str(subs_count),'utf-8') + self.bytes_seperator
                                                 + bytes(str(td_mins), 'utf-8')) 
 
                             if debug:
