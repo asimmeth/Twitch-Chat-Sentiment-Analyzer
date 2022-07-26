@@ -1,28 +1,45 @@
+import torch
 import sqlite3
 import json
 
-def get_dashboard_data(channel_name, start_time):
-	
-    channel_name = '\'' + channel_name + '\''
-    stream_title = '\'' + start_time + '\''
-    channel_name = '\'tarik\''
+def read_sentiments(model, tokenizer):
+	conn = sqlite3.connect('/Users/Vaibhav_Beohar/Documents/VB_Mck_Docs/MIDS/W210/final_proj/Twitch-chat-pioneers/src/front_end/db.sqlite3')
 
+	MAX_LEN = 160
+	class_names = ['Negative', 'Neutral', 'Positive']
+	cursor_obj = conn.cursor()
+	cursor_obj.execute("select text, username from streamer_data_sqlite_chats order by RANDOM() limit 1")
+	output = cursor_obj.fetchall()
+	msg = output[0][0]
+	uname = output[0][1]
+	conn.commit()
+	conn.close()  
 
-    conn = sqlite3.connect('/home/w210/Twitch-chat-pioneers/src/front_end/db.sqlite3')
+	encoded_review = tokenizer.encode_plus(
+		msg,
+		max_length=MAX_LEN,
+		add_special_tokens=True,
+		return_token_type_ids=False,
+		pad_to_max_length=True,
+		return_attention_mask=True,
+		return_tensors='pt',
+		)
 
-    query = '''select count(*) as total_messages, 
-                    avg(viewer_count) as avg_viewers,
-                        from chats_table
-                        where channel_name = {}
-                        '''.format(channel_name)
+	input_ids = encoded_review['input_ids']
+	attention_mask = encoded_review['attention_mask']
 
-    cursor_obj = conn.cursor()
-    cursor_obj.execute(query)
-    output = cursor_obj.fetchall()
-    msg_count = output[0][0]
-    conn.commit()
-    conn.close()  
+	output = model(input_ids, attention_mask)
 
+	prob = torch.nn.functional.softmax(output, dim=1)
+	top_prob = prob.topk(1, dim=1)[0].data[0].numpy()
+	_, prediction = torch.max(output, dim=1)
 
-    return json.dumps([{
-        'total_messages': msg_count }])
+	pred_class = class_names[prediction]
+	pred_proba = format(top_prob[0], '.6f') if pred_class=='Positive' else format(top_prob[0] * -1, '.6f') if pred_class=='Negative' else 0
+	# print(f'Review text: {msg}')
+	# print(f'Sentiment  : {class_names[prediction]}')
+
+	return json.dumps([{
+		'sentiment_display': '<p>Sentiment for: <B>'+ msg + '</B> sent by user: <B>'+ uname + '</B> is: <B>' + pred_class + '</B></p>', 
+		'prob_score' : pred_proba
+	}])

@@ -2,6 +2,7 @@ import logging
 import requests
 import json
 from twitch_listener import sqlite_handler
+import random
 
 def setup_loggers(name, log_file, level=logging.INFO):
         formatter = logging.Formatter('%(asctime)s — %(message)s')
@@ -54,3 +55,41 @@ def get_broadcast_id(channel_list, client_id, o_auth_api):
         id_list[channel] = user_data['data'][0]['id']  
         
     return id_list
+
+
+def view_count(chatter_count):
+    
+    if chatter_count > 5000:
+        viewer_count = round(chatter_count / .7)
+    elif chatter_count <= 5000:
+        viewer_count = round(chatter_count / .8)
+    else:
+        viewer_count = round(chatter_count / .8)
+        
+    viewer_count = random.randint(round(viewer_count *.95), round(viewer_count * 1.1))
+                                    
+        
+    return viewer_count
+
+def subscriber_count(followers):
+    
+    if followers >= 10000:
+        subscribers = round(followers / 80)
+    elif followers >= 5000:
+        subscribers = round(followers / 50)
+    elif followers >= 200:
+        subscribers = round(followers / 30)
+    elif followers >= 100:
+        subscribers = round(followers / 25)
+    elif followers >= 0:
+        subscribers = round(followers / 25)
+    else:
+        subscribers = round(followers / 25)
+    
+    subscribers = random.randint(round(subscribers *.95), round(subscribers * 1.1))
+                                    
+        
+    return subscribers
+
+    
+    

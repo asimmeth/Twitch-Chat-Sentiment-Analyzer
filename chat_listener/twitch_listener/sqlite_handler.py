@@ -42,6 +42,7 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
                                chatter_count INTEGER,
                                viewer_count INTEGER,
                                follower_count INTEGER,
+                               subscriber_count INTEGER,
                                stream_id text)'''
         db.execute(create_query)
         db.commit()
@@ -93,7 +94,8 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
         chatter_count = int(split_log[3])
         viewer_count = int(split_log[4])
         stream_date = split_log[5]
-        stream_length = int(split_log[6][:-1])
+        subs_count = int(split_log[6])
+        stream_length = int(split_log[7][:-1])
 
         count = line.count('.tmi.twitch.tv PRIVMSG #')
         entryInfo = 'Your host is tmi.twitch.tv' in line or 'End of /NAMES list\\r\\n' in line
@@ -154,7 +156,8 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
                                           chatter_count,
                                           viewer_count,
                                           follower_count,
-                                          stream_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)'''
+                                          subscriber_count,
+                                          stream_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)'''
             db.execute(insert_query,
             
             (
@@ -169,6 +172,7 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
                 chatter_count,
                 viewer_count,
                 followers_log['total'],
+                subs_count,
                 self.stream_id
             )
         )
