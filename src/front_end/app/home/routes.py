@@ -225,7 +225,7 @@ def total_chat_messages():
 @blueprint.route('/recieve_streamer_visitors')
 # @login_required
 def average_viewers():
-      """
+    """
     Calls get_average_view_count and returns the average view count of the stream
     output: average_viewers (float)
     """
@@ -272,7 +272,7 @@ def new_followers():
 @blueprint.route('/recieve_streamer_visitors')
 # @login_required
 def new_subscribers():
-        """
+    """
     Calls get_subscriber_change and returns the change in subscribers from the start to end of the stream
     output: follower_change (int)
     """
@@ -296,7 +296,7 @@ def new_subscribers():
 @blueprint.route('/recieve_streamer_visitors')
 # @login_required
 def average_sentiment():
-        """
+    """
     Calls get_average_sentiment and returns the average sentiment of the stream
     output: average_sentiment (float)
     """
@@ -320,7 +320,7 @@ def average_sentiment():
 @blueprint.route('/recieve_streamer_visitors')
 # @login_required
 def average_chatters():
-        """
+    """
     Calls get_average_chatters and returns the average number of chatters in the chatroom
     output: follower_change (float)
     """
@@ -344,7 +344,7 @@ def average_chatters():
 @blueprint.route('/recieve_streamer_visitors')
 # @login_required
 def get_recommedations():
-        """
+    """
     Calls recommender_engine and a dictionary of values and scores corresponding to the recommender model
     output: recommendation_dict (dict)
     """
