@@ -165,7 +165,7 @@ def get_average_sentiment(channel_name, start_time):
 
     return average_sentiment[0][0] 
 
-def get_number_chatters(channel_name, start_time):
+def get_average_chatters(channel_name, start_time):
     """
     Query sql table and get the average number of chatters for selected stream
     input: channel_name, start_time

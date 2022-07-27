@@ -202,16 +202,22 @@ def home():
 @blueprint.route('/recieve_streamer_visitors')
 # @login_required
 def total_chat_messages():
+    """
+    Calls get_message_count and returns the total message count of the stream
+    output: total_messages (int)
+    """
     streamer_choose_id = request.args.get('streamer_choose_id')
     streamer_choose_dt = request.args.get('streamer_choose_dt')
     print('---> test recieve_streamer_visitors: [START] --> ')
     print(streamer_choose_id)
     print(streamer_choose_dt)
     print('---> test recieve_streamer_visitors: [END] --> ')
+    
     # set streamer name and datetime for now
     streamer_choose_id = 'tarik'
     streamer_choose_dt = '2022-07-26 22:57:57.779134'
     ################################################
+    
     total_messages = dg.get_message_count(streamer_choose_id, streamer_choose_dt)
     
     return total_messages
@@ -219,6 +225,10 @@ def total_chat_messages():
 @blueprint.route('/recieve_streamer_visitors')
 # @login_required
 def average_viewers():
+      """
+    Calls get_average_view_count and returns the average view count of the stream
+    output: average_viewers (float)
+    """
     streamer_choose_id = request.args.get('streamer_choose_id')
     streamer_choose_dt = request.args.get('streamer_choose_dt')
     print('---> test recieve_streamer_visitors: [START] --> ')
@@ -230,13 +240,18 @@ def average_viewers():
     streamer_choose_id = 'tarik'
     streamer_choose_dt = '2022-07-26 22:57:57.779134'
     ################################################
+    
     average_viewers = dg.get_average_view_count(streamer_choose_id, streamer_choose_dt)
     
-    returnaverage_viewers
+    return average_viewers
 
 @blueprint.route('/recieve_streamer_visitors')
 # @login_required
 def new_followers():
+    """
+    Calls get_follower_change and returns the change in followers from the start to end of the stream
+    output: follower_change (int)
+    """
     streamer_choose_id = request.args.get('streamer_choose_id')
     streamer_choose_dt = request.args.get('streamer_choose_dt')
     print('---> test recieve_streamer_visitors: [START] --> ')
@@ -248,6 +263,7 @@ def new_followers():
     streamer_choose_id = 'tarik'
     streamer_choose_dt = '2022-07-26 22:57:57.779134'
     ################################################
+    
     follower_change = dg.get_follower_change(streamer_choose_id, streamer_choose_dt)
     
     return follower_change 
@@ -255,7 +271,11 @@ def new_followers():
 
 @blueprint.route('/recieve_streamer_visitors')
 # @login_required
-def new_followers():
+def new_subscribers():
+        """
+    Calls get_subscriber_change and returns the change in subscribers from the start to end of the stream
+    output: follower_change (int)
+    """
     streamer_choose_id = request.args.get('streamer_choose_id')
     streamer_choose_dt = request.args.get('streamer_choose_dt')
     print('---> test recieve_streamer_visitors: [START] --> ')
@@ -269,6 +289,78 @@ def new_followers():
     streamer_choose_dt = '2022-07-26 22:57:57.779134'
     ################################################
     
-    subscriber_change = dg.get_follower_change(streamer_choose_id, streamer_choose_dt)
+    subscriber_change = dg.get_subscriber_change(streamer_choose_id, streamer_choose_dt)
     
     return subscriber_change 
+
+@blueprint.route('/recieve_streamer_visitors')
+# @login_required
+def average_sentiment():
+        """
+    Calls get_average_sentiment and returns the average sentiment of the stream
+    output: average_sentiment (float)
+    """
+    streamer_choose_id = request.args.get('streamer_choose_id')
+    streamer_choose_dt = request.args.get('streamer_choose_dt')
+    print('---> test recieve_streamer_visitors: [START] --> ')
+    print(streamer_choose_id)
+    print(streamer_choose_dt)
+    print('---> test recieve_streamer_visitors: [END] --> ')
+    
+    
+    # set streamer name and datetime for now
+    streamer_choose_id = 'tarik'
+    streamer_choose_dt = '2022-07-26 22:57:57.779134'
+    ################################################
+    
+    average_sentiment = dg.get_average_sentiment(streamer_choose_id, streamer_choose_dt)
+    
+    return average_sentiment 
+
+@blueprint.route('/recieve_streamer_visitors')
+# @login_required
+def average_chatters():
+        """
+    Calls get_average_chatters and returns the average number of chatters in the chatroom
+    output: follower_change (float)
+    """
+    streamer_choose_id = request.args.get('streamer_choose_id')
+    streamer_choose_dt = request.args.get('streamer_choose_dt')
+    print('---> test recieve_streamer_visitors: [START] --> ')
+    print(streamer_choose_id)
+    print(streamer_choose_dt)
+    print('---> test recieve_streamer_visitors: [END] --> ')
+    
+    
+    # set streamer name and datetime for now
+    streamer_choose_id = 'tarik'
+    streamer_choose_dt = '2022-07-26 22:57:57.779134'
+    ################################################
+    
+    average_chatters = dg.get_average_chatters(streamer_choose_id, streamer_choose_dt)
+    
+    return average_chatters 
+
+@blueprint.route('/recieve_streamer_visitors')
+# @login_required
+def get_recommedations():
+        """
+    Calls recommender_engine and a dictionary of values and scores corresponding to the recommender model
+    output: recommendation_dict (dict)
+    """
+    streamer_choose_id = request.args.get('streamer_choose_id')
+    streamer_choose_dt = request.args.get('streamer_choose_dt')
+    print('---> test recieve_streamer_visitors: [START] --> ')
+    print(streamer_choose_id)
+    print(streamer_choose_dt)
+    print('---> test recieve_streamer_visitors: [END] --> ')
+    
+    
+    # set streamer name and datetime for now
+    streamer_choose_id = 'tarik'
+    streamer_choose_dt = '2022-07-26 22:57:57.779134'
+    ################################################
+    
+    recommendation_dict = dg.recommender_engine(streamer_choose_id, streamer_choose_dt)
+    
+    return recommendation_dict 
