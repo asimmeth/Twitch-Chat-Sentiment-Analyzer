@@ -230,7 +230,7 @@ def total_chat_messages():
 
 @blueprint.route('/recieve_streamer_visitors')
 # @login_required
-def total_chat_messages():
+def average_viewers():
    streamer_choose_id = request.args.get('streamer_choose_id')
    streamer_choose_dt = request.args.get('streamer_choose_dt')
    print('---> test recieve_streamer_visitors: [START] --> ')
