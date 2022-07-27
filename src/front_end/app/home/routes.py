@@ -214,8 +214,8 @@ def total_chat_messages():
     print('---> test recieve_streamer_visitors: [END] --> ')
     
     # set streamer name and datetime for now
-    streamer_choose_id = 'tarik'
-    streamer_choose_dt = '2022-07-26 22:57:57.779134'
+    streamer_choose_id = 'xeppaa'
+    streamer_choose_dt = '2022-07-27'
     ################################################
     
     total_messages = dg.get_message_count(streamer_choose_id, streamer_choose_dt)
@@ -237,8 +237,8 @@ def average_viewers():
     print('---> test recieve_streamer_visitors: [END] --> ')
     
     # set streamer name and datetime for now
-    streamer_choose_id = 'tarik'
-    streamer_choose_dt = '2022-07-26 22:57:57.779134'
+    streamer_choose_id = 'xeppaa'
+    streamer_choose_dt = '2022-07-27'
     ################################################
     
     average_viewers = dg.get_average_view_count(streamer_choose_id, streamer_choose_dt)
@@ -260,8 +260,8 @@ def new_followers():
     print('---> test recieve_streamer_visitors: [END] --> ')
     
     # set streamer name and datetime for now
-    streamer_choose_id = 'tarik'
-    streamer_choose_dt = '2022-07-26 22:57:57.779134'
+    streamer_choose_id = 'xeppaa'
+    streamer_choose_dt = '2022-07-27'
     ################################################
     
     follower_change = dg.get_follower_change(streamer_choose_id, streamer_choose_dt)
@@ -285,8 +285,8 @@ def new_subscribers():
     
     
     # set streamer name and datetime for now
-    streamer_choose_id = 'tarik'
-    streamer_choose_dt = '2022-07-26 22:57:57.779134'
+    streamer_choose_id = 'xeppaa'
+    streamer_choose_dt = '2022-07-27'
     ################################################
     
     subscriber_change = dg.get_subscriber_change(streamer_choose_id, streamer_choose_dt)
@@ -309,8 +309,8 @@ def average_sentiment():
     
     
     # set streamer name and datetime for now
-    streamer_choose_id = 'tarik'
-    streamer_choose_dt = '2022-07-26 22:57:57.779134'
+    streamer_choose_id = 'xeppaa'
+    streamer_choose_dt = '2022-07-27'
     ################################################
     
     average_sentiment = dg.get_average_sentiment(streamer_choose_id, streamer_choose_dt)
@@ -333,8 +333,8 @@ def average_chatters():
     
     
     # set streamer name and datetime for now
-    streamer_choose_id = 'tarik'
-    streamer_choose_dt = '2022-07-26 22:57:57.779134'
+    streamer_choose_id = 'xeppaa'
+    streamer_choose_dt = '2022-07-27'
     ################################################
     
     average_chatters = dg.get_average_chatters(streamer_choose_id, streamer_choose_dt)
@@ -357,8 +357,8 @@ def get_recommedations():
     
     
     # set streamer name and datetime for now
-    streamer_choose_id = 'tarik'
-    streamer_choose_dt = '2022-07-26 22:57:57.779134'
+    streamer_choose_id = 'xeppaa'
+    streamer_choose_dt = '2022-07-27'
     ################################################
     
     recommendation_dict = dg.recommender_engine(streamer_choose_id, streamer_choose_dt)
