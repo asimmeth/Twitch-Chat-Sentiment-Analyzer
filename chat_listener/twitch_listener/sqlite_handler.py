@@ -31,8 +31,8 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
         
         
         create_query = '''CREATE TABLE IF NOT EXISTS 
-                            chats_table(date datetime,
-                               stream_date datetime,
+                            chats_table_demo(date datetime,
+                               stream_datetime datetime,
                                stream_length INTEGER,
                                username text,
                                message_text text,
@@ -43,7 +43,9 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
                                viewer_count INTEGER,
                                follower_count INTEGER,
                                subscriber_count INTEGER,
-                               stream_id text)'''
+                               stream_date datetime,
+                               stream_id text,
+                               message_sentiment INTEGER)'''
         db.execute(create_query)
         db.commit()
 
@@ -93,9 +95,10 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
         line = split_log[0]
         chatter_count = int(split_log[3])
         viewer_count = int(split_log[4])
-        stream_date = split_log[5]
+        stream_datetime = split_log[5]
         subs_count = int(split_log[6])
-        stream_length = int(split_log[7][:-1])
+        stream_date = split_log[7]
+        stream_length = int(split_log[8][:-1])
 
         count = line.count('.tmi.twitch.tv PRIVMSG #')
         entryInfo = 'Your host is tmi.twitch.tv' in line or 'End of /NAMES list\\r\\n' in line
@@ -144,9 +147,9 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
             else:
                 data.append(row)
          
-            insert_query = '''INSERT INTO chats_table(
+            insert_query = '''INSERT INTO chats_table_demo(
                                           date, 
-                                          stream_date,
+                                          stream_datetime,
                                           stream_length,
                                           username, 
                                           message_text, 
@@ -157,12 +160,14 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
                                           viewer_count,
                                           follower_count,
                                           subscriber_count,
-                                          stream_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)'''
+                                          stream_date,
+                                          stream_id,
+                                          message_sentiment) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'''
             db.execute(insert_query,
             
             (
                 thisdate,
-                stream_date,
+                stream_datetime,
                 stream_length,
                 row['username'],
                 row['text'],
@@ -173,7 +178,9 @@ class SQLiteHandler(logging.Handler): # Inherit from logging.Handler
                 viewer_count,
                 followers_log['total'],
                 subs_count,
-                self.stream_id
+                stream_date,
+                self.stream_id,
+                None
             )
         )
             db.commit()

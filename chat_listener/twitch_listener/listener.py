@@ -12,6 +12,7 @@ import requests
 import json
 from datetime import datetime
 import urllib.request, json 
+from datetime import date
 
 class connect_twitch(socket):
     
@@ -43,10 +44,6 @@ class connect_twitch(socket):
         self._nameString = f"NICK " + self.nickname + f"\n"
         
         self.bytes_seperator = bytes("||||", 'utf-8')
-        
-
-        
-        
         
 
     def _join_channels(self, channels):
@@ -87,6 +84,7 @@ class connect_twitch(socket):
         self._join_channels(channels)
         startTime = time()
         start_time = datetime.now()
+        start_date = date.today()
         
         if until_offline is False:
             # Collect data while duration not exceeded and channels are live
@@ -135,6 +133,7 @@ class connect_twitch(socket):
                                                 + bytes(str(viewer_count),'utf-8') + self.bytes_seperator 
                                                 + bytes(str(start_time),'utf-8') + self.bytes_seperator
                                                 + bytes(str(subs_count),'utf-8') + self.bytes_seperator
+                                                + bytes(str(start_date),'utf-8') + self.bytes_seperator
                                                 + bytes(str(td_mins), 'utf-8')) 
 
                             if debug:
@@ -193,6 +192,7 @@ class connect_twitch(socket):
                                                 + bytes(str(viewer_count),'utf-8') + self.bytes_seperator 
                                                 + bytes(str(start_time),'utf-8') + self.bytes_seperator
                                                 + bytes(str(subs_count),'utf-8') + self.bytes_seperator
+                                                + bytes(str(start_date),'utf-8') + self.bytes_seperator
                                                 + bytes(str(td_mins), 'utf-8')) 
 
                             if debug:
