@@ -11,8 +11,10 @@ from jinja2 import TemplateNotFound
 import random
 import os
 import sqlite3
-import data_gathering_functions as dg
 
+import pandas as pd
+
+import src.scripts.data_gathering_functions as dg
 from src.scripts.load_sentiment_model import load_model, tokenizer
 from scripts.read_sentiments_from_db import read_sentiments
 
@@ -73,106 +75,106 @@ def testfn():
         # return render_template('index.html', msg=jsonify(message))
 
 
-@blueprint.route('/recieve_streamer_visitors')
-# @login_required
-def recieve_streamer_visitors():
-   streamer_choose_id = request.args.get('streamer_choose_id')
-   streamer_choose_dt = request.args.get('streamer_choose_dt')
-   print('---> test recieve_streamer_visitors: [START] --> ')
-   print(streamer_choose_id)
-   print(streamer_choose_dt)
-   print('---> test recieve_streamer_visitors: [END] --> ')
-   if streamer_choose_id == 'xQcOW':
-    return "<p> 1,334,452 </p>"
-   elif streamer_choose_id == 'Summit1G':
-    return "<p> 2,345,453 </p>"
-   elif streamer_choose_id == 'Shroud':
-    return "<p> 685,765 </p>" 
+# @blueprint.route('/recieve_streamer_visitors')
+# # @login_required
+# def recieve_streamer_visitors():
+#    streamer_choose_id = request.args.get('streamer_choose_id')
+#    streamer_choose_dt = request.args.get('streamer_choose_dt')
+#    print('---> test recieve_streamer_visitors: [START] --> ')
+#    print(streamer_choose_id)
+#    print(streamer_choose_dt)
+#    print('---> test recieve_streamer_visitors: [END] --> ')
+#    if streamer_choose_id == 'xQcOW':
+#     return "<p> 1,334,452 </p>"
+#    elif streamer_choose_id == 'Summit1G':
+#     return "<p> 2,345,453 </p>"
+#    elif streamer_choose_id == 'Shroud':
+#     return "<p> 685,765 </p>" 
 
 
-@blueprint.route('/streamer_visitors_perc')
-# @login_required
-def streamer_visitors_perc():
-   streamer_choose_id = request.args.get('streamer_choose_id')
-   print(streamer_choose_id)
-   if streamer_choose_id == 'xQcOW':
-    return "<p> 5.25 </p>"
-   elif streamer_choose_id == 'Summit1G':
-    return "<p> -1.25% </p>"
-   elif streamer_choose_id == 'Shroud':
-    return "<p> 0.8% </p>" 
+# @blueprint.route('/streamer_visitors_perc')
+# # @login_required
+# def streamer_visitors_perc():
+#    streamer_choose_id = request.args.get('streamer_choose_id')
+#    print(streamer_choose_id)
+#    if streamer_choose_id == 'xQcOW':
+#     return "<p> 5.25 </p>"
+#    elif streamer_choose_id == 'Summit1G':
+#     return "<p> -1.25% </p>"
+#    elif streamer_choose_id == 'Shroud':
+#     return "<p> 0.8% </p>" 
 
-@blueprint.route('/streamer_visitors_earnings')
-# @login_required
-def streamer_visitors_earnings():
-   streamer_choose_id = request.args.get('streamer_choose_id')
-   print(streamer_choose_id)
-   if streamer_choose_id == 'xQcOW':
-    return "<p> 300 </p>"
-   elif streamer_choose_id == 'Summit1G':
-    return "<p> 910 </p>"
-   elif streamer_choose_id == 'Shroud':
-    return "<p> 870 </p>" 
+# @blueprint.route('/streamer_visitors_earnings')
+# # @login_required
+# def streamer_visitors_earnings():
+#    streamer_choose_id = request.args.get('streamer_choose_id')
+#    print(streamer_choose_id)
+#    if streamer_choose_id == 'xQcOW':
+#     return "<p> 300 </p>"
+#    elif streamer_choose_id == 'Summit1G':
+#     return "<p> 910 </p>"
+#    elif streamer_choose_id == 'Shroud':
+#     return "<p> 870 </p>" 
 
-@blueprint.route('/streamer_visitors_earnings_perc')
-# @login_required
-def streamer_visitors_earnings_perc():
-   streamer_choose_id = request.args.get('streamer_choose_id')
-   print(streamer_choose_id)
-   if streamer_choose_id == 'xQcOW':
-    return "<p> 6.65% </p>"
-   elif streamer_choose_id == 'Summit1G':
-    return "<p> 0.1% </p>"
-   elif streamer_choose_id == 'Shroud':
-    return "<p> 1.34% </p>" 
+# @blueprint.route('/streamer_visitors_earnings_perc')
+# # @login_required
+# def streamer_visitors_earnings_perc():
+#    streamer_choose_id = request.args.get('streamer_choose_id')
+#    print(streamer_choose_id)
+#    if streamer_choose_id == 'xQcOW':
+#     return "<p> 6.65% </p>"
+#    elif streamer_choose_id == 'Summit1G':
+#     return "<p> 0.1% </p>"
+#    elif streamer_choose_id == 'Shroud':
+#     return "<p> 1.34% </p>" 
 
-@blueprint.route('/livestreamed_min')
-# @login_required
-def livestreamed_min():
-   streamer_choose_id = request.args.get('streamer_choose_id')
-   print(streamer_choose_id)
-   if streamer_choose_id == 'xQcOW':
-    return "<p>23,483</p>"
-   elif streamer_choose_id == 'Summit1G':
-    return "<p> 1,289</p>"
-   elif streamer_choose_id == 'Shroud':
-    return "<p> 13,530</p>" 
+# @blueprint.route('/livestreamed_min')
+# # @login_required
+# def livestreamed_min():
+#    streamer_choose_id = request.args.get('streamer_choose_id')
+#    print(streamer_choose_id)
+#    if streamer_choose_id == 'xQcOW':
+#     return "<p>23,483</p>"
+#    elif streamer_choose_id == 'Summit1G':
+#     return "<p> 1,289</p>"
+#    elif streamer_choose_id == 'Shroud':
+#     return "<p> 13,530</p>" 
 
-@blueprint.route('/livestreamed_min_perc')
-# @login_required
-def livestreamed_min_perc():
-   streamer_choose_id = request.args.get('streamer_choose_id')
-   print(streamer_choose_id)
-   if streamer_choose_id == 'xQcOW':
-    return "<p> 3.65% </p>"
-   elif streamer_choose_id == 'Summit1G':
-    return "<p> -5.3%</p>"
-   elif streamer_choose_id == 'Shroud':
-    return "<p> 2.34% </p>"     
+# @blueprint.route('/livestreamed_min_perc')
+# # @login_required
+# def livestreamed_min_perc():
+#    streamer_choose_id = request.args.get('streamer_choose_id')
+#    print(streamer_choose_id)
+#    if streamer_choose_id == 'xQcOW':
+#     return "<p> 3.65% </p>"
+#    elif streamer_choose_id == 'Summit1G':
+#     return "<p> -5.3%</p>"
+#    elif streamer_choose_id == 'Shroud':
+#     return "<p> 2.34% </p>"     
 
-@blueprint.route('/streamer_chats_count')
-# @login_required
-def streamer_chats_count():
-   streamer_choose_id = request.args.get('streamer_choose_id')
-   print(streamer_choose_id)
-   if streamer_choose_id == 'xQcOW':
-    return "<p>123,830</p>"
-   elif streamer_choose_id == 'Summit1G':
-    return "<p> 76,890</p>"
-   elif streamer_choose_id == 'Shroud':
-    return "<p> 199,300</p>" 
+# @blueprint.route('/streamer_chats_count')
+# # @login_required
+# def streamer_chats_count():
+#    streamer_choose_id = request.args.get('streamer_choose_id')
+#    print(streamer_choose_id)
+#    if streamer_choose_id == 'xQcOW':
+#     return "<p>123,830</p>"
+#    elif streamer_choose_id == 'Summit1G':
+#     return "<p> 76,890</p>"
+#    elif streamer_choose_id == 'Shroud':
+#     return "<p> 199,300</p>" 
 
-@blueprint.route('/streamer_chats_perc')
-# @login_required
-def streamer_chats_perc():
-   streamer_choose_id = request.args.get('streamer_choose_id')
-   print(streamer_choose_id)
-   if streamer_choose_id == 'xQcOW':
-    return "<p> 5.65% </p>"
-   elif streamer_choose_id == 'Summit1G':
-    return "<p> -0.3%</p>"
-   elif streamer_choose_id == 'Shroud':
-    return "<p> 9.34% </p>"   
+# @blueprint.route('/streamer_chats_perc')
+# # @login_required
+# def streamer_chats_perc():
+#    streamer_choose_id = request.args.get('streamer_choose_id')
+#    print(streamer_choose_id)
+#    if streamer_choose_id == 'xQcOW':
+#     return "<p> 5.65% </p>"
+#    elif streamer_choose_id == 'Summit1G':
+#     return "<p> -0.3%</p>"
+#    elif streamer_choose_id == 'Shroud':
+#     return "<p> 9.34% </p>"   
 
 
 
@@ -199,7 +201,7 @@ def home():
 
 ### Tiles Data Pull
 
-@blueprint.route('/recieve_streamer_visitors')
+@blueprint.route('/total_messages')
 # @login_required
 def total_chat_messages():
     """
@@ -220,13 +222,13 @@ def total_chat_messages():
     
     total_messages = dg.get_message_count(streamer_choose_id, streamer_choose_dt)
     
-    return total_messages
+    return '<p>'+str(total_messages)+'</p>'
 
-@blueprint.route('/recieve_streamer_visitors')
+@blueprint.route('/average_viewers')
 # @login_required
 def average_viewers():
     """
-    Calls get_average_view_count and returns the average view count of the stream
+    Calls get_average_view_count and returns the average view count of the stream``
     output: average_viewers (float)
     """
     streamer_choose_id = request.args.get('streamer_choose_id')
@@ -243,9 +245,9 @@ def average_viewers():
     
     average_viewers = dg.get_average_view_count(streamer_choose_id, streamer_choose_dt)
     
-    return average_viewers
+    return '<p>'+str(round(average_viewers,2))+'</p>'
 
-@blueprint.route('/recieve_streamer_visitors')
+@blueprint.route('/followers_change')
 # @login_required
 def new_followers():
     """
@@ -266,10 +268,10 @@ def new_followers():
     
     follower_change = dg.get_follower_change(streamer_choose_id, streamer_choose_dt)
     
-    return follower_change 
+    return '<p>'+str(round(follower_change,2))+'</p>'
 
 
-@blueprint.route('/recieve_streamer_visitors')
+@blueprint.route('/subscriber_change')
 # @login_required
 def new_subscribers():
     """
@@ -288,12 +290,11 @@ def new_subscribers():
     streamer_choose_id = 'xeppaa'
     streamer_choose_dt = '2022-07-27'
     ################################################
-    
     subscriber_change = dg.get_subscriber_change(streamer_choose_id, streamer_choose_dt)
+    return str(subscriber_change)+'+' if subscriber_change > 0 else str(subscriber_change)+'-'
     
-    return subscriber_change 
 
-@blueprint.route('/recieve_streamer_visitors')
+@blueprint.route('/avg_sentiment')
 # @login_required
 def average_sentiment():
     """
@@ -302,22 +303,16 @@ def average_sentiment():
     """
     streamer_choose_id = request.args.get('streamer_choose_id')
     streamer_choose_dt = request.args.get('streamer_choose_dt')
-    print('---> test recieve_streamer_visitors: [START] --> ')
-    print(streamer_choose_id)
-    print(streamer_choose_dt)
-    print('---> test recieve_streamer_visitors: [END] --> ')
-    
-    
+    print('---> avg_sentiment')
     # set streamer name and datetime for now
     streamer_choose_id = 'xeppaa'
     streamer_choose_dt = '2022-07-27'
     ################################################
     
     average_sentiment = dg.get_average_sentiment(streamer_choose_id, streamer_choose_dt)
-    
-    return average_sentiment 
+    return '<p>'+str(round(average_sentiment, 2))+'</p>'
 
-@blueprint.route('/recieve_streamer_visitors')
+@blueprint.route('/avg_chatters')
 # @login_required
 def average_chatters():
     """
@@ -326,11 +321,6 @@ def average_chatters():
     """
     streamer_choose_id = request.args.get('streamer_choose_id')
     streamer_choose_dt = request.args.get('streamer_choose_dt')
-    print('---> test recieve_streamer_visitors: [START] --> ')
-    print(streamer_choose_id)
-    print(streamer_choose_dt)
-    print('---> test recieve_streamer_visitors: [END] --> ')
-    
     
     # set streamer name and datetime for now
     streamer_choose_id = 'xeppaa'
@@ -339,9 +329,9 @@ def average_chatters():
     
     average_chatters = dg.get_average_chatters(streamer_choose_id, streamer_choose_dt)
     
-    return average_chatters 
+    return '<p>'+str(round(average_chatters,2))+'</p>' 
 
-@blueprint.route('/recieve_streamer_visitors')
+@blueprint.route('/rec_engine_output_table')
 # @login_required
 def get_recommedations():
     """
@@ -360,7 +350,4 @@ def get_recommedations():
     streamer_choose_id = 'xeppaa'
     streamer_choose_dt = '2022-07-27'
     ################################################
-    
-    recommendation_dict = dg.recommender_engine(streamer_choose_id, streamer_choose_dt)
-    
-    return recommendation_dict 
+    return dg.recommender_engine(streamer_choose_id, streamer_choose_dt)

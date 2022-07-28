@@ -3,7 +3,9 @@ import sqlite3
 import json
 
 def read_sentiments(model, tokenizer):
-	conn = sqlite3.connect('/home/w210/Twitch-chat-pioneers/src/front_end/db.sqlite3')
+	# conn = sqlite3.connect('/home/w210/Twitch-chat-pioneers/src/front_end/db.sqlite3')
+	conn = sqlite3.connect('../front_end/db.sqlite3')
+
 
 	MAX_LEN = 160
 	class_names = ['Negative', 'Neutral', 'Positive']

@@ -101,17 +101,18 @@
 							<div class="col-sm-6">
 								<div class="card">
 									<div class="card-body">
-										<h5 class="card-title mb-4">Livestreamed minutes (in '000s)</h5>
-										<h1 class="mt-1 mb-3"><div id='livestreamed_min'></div></h1>
+										<!-- <h5 class="card-title mb-4">Livestreamed minutes (in '000s)</h5> -->
+										<h3>Average sentiment</h3>
+										<h1 class="mt-1 mb-3"><div id='avg_sentiment'></div></h1>
 										<div class="mb-1">
-											<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i><div id='livestreamed_min_perc'></div></span>
+											<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i><div id='subscriber_change'></div></span>
 											<span class="text-muted">Since last week</span>
 										</div>
 									</div>
 								</div>
 								<div class="card">
 									<div class="card-body">
-										<h5 class="card-title mb-4">Views</h5>
+										<h3>Avg chatters</h3>
 										<script>
 											fetch('/test')
 											.then(function (response) {
@@ -123,7 +124,7 @@
 										</script>
 
 										
-										<h1 class="mt-1 mb-3"><div id='visitor_count'></div> <div id='streamer_visitors'></div></h1>
+										<h1 class="mt-1 mb-3"><div id='visitor_count'></div> <div id='avg_chatters'></div></h1>
 										   <script>
 											window.onload = function() {
 												var selItem = sessionStorage.getItem("selItem");  
@@ -134,7 +135,7 @@
 												}
 										   </script>	
 											<div class="mb-1">
-											<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> <div id='streamer_visitors_perc'></div></span>
+											<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> <div id='streamer_visitors'></div></span>
 											<span class="text-muted">Since last week</span>
 										</div>
 									</div>
@@ -143,8 +144,8 @@
 							<div class="col-sm-6">
 								<div class="card">
 									<div class="card-body">
-										<h5 class="card-title mb-4">Subs</h5>
-										<h1 class="mt-1 mb-3"><div id='streamer_visitors_earnings'></div></h1>
+										<h3>Total messages</h3>
+										<h1 class="mt-1 mb-3"><div id='total_messages'></div></h1>
 										<div class="mb-1">
 											<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> <div id='streamer_visitors_earnings_perc'></div></span>
 											<span class="text-muted">Since last week</span>
@@ -153,26 +154,41 @@
 								</div>
 								<div class="card">
 									<div class="card-body">
-										<h5 class="card-title mb-4">Total chats</h5>
-										<h1 class="mt-1 mb-3"><div id='streamer_chats_count'></div></h1>
-										<div class="mb-1">
+										<h3>Followers change</h3>
+										<h1 class="mt-1 mb-3"><div id='followers_change'></div></h1>
+										<!-- <div class="mb-1">
 											<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> <div id='streamer_chats_perc'></div></span>
 											<span class="text-muted">Since last week</span>
-										</div>
+										</div> -->
 									</div>
 								</div>
+								<div class="card">
+									<div class="card-body">
+										<h3>Average viewers</h3>
+										<h1 class="mt-1 mb-3"><div id='average_viewers'></div></h1>
+									</div>
+								</div>								
 							</div>
 							<!-- temporary card to show emotions -->
 							<div class="card flex-fill">
 								<div class="card-header">
-			
-									<h5 class="card-title mb-0">Chats and their emotions</h5>
+									<h3>Example of stream chats</h3>
 								</div>
 								<div class="card-body d-flex">
 									<div id='read_random_sentiments'></div>
 								</div>
 							</div>
 							<!-- temporary card to show emotions -->
+							<!-- card to show recommendation of channel -->
+							<div class="card flex-fill">
+								<div class="card-header">
+									<h3>Our recommendation for your channel</h3>
+								</div>
+								<div class="card-body d-flex">
+									<div id='rec_engine_output_table'></div>
+								</div>
+							</div>
+							<!-- card to show recommendation of channel -->
 						</div>
 					</div>
 				</div>
@@ -285,13 +301,14 @@
 								<video controls width="100%" height="75%" loop autoplay>
 									<!-- <source src={{ url_for('static', filename="supcaitlin_twitch_recording_2022-07-15.mp4") }} type="video/mp4">
 									<source src={{ url_for('static', filename="supcaitlin_twitch_recording_2022-07-15 at 1.17.29 AM_2.mp4") }} type="video/mp4"> -->
-									<source src={{ url_for('static', filename="criticalrole_twitch_recording_2022-07-15 at 1.14.40 AM.mp4") }} type="video/mp4">
+									<!-- <source src={{ url_for('static', filename="criticalrole_twitch_recording_2022-07-15 at 1.14.40 AM.mp4") }} type="video/mp4"> -->
+									<source src={{ url_for('static', filename="TwitchGif.mp4") }} type="video/mp4">
 									Your browser does not support the video tag.
 								</video>	
 							</div>
 							<!-- <svg width="800" height="200" id="chart"></svg>-->
 							<div class="card-header">
-								<h3>Detailed analysis of last 12 hours of livestream</h3>
+								<h3>Detailed analysis of last 12 hours of livestream for the selected date</h3>
 							</div>
 							<div id="observablehq-chart-7e84c5d8"></div>
 							<div id="observablehq-mystyle-7e84c5d8"></div>
@@ -1292,22 +1309,22 @@
 
 			$(document).ready(function () {
 				$('#btnradio1').click(function () {
-					var e = document.getElementById("streamer_choose");
-					var strUser = e.value;
-					var text = e.options[e.selectedIndex].text;				
-					console.log('----> ', strUser)
-					console.log('----> ', text)
+					// var e = document.getElementById("streamer_choose");
+					// var strUser = e.value;
+					// var text = e.options[e.selectedIndex].text;				
+					// console.log('----> ', strUser)
+					// console.log('----> ', text)
 
-					var eDate = document.getElementById("streamer_date");
-					var strDate = eDate.value;
-					var strDateText = eDate.options[eDate.selectedIndex].text;				
-					console.log('----> ', strDate)
-					console.log('----> ', strDateText)					
+					// var eDate = document.getElementById("streamer_date");
+					// var strDate = eDate.value;
+					// var strDateText = eDate.options[eDate.selectedIndex].text;				
+					// console.log('----> ', strDate)
+					// console.log('----> ', strDateText)					
 
-					if ($(this).is(':checked')) {
-						$("#live_feed").show();
-						$("#historic_feed").hide();
-					}
+					// if ($(this).is(':checked')) {
+					// 	$("#live_feed").show();
+					// 	$("#historic_feed").hide();
+					// }
 				});
 
 				$('#btnradio2').click(function () {
@@ -1383,28 +1400,30 @@
 							$("#live_feed").show();
 							$("#historic_feed").hide();
 
-							call_streamer_func('/streamer_chats_perc', strUser, strDate, '#streamer_chats_perc');
-							call_streamer_func('/streamer_chats_count', strUser, strDate, '#streamer_chats_count');
-							call_streamer_func('/livestreamed_min_perc', strUser, strDate, '#livestreamed_min_perc');
-							call_streamer_func('/livestreamed_min', strUser, strDate, '#livestreamed_min');
-							call_streamer_func('/streamer_visitors_perc', strUser, strDate, '#streamer_visitors_perc');
-							call_streamer_func('/recieve_streamer_visitors', strUser, strDate, '#recieve_streamer_visitors');
+							call_streamer_func('/average_viewers', strUser, strDate, '#average_viewers');
+							call_streamer_func('/followers_change', strUser, strDate, '#followers_change');
+							call_streamer_func('/subscriber_change', strUser, strDate, '#subscriber_change');
+							call_streamer_func('/avg_sentiment', strUser, strDate, '#avg_sentiment');
+							call_streamer_func('/avg_chatters', strUser, strDate, '#avg_chatters');
+							call_streamer_func('/total_messages', strUser, strDate, '#total_messages');
 							call_streamer_func('/streamer_visitors_earnings', strUser, strDate, '#streamer_visitors_earnings');
 							call_streamer_func('/streamer_visitors_earnings_perc', strUser, strDate, '#streamer_visitors_earnings_perc');
+							call_streamer_func('/rec_engine_output_table', strUser, strDate, '#rec_engine_output_table');
 					}					
 
 					if ($(radio_selected2).is(':checked')) {
 							$("#live_feed").hide();
 							$("#historic_feed").show();
 
-							call_streamer_func('/streamer_chats_perc', strUser, strDate, '#streamer_chats_perc');
-							call_streamer_func('/streamer_chats_count', strUser, strDate, '#streamer_chats_count');
-							call_streamer_func('/livestreamed_min_perc', strUser, strDate, '#livestreamed_min_perc');
-							call_streamer_func('/livestreamed_min', strUser, strDate, '#livestreamed_min');
-							call_streamer_func('/streamer_visitors_perc', strUser, strDate, '#streamer_visitors_perc');
-							call_streamer_func('/recieve_streamer_visitors', strUser, strDate, '#recieve_streamer_visitors');
+							call_streamer_func('/average_viewers', strUser, strDate, '#average_viewers');
+							call_streamer_func('/followers_change', strUser, strDate, '#followers_change');
+							call_streamer_func('/subscriber_change', strUser, strDate, '#subscriber_change');
+							call_streamer_func('/avg_sentiment', strUser, strDate, '#avg_sentiment');
+							call_streamer_func('/avg_chatters', strUser, strDate, '#avg_chatters');
+							call_streamer_func('/total_messages', strUser, strDate, '#total_messages');
 							call_streamer_func('/streamer_visitors_earnings', strUser, strDate, '#streamer_visitors_earnings');
 							call_streamer_func('/streamer_visitors_earnings_perc', strUser, strDate, '#streamer_visitors_earnings_perc');
+							call_streamer_func('/rec_engine_output_table', strUser, strDate, '#rec_engine_output_table');
 					}
 				});
 			});
