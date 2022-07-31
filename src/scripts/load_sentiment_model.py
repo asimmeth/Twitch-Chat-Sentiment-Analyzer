@@ -43,6 +43,6 @@ model = SentimentClassifier(len(class_names))
 
 @lru_cache(maxsize=128)
 def load_model():
-  # model.load_state_dict(torch.load(os.getcwd()+'/models/twitch-bert-base-cased-sentiment-pytorch/BERT-base-cased-sentiment-pytorch_model.bin'))
-  model.load_state_dict(torch.load('/Users/Vaibhav_Beohar/Documents/VB_Mck_Docs/MIDS/W210/final_proj/Twitch-chat-pioneers/models/twitch-bert-base-cased-sentiment-pytorch/BERT-base-cased-sentiment-pytorch_model.bin'))
+  model.load_state_dict(torch.load('/home/w210/Twitch-chat-pioneers//models/twitch-bert-base-cased-sentiment-pytorch/BERT-base-cased-sentiment-pytorch_model.bin'))
+  # model.load_state_dict(torch.load('/Users/Vaibhav_Beohar/Documents/VB_Mck_Docs/MIDS/W210/final_proj/Twitch-chat-pioneers/models/twitch-bert-base-cased-sentiment-pytorch/BERT-base-cased-sentiment-pytorch_model.bin'))
   return model
