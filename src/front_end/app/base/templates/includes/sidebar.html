@@ -5,7 +5,7 @@
 				<!--					<span class="align-middle">Twitch Chat Pioneers</span> -->
 				</a>
 
-				<p style="text-align:center;"><img style="max-width: 50%;max-height: 50%;" src= {{url_for('static',filename ='nostra_sidebar_logo')}}></p>
+				<p style="text-align:center;"><img style="max-width: 50%;max-height: 50%;" src= {{url_for('static',filename ='makesense_logo')}}></p>
 
 				<ul class="sidebar-nav">
 					<li class="sidebar-header">
@@ -19,13 +19,19 @@
 					</li>
 
 					<li class="sidebar-item {% if 'blank' in segment %} active {% endif %}">
-						<a class="sidebar-link" href="ui-home-page.html">
+						<a class="sidebar-link" href="ui-about-us-page.html">
 							<i class="align-middle" data-feather="home"></i> <span class="align-middle">About Us</span>
 						</a>
 					</li>
 
 					<li class="sidebar-item {% if 'blank' in segment %} active {% endif %}">
-						<a class="sidebar-link" href="ui-pipeline-page.html">
+						<a class="sidebar-link" href="ui-our-team-page.html">
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Our Team</span>
+						</a>
+					</li>
+
+					<li class="sidebar-item {% if 'blank' in segment %} active {% endif %}">
+						<a class="sidebar-link" href="ui-our-process-page.html">
 							<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Our Process</span>
 						</a>
 					</li>
