@@ -216,8 +216,8 @@ def total_chat_messages():
     print('---> test recieve_streamer_visitors: [END] --> ')
     
     # set streamer name and datetime for now
-    streamer_choose_id = 'xeppaa'
-    streamer_choose_dt = '2022-07-27'
+#     streamer_choose_id = 'xeppaa'
+#     streamer_choose_dt = '2022-07-27'
     ################################################
     
     total_messages = dg.get_message_count(streamer_choose_id, streamer_choose_dt)
@@ -235,13 +235,13 @@ def average_viewers():
     streamer_choose_dt = request.args.get('streamer_choose_dt')
     
     # set streamer name and datetime for now
-    streamer_choose_id = 'xeppaa'
-    streamer_choose_dt = '2022-07-27'
+#     streamer_choose_id = 'xeppaa'
+#     streamer_choose_dt = '2022-07-27'
     ################################################
     
     average_viewers = dg.get_average_view_count(streamer_choose_id, streamer_choose_dt)
     
-    return '<p>'+str(round(average_viewers,2))+'</p>'
+    return '<p>'+str(round(average_viewers))+'</p>'
 
 @blueprint.route('/followers_change')
 # @login_required
@@ -254,8 +254,8 @@ def new_followers():
     streamer_choose_dt = request.args.get('streamer_choose_dt')
     
     # set streamer name and datetime for now
-    streamer_choose_id = 'xeppaa'
-    streamer_choose_dt = '2022-07-27'
+#     streamer_choose_id = 'xeppaa'
+#     streamer_choose_dt = '2022-07-27'
     ################################################
     
     follower_change = dg.get_follower_change(streamer_choose_id, streamer_choose_dt)
@@ -281,8 +281,8 @@ def pct_new_followers():
     streamer_choose_dt = request.args.get('streamer_choose_dt')
     
     # set streamer name and datetime for now
-    streamer_choose_id = 'xeppaa'
-    streamer_choose_dt = '2022-07-27'
+#     streamer_choose_id = 'xeppaa'
+#     streamer_choose_dt = '2022-07-27'
     ################################################
     
     follower_change_pct = dg.get_pct_follower_change(streamer_choose_id, streamer_choose_dt)
@@ -306,8 +306,8 @@ def new_subscribers():
     
     
     # set streamer name and datetime for now
-    streamer_choose_id = 'xeppaa'
-    streamer_choose_dt = '2022-07-27'
+#     streamer_choose_id = 'xeppaa'
+#     streamer_choose_dt = '2022-07-27'
     ################################################
     subscriber_change = dg.get_subscriber_change(streamer_choose_id, streamer_choose_dt)
 
@@ -332,8 +332,8 @@ def pct_new_subscribers():
     streamer_choose_dt = request.args.get('streamer_choose_dt')
     
     # set streamer name and datetime for now
-    streamer_choose_id = 'xeppaa'
-    streamer_choose_dt = '2022-07-27'
+#     streamer_choose_id = 'xeppaa'
+#     streamer_choose_dt = '2022-07-27'
     ################################################
     
     subscriber_change_pct = dg.get_pct_subscriber_change(streamer_choose_id, streamer_choose_dt)
@@ -352,8 +352,8 @@ def average_sentiment():
     streamer_choose_dt = request.args.get('streamer_choose_dt')
     print('---> avg_sentiment')
     # set streamer name and datetime for now
-    streamer_choose_id = 'xeppaa'
-    streamer_choose_dt = '2022-07-27'
+#     streamer_choose_id = 'xeppaa'
+#     streamer_choose_dt = '2022-07-27'
     ################################################
     
     average_sentiment = dg.get_average_sentiment(streamer_choose_id, streamer_choose_dt)
@@ -370,8 +370,8 @@ def chat_percentages():
     streamer_choose_dt = request.args.get('streamer_choose_dt')
     print('---> avg_sentiment')
     # set streamer name and datetime for now
-    streamer_choose_id = 'xeppaa'
-    streamer_choose_dt = '2022-07-27'
+#     streamer_choose_id = 'xeppaa'
+#     streamer_choose_dt = '2022-07-27'
     ################################################
     
     chat_percentages = dg.get_pct_positive_negative(streamer_choose_id, streamer_choose_dt)
@@ -388,13 +388,13 @@ def average_chatters():
     streamer_choose_dt = request.args.get('streamer_choose_dt')
     
     # set streamer name and datetime for now
-    streamer_choose_id = 'xeppaa'
-    streamer_choose_dt = '2022-07-27'
+#     streamer_choose_id = 'xeppaa'
+#     streamer_choose_dt = '2022-07-27'
     ################################################
     
     average_chatters = dg.get_average_chatters(streamer_choose_id, streamer_choose_dt)
     
-    return '<p>'+str(round(average_chatters,2))+'</p>' 
+    return '<p>'+str(round(average_chatters))+'</p>' 
 
 @blueprint.route('/rec_engine_output_table')
 # @login_required
@@ -413,8 +413,8 @@ def get_recommedations():
     print('---> test recieve_streamer_visitors: [END] --> ')
     
     # set streamer name and datetime for now
-    streamer_choose_id = 'xeppaa'
-    streamer_choose_dt = '2022-07-27'
+#     streamer_choose_id = 'xeppaa'
+#     streamer_choose_dt = '2022-07-27'
     print('Here are the sorted choices ---> ', sorted_choices)
     ################################################
     return dg.recommender_engine(streamer_choose_id, streamer_choose_dt, sorted_choices)
