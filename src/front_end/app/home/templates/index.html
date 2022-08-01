@@ -327,8 +327,9 @@
 							<div class="card-header">
 								<h3>Detailed analysis of last 12 hours of livestream for the selected date</h3>
 							</div>
-							<div id="observablehq-chart-7e84c5d8"></div>
-							<div id="observablehq-mystyle-7e84c5d8"></div>
+							<object type="image/svg+xml" data={{ url_for('static', filename="legend.svg") }}></object>
+							<div id="observablehq-chart-fbd47c6c"></div>
+							<div id="observablehq-mystyle-fbd47c6c"></div>
 							<div class="card-header">
 								<h3>Sentiment scores for last 36 months of livestream</h3>
 							</div>
@@ -1472,6 +1473,7 @@
 							call_streamer_func('/streamer_visitors_earnings', strUser, strDate, '#streamer_visitors_earnings');
 							call_streamer_func('/streamer_visitors_earnings_perc', strUser, strDate, '#streamer_visitors_earnings_perc');
 							// call_streamer_func('/rec_engine_output_table', strUser, strDate, '#rec_engine_output_table');
+							$("#rec_engine_output_table").html("");
 					}
 				});
 
@@ -1528,15 +1530,15 @@
 		</script>	
 		
 
-
 		<script type="module">
-		import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
-		import define from "https://api.observablehq.com/@vbeohar/experimentation-for-w210-capstone-twitch-sentiments-grap.js?v=3";
-		new Runtime().module(define, name => {
-		  if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-7e84c5d8"));
-		  if (name === "mystyle") return new Inspector(document.querySelector("#observablehq-mystyle-7e84c5d8"));
-		});
+			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+			import define from "https://api.observablehq.com/@vbeohar/experimentation-for-w210-capstone-twitch-sentiments-grap.js?v=3";
+			new Runtime().module(define, name => {
+			  if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-fbd47c6c"));
+			  if (name === "mystyle") return new Inspector(document.querySelector("#observablehq-mystyle-fbd47c6c"));
+			});
 		</script>
+		
 
 		<script type="module">
 		import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
@@ -1545,9 +1547,12 @@
 		if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-3319f4c3"));
 		return ["focus"].includes(name);
 		});
+		</script>
 
-
-
+		<script type="module">
+		import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+		import define from "https://api.observablehq.com/@vbeohar/creating-legends-for-charts-forked-to-create-legend-for-my-w.js?v=3";
+		new Runtime().module(define, Inspector.into("#observablehq-ed107dc9"));
 		</script>
 
 {% endblock javascripts %}
