@@ -20,10 +20,10 @@
 
 		<div class="container-fluid p-0">
 
-			<!-- <div class="row mb-2 mb-xl-3"> -->
-				<!-- <div class="col-auto d-none d-sm-block"> -->
+			<div class="row mb-2 mb-xl-3">
+				<div class="col-auto d-none d-sm-block">
 					<h3><strong>Twitch Sentiment Analytics</strong> Dashboard</h3>
-									<label for="cars">Choose a streamer:</label>
+									<!-- <label for="cars">Choose a streamer:</label>
 									<select id="streamer_choose" style="width:150px;">
 										<option value="" selected>Select streamer</option>
 										<option value="xQcOW">xQcOW</option>
@@ -59,7 +59,53 @@
 									<label for="cars"></label>
 									<label for="cars"></label>
 									<label for="cars"></label>
-									<button type="button" id="submitBtn" class="btn btn-primary">Refresh</button>
+									<button type="button" id="submitBtn" class="btn btn-primary">Refresh</button> -->
+
+									<div class="col-sm-12">
+										<div class="card">
+											<table style="border:1px solid black;margin-left:auto;margin-right:auto;border-spacing:33px;border-collapse:separate;">
+												<tr>
+												<td>
+														<label>Choose streamer</label>
+														<select id="streamer_choose" style="width:150px;">
+															<option value="" selected>Select streamer</option>
+															<option value="xQcOW">xQcOW</option>
+															<option value="Summit1G">Summit1G</option>
+															<option value="Shroud">Shroud</option>
+														</select>
+													</td>
+												<td>
+													<label>Choose stream date</label>
+														<select id="streamer_date" style="width:150px;">
+															<option value="" selected>Select date</option>
+															<option value="07-26-2022">Jul 26, 2022</option>
+															<option value="07-25-2022">Jul 25, 2022</option>
+															<option value="07-24-2022">Jul 24, 2022</option>
+															<option value="07-23-2022">Jul 23, 2022</option>
+															<option value="07-22-2022">Jul 22, 2022</option>
+															<option value="07-21-2022">Jul 21, 2022</option>
+															<option value="07-20-2022">Jul 20, 2022</option>
+															<option value="07-19-2022">Jul 19, 2022</option>
+															<option value="07-18-2022">Jul 18, 2022</option>
+														</select>											
+												</td>
+												<td>	
+														<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+														<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
+														<label class="btn btn-outline-primary" for="btnradio1">Live</label>
+				
+														<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+														<label class="btn btn-outline-primary" for="btnradio2">Recorded</label>
+														</div>
+													</td>
+												<td>
+													<button type="button" id="submitBtn" class="btn btn-primary">Refresh</button>
+												</td>
+												</tr>
+											</table>
+										</div>
+									</div>
+
 
 					<!-- <div class="container">
 						<div class="row">
@@ -90,7 +136,7 @@
 						</div>
 					</div>	 -->
 				
-				<!-- </div> -->
+				</div>
 				<!-- <div class="col-auto ml-auto text-right mt-n1">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
@@ -100,7 +146,7 @@
 						</ol>
 					</nav>
 				</div> -->
-			<!-- </div> -->
+			</div>
 			<div class="row">
 				<div class="col-xl-6 col-xxl-5 d-flex">
 					<div class="w-100">
@@ -111,40 +157,20 @@
 										<!-- <h5 class="card-title mb-4">Livestreamed minutes (in '000s)</h5> -->
 										<h3>Average sentiment</h3>
 										<h1 class="mt-1 mb-3"><div id='avg_sentiment'></div></h1>
-										<div class="mb-1">
+										<!-- <div class="mb-1">
 											<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i><div id='subscriber_change'></div></span>
 											<span class="text-muted">Since last week</span>
-										</div>
+										</div> -->
 									</div>
 								</div>
 								<div class="card">
 									<div class="card-body">
 										<h3>Average chatters</h3>
-										<!-- <script>
-											fetch('/test')
-											.then(function (response) {
-												return response.json();
-											}).then(function (text) {
-												console.log('GET response:');
-												console.log(text.greeting); 
-											});
-										</script> -->
-
-										
 										<h1 class="mt-1 mb-3"><div id='visitor_count'></div> <div id='avg_chatters'></div></h1>
-										   <!-- <script>
-											window.onload = function() {
-												var selItem = sessionStorage.getItem("selItem");  
-												console.log('inside window onload');
-												console.log(selItem);
-												$('#sort-item').val(selItem);
-												// refresh_sentiments_using_d3();
-												}
-										   </script>	 -->
-											<div class="mb-1">
+										<!-- <div class="mb-1">
 											<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> <div id='streamer_visitors'></div></span>
 											<span class="text-muted">Since last week</span>
-										</div>
+										</div> -->
 									</div>
 								</div>
 							</div>
@@ -177,17 +203,44 @@
 								</div>								
 							</div>
 							<!-- temporary card to show emotions -->
-							<div class="card flex-fill">
-								<div class="card-header">
-									<h3>Example of stream chats</h3>
-								</div>
-								<div class="card-body d-flex">
-									<div id='read_random_sentiments'></div>
+							<div class="col-sm-12">
+								<div class="card">
+									<div class="card-header">
+										<h3>Example of stream chats</h3>
+									</div>
+									<div class="card-body">
+										<div id='read_random_sentiments'></div>
+										<!-- <div>
+										</div> -->
+									</div>
 								</div>
 							</div>
 							<!-- temporary card to show emotions -->
 							<!-- card to show recommendation of channel -->
-							<div class="card flex-fill">
+							<div class="col-sm-12">
+								<div class="card">
+									<div class="card-header">
+										<h3>Our recommendation for your channel</h3>
+									</div>
+									<div class="card-header" id="sortable_ul">
+										<ul id="sortable1" class="connectedSortable">
+											<li class="ui-state-default" id="subscriber_change">Subscribers</li>
+											<li class="ui-state-default" id="followers_change">Followers</li>
+											<li class="ui-state-default" id="average_sentiment">Sentiment</li>
+										  </ul>
+										   <button type="button" id="recEngineBtn" class="btn btn-primary">Refresh</button>
+									</div>
+									<div class="card-body">
+										<div id='rec_engine_output_table'></div>
+										<!-- <div>
+										</div> -->
+									</div>
+								</div>
+							</div>
+
+
+
+							<!-- <div class="card flex-fill">
 								<div class="card-header">
 									<h3>Our recommendation for your channel</h3>
 								</div>
@@ -197,14 +250,13 @@
 										<li class="ui-state-default" id="followers_change">Followers</li>
 										<li class="ui-state-default" id="average_sentiment">Sentiment</li>
 									  </ul>
-									   <!-- <input type="submit" class="btn btn-primary" value="Submit" onclick="submit()"> -->
 									   <button type="button" id="recEngineBtn" class="btn btn-primary">Refresh</button>
 								</div>
-								<!-- <div class="card-body d-flex"> -->
+								<div class="card-body d-flex">
 								<div width="100%">	
 									<div id='rec_engine_output_table'></div>
 								</div>
-							</div>
+							</div> -->
 							<!-- card to show recommendation of channel -->
 						</div>
 					</div>
