@@ -340,14 +340,16 @@ def get_recommedations():
     """
     streamer_choose_id = request.args.get('streamer_choose_id')
     streamer_choose_dt = request.args.get('streamer_choose_dt')
+    sorted_choices = request.args.get('sorted_choices')
+
     print('---> test recieve_streamer_visitors: [START] --> ')
     print(streamer_choose_id)
     print(streamer_choose_dt)
     print('---> test recieve_streamer_visitors: [END] --> ')
     
-    
     # set streamer name and datetime for now
     streamer_choose_id = 'xeppaa'
     streamer_choose_dt = '2022-07-27'
+    print('Here are the sorted choices ---> ', sorted_choices)
     ################################################
-    return dg.recommender_engine(streamer_choose_id, streamer_choose_dt)
+    return dg.recommender_engine(streamer_choose_id, streamer_choose_dt, sorted_choices)

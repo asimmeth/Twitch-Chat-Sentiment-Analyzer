@@ -194,10 +194,10 @@ def get_average_chatters(channel_name, start_time):
 
     return average_chatters[0][0] 
 
-def recommendation(row):
+def recommendation(row,sorted_choices):
     '''
     Basic recommendation engine. Each normalized category divided by the seconds spent times the weight. 
-    
+
     Current weight configuration: 
     35% Sentiment Value
     30% Subs Gained
@@ -211,7 +211,7 @@ def recommendation(row):
     return value
 
 
-def recommender_engine(channel_name, start_time):
+def recommender_engine(channel_name, start_time, sorted_choices):
     """ Queries sql table to get new followers, new subscribers, average viewers,
         average sentiment, and time by category. Runs the recommendation engine and
         outputs results.
@@ -321,18 +321,36 @@ def recommender_engine(channel_name, start_time):
     df = pd.read_sql_query(grouped_stream_query, conn)
     df['subscriber_change'] = np.array(subscriber_list)
     df['followers_change'] = np.array(subscriber_list)
-    
+
+    df = df.append(pd.DataFrame({'channel_name':['xeppaa', 'xeppaa', 'xeppaa', 'xeppaa'], 'stream_topic':['VALORANT', 'VALORANT2', 'VALORANT3', 'VALORANT4'] , \
+                                'avg_viewers':[1000, 1040, 1100, 2000], 'average_sentiment':[0.1, 0.2, 0.3, 0.4], 'time':[8, 3, 5, 6], 'subscriber_change':[20, 30, 40, 50], 'followers_change':[20, 30, 40, 50]}))
+
+    df.loc[:,'Topic'] = df['stream_topic']
+    df.loc[:,'Avg viewers'] = df['avg_viewers']
+    df.loc[:,'Avg sentiment'] = df['average_sentiment']
+    df.loc[:,'Subscriber Δ'] = df['subscriber_change']
+    df.loc[:,'Followers Δ'] = df['followers_change']
+    print(df)
+    topics = [1, 2, 3, 5, 5]
     
     if len(topics) > 1:
         for col in ['avg_viewers','average_sentiment','subscriber_change','followers_change']:
-       
             df[col] = (df[col] - df[col].min()) / (df[col].max() - df[col].min())
-    
-        df['score'] = df.apply(recommendation, axis = 1)
+        # df['Score'] = df.apply(recommendation, args=(sorted_choices), axis = 1, ) --> this was hard to use because of multiple **kwargs
+        scores = sorted_choices.split(',')
+        print(scores)
+        df.loc[:, 'Score %'] = [(i*.35 + i*.30 + k*.25 + l*.10)/time for i, j, k, l, time in zip(df[scores[0]], df[scores[1]], df[scores[2]], df['avg_viewers'], df['time'])]
     else:
-        df['score'] = 100
+        df['Score %'] = 100
      
+    df['Score %'] = ((df['Score %']/df['Score %'].sum())*100).round(decimals=1)
     conn.commit()
     conn.close()
-    return df.to_html(classes='table table-stripped', index=False)
+
+    pd.set_option('colheader_justify', 'left')
+    # df['Score'] =  '<b>' + df['Score'].astype(str) + '%</b>'
+
+    return df[['Topic','Avg viewers','Avg sentiment','Subscriber Δ','Followers Δ', 'Score %']].\
+        sort_values(by=['Score %'], ascending=False).\
+                to_html(classes='table table-stripped', index=False)
 

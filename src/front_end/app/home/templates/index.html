@@ -8,7 +8,14 @@
 	</style>
 {% block content %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css" />
+<style>
+	#sortable1 { list-style-type: none; margin: 0; padding: 0 0 2.5em; float: left; margin-right: 10px; }
+	#sortable1 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
+</style>
 	<main class="content">
 
 		<div class="container-fluid p-0">
@@ -112,7 +119,7 @@
 								</div>
 								<div class="card">
 									<div class="card-body">
-										<h3>Avg chatters</h3>
+										<h3>Average chatters</h3>
 										<script>
 											fetch('/test')
 											.then(function (response) {
@@ -146,10 +153,10 @@
 									<div class="card-body">
 										<h3>Total messages</h3>
 										<h1 class="mt-1 mb-3"><div id='total_messages'></div></h1>
-										<div class="mb-1">
+										<!-- <div class="mb-1">
 											<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> <div id='streamer_visitors_earnings_perc'></div></span>
 											<span class="text-muted">Since last week</span>
-										</div>
+										</div> -->
 									</div>
 								</div>
 								<div class="card">
@@ -184,7 +191,17 @@
 								<div class="card-header">
 									<h3>Our recommendation for your channel</h3>
 								</div>
-								<div class="card-body d-flex">
+								<div class="card-header" id="sortable_ul">
+									<ul id="sortable1" class="connectedSortable">
+										<li class="ui-state-default" id="subscriber_change">Subscribers</li>
+										<li class="ui-state-default" id="followers_change">Followers</li>
+										<li class="ui-state-default" id="average_sentiment">Sentiment</li>
+									  </ul>
+									   <!-- <input type="submit" class="btn btn-primary" value="Submit" onclick="submit()"> -->
+									   <button type="button" id="recEngineBtn" class="btn btn-primary">Refresh</button>
+								</div>
+								<!-- <div class="card-body d-flex"> -->
+								<div width="100%">	
 									<div id='rec_engine_output_table'></div>
 								</div>
 							</div>
@@ -1368,6 +1385,7 @@
 
 
 			$(document).ready(function () {
+				$("#sortable_ul").hide();
 
 				$('#submitBtn').click(function () {
 					var e = document.getElementById("streamer_choose");
@@ -1399,21 +1417,51 @@
 					if ($(radio_selected1).is(':checked')) {
 							$("#live_feed").show();
 							$("#historic_feed").hide();
+							$("#sortable_ul").hide();
 
-							call_streamer_func('/average_viewers', strUser, strDate, '#average_viewers');
-							call_streamer_func('/followers_change', strUser, strDate, '#followers_change');
-							call_streamer_func('/subscriber_change', strUser, strDate, '#subscriber_change');
-							call_streamer_func('/avg_sentiment', strUser, strDate, '#avg_sentiment');
-							call_streamer_func('/avg_chatters', strUser, strDate, '#avg_chatters');
-							call_streamer_func('/total_messages', strUser, strDate, '#total_messages');
-							call_streamer_func('/streamer_visitors_earnings', strUser, strDate, '#streamer_visitors_earnings');
-							call_streamer_func('/streamer_visitors_earnings_perc', strUser, strDate, '#streamer_visitors_earnings_perc');
-							call_streamer_func('/rec_engine_output_table', strUser, strDate, '#rec_engine_output_table');
+							$("#average_viewers").html("");
+							$("#average_viewers").html('<p style="font-family:georgia,garamond,serif;font-size:16px;font-style:italic;color:blue;">Not available in livestream</p>');
+
+							$("#followers_change").html("");
+							$("#followers_change").html('<p style="font-family:georgia,garamond,serif;font-size:16px;font-style:italic;color:blue;">Not available in livestream</p>');
+
+							$("#subscriber_change").html("");
+							// $("#subscriber_change").html('<p style="font-family:georgia,garamond,serif;font-size:16px;font-style:italic;color:blue;">Not available in livestream</p>');
+							
+							$("#avg_sentiment").html("");
+							$("#avg_sentiment").html('<p style="font-family:georgia,garamond,serif;font-size:16px;font-style:italic;color:blue;">Not available in livestream</p>');
+							
+							$("#avg_chatters").html("");
+							$("#avg_chatters").html('<p style="font-family:georgia,garamond,serif;font-size:16px;font-style:italic;color:blue;">Not available in livestream</p>');
+
+							$("#total_messages").html("");
+							$("#total_messages").html('<p style="font-family:georgia,garamond,serif;font-size:16px;font-style:italic;color:blue;">Not available in livestream</p>');	
+
+							$("#streamer_visitors_earnings").html("");
+							$("#streamer_visitors_earnings").html('<p style="font-family:georgia,garamond,serif;font-size:16px;font-style:italic;color:blue;">Not available in livestream</p>');	
+
+							$("#streamer_visitors_earnings_perc").html("");
+							// $("#streamer_visitors_earnings_perc").html('<p style="font-family:georgia,garamond,serif;font-size:16px;font-style:italic;color:blue;">Not available in livestream</p>');	
+
+							$("#rec_engine_output_table").html("");
+							$("#rec_engine_output_table").html('<p style="font-family:georgia,garamond,serif;font-size:16px;font-style:italic;color:blue;">Go to the recordings tab to access your recommended streams based your history</p>');	
+
+							// call_streamer_func('/average_viewers', strUser, strDate, '#average_viewers');
+							// call_streamer_func('/followers_change', strUser, strDate, '#followers_change');
+							// call_streamer_func('/subscriber_change', strUser, strDate, '#subscriber_change');
+							// call_streamer_func('/avg_sentiment', strUser, strDate, '#avg_sentiment');
+							// call_streamer_func('/avg_chatters', strUser, strDate, '#avg_chatters');
+							// call_streamer_func('/total_messages', strUser, strDate, '#total_messages');
+							// call_streamer_func('/streamer_visitors_earnings', strUser, strDate, '#streamer_visitors_earnings');
+							// call_streamer_func('/streamer_visitors_earnings_perc', strUser, strDate, '#streamer_visitors_earnings_perc');
+							// call_streamer_func('/rec_engine_output_table', strUser, strDate, '#rec_engine_output_table');
 					}					
 
 					if ($(radio_selected2).is(':checked')) {
 							$("#live_feed").hide();
 							$("#historic_feed").show();
+							$("#sortable_ul").show();
+							
 
 							call_streamer_func('/average_viewers', strUser, strDate, '#average_viewers');
 							call_streamer_func('/followers_change', strUser, strDate, '#followers_change');
@@ -1423,14 +1471,41 @@
 							call_streamer_func('/total_messages', strUser, strDate, '#total_messages');
 							call_streamer_func('/streamer_visitors_earnings', strUser, strDate, '#streamer_visitors_earnings');
 							call_streamer_func('/streamer_visitors_earnings_perc', strUser, strDate, '#streamer_visitors_earnings_perc');
-							call_streamer_func('/rec_engine_output_table', strUser, strDate, '#rec_engine_output_table');
+							// call_streamer_func('/rec_engine_output_table', strUser, strDate, '#rec_engine_output_table');
 					}
 				});
+
+
+				$('#recEngineBtn').click(function () {
+					var idsInOrder = [];
+					$("ul#sortable1 li").each(function() {  idsInOrder.push($(this).attr('id')) }); 
+					var str_sorted_choices = idsInOrder.join();
+					// alert(idsInOrder.join('\n'));
+					// alert(str_sorted_choices);
+					var e = document.getElementById("streamer_choose");
+					var streamer_id = e.value;
+					var eDate = document.getElementById("streamer_date");
+					var streamer_date = eDate.value;
+					$("#rec_engine_output_table").html("");
+					$.ajax({
+								url: '/rec_engine_output_table',
+								type: "get",
+								data: {streamer_choose_id: streamer_id, streamer_choose_dt: streamer_date, sorted_choices: str_sorted_choices},
+							success: function(response) {
+								$("#rec_engine_output_table").html(response);
+							},
+							error: function(xhr) {
+								//Do Something to handle error
+							}
+						});						
+				});
+
 			});
 
 
 			function call_streamer_func(api_url, streamer_id, streamer_date, div_to_refresh){
 					console.log('inside streamer function');
+					$(div_to_refresh).html("");
 					$.ajax({
 							url: api_url,
 							type: "get",
@@ -1444,8 +1519,15 @@
 					});				
 			}
 
+		$(function() {
+			$( "#sortable1" ).sortable({
+			connectWith: ".connectedSortable"
+			}).disableSelection();
+		});
+
 		</script>	
 		
+
 
 		<script type="module">
 		import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
@@ -1463,6 +1545,9 @@
 		if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-3319f4c3"));
 		return ["focus"].includes(name);
 		});
+
+
+
 		</script>
 
 {% endblock javascripts %}
