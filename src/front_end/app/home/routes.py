@@ -233,10 +233,6 @@ def average_viewers():
     """
     streamer_choose_id = request.args.get('streamer_choose_id')
     streamer_choose_dt = request.args.get('streamer_choose_dt')
-    print('---> test recieve_streamer_visitors: [START] --> ')
-    print(streamer_choose_id)
-    print(streamer_choose_dt)
-    print('---> test recieve_streamer_visitors: [END] --> ')
     
     # set streamer name and datetime for now
     streamer_choose_id = 'xeppaa'
@@ -256,10 +252,6 @@ def new_followers():
     """
     streamer_choose_id = request.args.get('streamer_choose_id')
     streamer_choose_dt = request.args.get('streamer_choose_dt')
-    print('---> test recieve_streamer_visitors: [START] --> ')
-    print(streamer_choose_id)
-    print(streamer_choose_dt)
-    print('---> test recieve_streamer_visitors: [END] --> ')
     
     # set streamer name and datetime for now
     streamer_choose_id = 'xeppaa'
