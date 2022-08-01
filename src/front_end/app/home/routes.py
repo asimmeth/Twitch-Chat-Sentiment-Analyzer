@@ -260,7 +260,34 @@ def new_followers():
     
     follower_change = dg.get_follower_change(streamer_choose_id, streamer_choose_dt)
     
-    return '<p>'+str(round(follower_change,2))+'</p>'
+    if follower_change > 0:
+         follower_change_str = '+' + str(follower_change)
+    elif follower_change < 0:
+      follower_change_str = '-' +str(follower_change)
+    else:
+        follwer_change_str = str(follower_change)
+
+    return follower_change_str
+
+
+@blueprint.route('/pct_follower_change')
+# @login_required
+def pct_new_followers():
+    """
+    Calls get_follower_change and returns the change in followers from the start to end of the stream
+    output: follower_change (int)
+    """
+    streamer_choose_id = request.args.get('streamer_choose_id')
+    streamer_choose_dt = request.args.get('streamer_choose_dt')
+    
+    # set streamer name and datetime for now
+    streamer_choose_id = 'xeppaa'
+    streamer_choose_dt = '2022-07-27'
+    ################################################
+    
+    follower_change_pct = dg.get_pct_follower_change(streamer_choose_id, streamer_choose_dt)
+    
+    return str(follower_change_pct) + '%'
 
 
 @blueprint.route('/subscriber_change')
@@ -283,7 +310,35 @@ def new_subscribers():
     streamer_choose_dt = '2022-07-27'
     ################################################
     subscriber_change = dg.get_subscriber_change(streamer_choose_id, streamer_choose_dt)
-    return str(subscriber_change)+'+' if subscriber_change > 0 else str(subscriber_change)+'-'
+
+    if subscriber_change > 0:
+         subscriber_change_str = '+' + str(subscriber_change)
+    elif subscriber_change < 0:
+      subscriber_change_str = '-' +str(subscriber_change)
+    else:
+        subscriber_change_str = str(subscriber_change)
+
+    return subscriber_change_str
+
+@blueprint.route('/pct_subscriber_change')
+# @login_required
+def pct_new_subscribers():
+    """
+    Calls get_pct_subscriber_change and returns the percentage change in subscribers from
+    the start to the end of the stream
+    output: pct_subscriber_change (int)
+    """
+    streamer_choose_id = request.args.get('streamer_choose_id')
+    streamer_choose_dt = request.args.get('streamer_choose_dt')
+    
+    # set streamer name and datetime for now
+    streamer_choose_id = 'xeppaa'
+    streamer_choose_dt = '2022-07-27'
+    ################################################
+    
+    subscriber_change_pct = dg.get_pct_subscriber_change(streamer_choose_id, streamer_choose_dt)
+    
+    return str(subscriber_change_pct) + '%'
     
 
 @blueprint.route('/avg_sentiment')

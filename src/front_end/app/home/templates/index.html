@@ -74,6 +74,7 @@
 															<option value="xQcOW">xQcOW</option>
 															<option value="Summit1G">Summit1G</option>
 															<option value="Shroud">Shroud</option>
+															<option value="lirik">lirik</option>
 														</select>
 													</td>
 												<td>
@@ -88,7 +89,7 @@
 															<option value="07-21-2022">Jul 21, 2022</option>
 															<option value="07-20-2022">Jul 20, 2022</option>
 															<option value="07-19-2022">Jul 19, 2022</option>
-															<option value="07-18-2022">Jul 18, 2022</option>
+															<option value="2022-07-30">Jul 30, 2022</option>
 														</select>											
 												</td>
 												<td>	
@@ -148,79 +149,101 @@
 						</ol>
 					</nav>
 				</div> -->
-			</div>
-			<div class="row">
-				<div class="col-xl-6 col-xxl-5 d-flex">
-					<div class="w-100">
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="card">
-									<div class="card-body">
-										<!-- <h5 class="card-title mb-4">Livestreamed minutes (in '000s)</h5> -->
-										<h3>Average Sentiment</h3>
-										<h1 class="mt-1 mb-3"><div id='avg_sentiment'></div></h1>
-										<!-- <div class="mb-1">
-											<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i><div id='subscriber_change'></div></span>
-											<span class="text-muted">Since last week</span>
-										</div> -->
+				<div class="row">
+					<div class="col-xl-6 col-xxl-5 d-flex">
+						<div class="w-100">
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="card">
+										<div class="card-body">
+											<!-- <h5 class="card-title mb-4">Livestreamed minutes (in '000s)</h5> -->
+											<h3>Average Sentiment</h3>
+											<h1 class="mt-1 mb-3"><div id='avg_sentiment'></div></h1>
+											<div class="mb-1">
+												<!-- <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i><div id='subscriber_change'></div></span> -->
+												<!-- <span class="text-muted">Since last week</span> -->
+											</div>
+										</div>
 									</div>
-								</div>
-								<div class="card">
-									<div class="card-body">
-										<h3>Average chatters</h3>
-										<h1 class="mt-1 mb-3"><div id='visitor_count'></div> <div id='avg_chatters'></div></h1>
-										<!-- <div class="mb-1">
-											<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> <div id='streamer_visitors'></div></span>
-											<span class="text-muted">Since last week</span>
-										</div> -->
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-6">
-								<div class="card">
-									<div class="card-body">
-										<h3>Total Messages</h3>
-										<h1 class="mt-1 mb-3"><div id='total_messages'></div></h1>
-										<!-- <div class="mb-1">
-											<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> <div id='streamer_visitors_earnings_perc'></div></span>
-											<span class="text-muted">Since last week</span>
-										</div> -->
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-body">
-										<h3>Change in Followers</h3>
-										<h1 class="mt-1 mb-3"><div id='followers_change'></div></h1>
-										<div class="mb-1">
-											<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> <div id='streamer_chats_perc'></div></span>
-											<span class="text-muted">Percent Change</span>
+									<div class="card">
+										<div class="card-body">
+											<h3>Average Viewers</h3>
+											<h1 class="mt-1 mb-3"><div id='average_viewers'></div></h1>
+										</div>
+									</div>		
+									<div class="card">
+										<div class="card-body">
+											<h3>Average Chatters</h3>
+											<!-- <script>
+												fetch('/test')
+												.then(function (response) {
+													return response.json();
+												}).then(function (text) {
+													console.log('GET response:');
+													console.log(text.greeting); 
+												});
+											</script> -->
+	
+											
+											<h1 class="mt-1 mb-3"><div id='visitor_count'></div> <div id='avg_chatters'></div></h1>
+											   <!-- <script>
+												window.onload = function() {
+													var selItem = sessionStorage.getItem("selItem");  
+													console.log('inside window onload');
+													console.log(selItem);
+													$('#sort-item').val(selItem);
+													// refresh_sentiments_using_d3();
+													}
+											   </script>	 -->
+												<div class="mb-1">
+												<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> <div id='streamer_visitors'></div></span>
+												<!-- <span class="text-muted">Since last week</span> -->
+											</div>
 										</div>
 									</div>
 								</div>
-								<div class="card">
-									<div class="card-body">
-										<h3>Change in Subscribers</h3>
-										<h1 class="mt-1 mb-3"><div id='subscriber_change'></div></h1>
+								<div class="col-sm-6">
+									<div class="card">
+										<div class="card-body">
+											<h3>Total Messages</h3>
+											<h1 class="mt-1 mb-3"><div id='total_messages'></div></h1>
+											<!-- <div class="mb-1">
+												<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> <div id='streamer_visitors_earnings_perc'></div></span>
+												<span class="text-muted">Since last week</span>
+											</div> -->
+										</div>
 									</div>
-								</div>								
-							</div>
-							<!-- temporary card to show emotions -->
-							<div class="col-sm-12">
-								<div class="card">
+									<div class="card">
+										<div class="card-body">
+											<h3>Change in Followers</h3>
+											<h1 class="mt-1 mb-3"><div id='followers_change'></div></h1>
+											<div class="mb-1">
+												<span class="text-muted">Pct Change: <class="text-muted"> <i class="mdi mdi-arrow-bottom-right"></i><div id='pct_follower_change'></div></span>
+											</div>
+										</div>
+									</div>
+									<div class="card">
+										<div class="card-body">
+											<h3>Change in Subscribers</h3>
+											<h1 class="mt-1 mb-3"><div id='subscriber_change'></div></h1>
+											<div class="mb-1">
+													<span class="text-muted">Pct Change: <class="text-muted"> <i class="mt-1 mb-3"></i><div id='pct_subscriber_change'></div></span>
+											</div>
+										</div>
+									</div>								
+								</div>
+								<!-- temporary card to show emotions -->
+								<div class="card flex-fill">
 									<div class="card-header">
 										<h3>Example of stream chats</h3>
 									</div>
-									<div class="card-body">
+									<div class="card-body d-flex">
 										<div id='read_random_sentiments'></div>
-										<!-- <div>
-										</div> -->
 									</div>
 								</div>
-							</div>
-							<!-- temporary card to show emotions -->
-							<!-- card to show recommendation of channel -->
-							<div class="col-sm-12">
-								<div class="card">
+								<!-- temporary card to show emotions -->
+								<!-- card to show recommendation of channel -->
+								<div class="card flex-fill">
 									<div class="card-header">
 										<h3>Our recommendation for your channel</h3>
 									</div>
@@ -230,39 +253,18 @@
 											<li class="ui-state-default" id="followers_change">Followers</li>
 											<li class="ui-state-default" id="average_sentiment">Sentiment</li>
 										  </ul>
+										   <!-- <input type="submit" class="btn btn-primary" value="Submit" onclick="submit()"> -->
 										   <button type="button" id="recEngineBtn" class="btn btn-primary">Refresh</button>
 									</div>
-									<div class="card-body">
+									<!-- <div class="card-body d-flex"> -->
+									<div width="100%">	
 										<div id='rec_engine_output_table'></div>
-										<!-- <div>
-										</div> -->
 									</div>
 								</div>
+								<!-- card to show recommendation of channel -->
 							</div>
-
-
-
-							<!-- <div class="card flex-fill">
-								<div class="card-header">
-									<h3>Our recommendation for your channel</h3>
-								</div>
-								<div class="card-header" id="sortable_ul">
-									<ul id="sortable1" class="connectedSortable">
-										<li class="ui-state-default" id="subscriber_change">Subscribers</li>
-										<li class="ui-state-default" id="followers_change">Followers</li>
-										<li class="ui-state-default" id="average_sentiment">Sentiment</li>
-									  </ul>
-									   <button type="button" id="recEngineBtn" class="btn btn-primary">Refresh</button>
-								</div>
-								<div class="card-body d-flex">
-								<div width="100%">	
-									<div id='rec_engine_output_table'></div>
-								</div>
-							</div> -->
-							<!-- card to show recommendation of channel -->
 						</div>
 					</div>
-				</div>
 
 				<!-- <div class="col-xl-6 col-xxl-7">
 					<div class="card flex-fill w-100">
@@ -1520,7 +1522,9 @@
 
 							call_streamer_func('/average_viewers', strUser, strDate, '#average_viewers');
 							call_streamer_func('/followers_change', strUser, strDate, '#followers_change');
+							call_streamer_func('/pct_follower_change', strUser, strDate, '#pct_follower_change');
 							call_streamer_func('/subscriber_change', strUser, strDate, '#subscriber_change');
+							call_streamer_func('/pct_subscriber_change', strUser, strDate, '#pct_subscriber_change');
 							call_streamer_func('/avg_sentiment', strUser, strDate, '#avg_sentiment');
 							call_streamer_func('/avg_chatters', strUser, strDate, '#avg_chatters');
 							call_streamer_func('/total_messages', strUser, strDate, '#total_messages');

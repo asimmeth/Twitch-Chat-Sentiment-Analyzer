@@ -2,7 +2,7 @@ import sqlite3
 import pandas as pd
 import numpy as np
 
-# conn = sqlite3.connect('/home/w210/Twitch-chat-pioneers/src/front_end/db.sqlite3')
+#conn = sqlite3.connect(con_string)
 con_string = '../front_end/db.sqlite3'
 
 
@@ -15,6 +15,7 @@ def get_subscriber_change(channel_name, start_time):
     
     channel_name = '\'' + channel_name + '\''
     start_time = '\'' + start_time + '\''
+    
     conn = sqlite3.connect(con_string)
     
     new_subscriber_query =  '''
@@ -47,6 +48,47 @@ def get_subscriber_change(channel_name, start_time):
     
     return subscriber_change
 
+def get_pct_subscriber_change(channel_name, start_time):
+    """
+    Query sql table and get the average number of chatters for selected stream
+    input: channel_name, start_time
+    output: average_chatters (float)
+    """
+    channel_name = '\'' + channel_name + '\''
+    start_time = '\'' + start_time + '\''
+    
+    conn = sqlite3.connect(con_string)
+    
+    new_subscriber_query =  '''
+                    with starting_subscribers as (
+                        select subscriber_count
+                        from chats_table_demo
+                        where channel_name = {} and stream_date = {} 
+                        order by date asc
+                        limit 1)
+
+                    ,ending_subscribers as (
+                        select subscriber_count
+                        from chats_table_demo
+                        where channel_name = {} and stream_date = {}
+                        order by date desc
+                        limit 1
+                        )
+
+                    select * from starting_subscribers
+                    UNION ALL select * from ending_subscribers
+
+                    '''.format(channel_name, start_time, channel_name, start_time)
+    
+    cursor_obj = conn.cursor()
+    cursor_obj.execute(new_subscriber_query)
+    subscriber_count = cursor_obj.fetchall()
+    subscriber_change_pct = round((100 * (subscriber_count[1][0] - subscriber_count[0][0]) / subscriber_count[0][0]))
+    conn.commit()
+    conn.close()
+    
+    return subscriber_change_pct
+
 def get_follower_change(channel_name, start_time):
     """
     Query sql table and get the change in followers for selected stream
@@ -56,8 +98,8 @@ def get_follower_change(channel_name, start_time):
      # set streamer name and datetime for now
     channel_name = '\'' + channel_name + '\''
     start_time = '\'' + start_time + '\''
-    conn = sqlite3.connect(con_string)
     
+    conn = sqlite3.connect(con_string)
     
     new_followers_query =  '''
                     with starting_followers as (
@@ -89,6 +131,48 @@ def get_follower_change(channel_name, start_time):
     
     return follower_change
 
+def get_pct_follower_change(channel_name, start_time):
+    """
+    Query sql table and get the change in followers for selected stream
+    input: channel_name, start_time
+    output: follower_change (int)
+    """
+     # set streamer name and datetime for now
+    channel_name = '\'' + channel_name + '\''
+    start_time = '\'' + start_time + '\''
+    
+    conn = sqlite3.connect(con_string)
+    
+    new_followers_query =  '''
+                    with starting_followers as (
+                        select follower_count
+                        from chats_table_demo
+                        where channel_name = {} and stream_date = {} 
+                        order by date asc
+                        limit 1)
+
+                    ,ending_followers as (
+                        select follower_count
+                        from chats_table_demo
+                        where channel_name = {} and stream_date = {}
+                        order by date desc
+                        limit 1
+                        )
+
+                    select * from starting_followers
+                    UNION ALL select * from ending_followers
+
+                    '''.format(channel_name, start_time, channel_name, start_time)
+    
+    cursor_obj = conn.cursor()
+    cursor_obj.execute(new_followers_query)
+    follower_count = cursor_obj.fetchall()
+    follower_count_pct = round((100 * (follower_count[0][0] - follower_count[1][0]) / follower_count[1][0]))
+    conn.commit()
+    conn.close()
+    
+    return follower_count_pct
+
 def get_average_view_count(channel_name, start_time):
     """
     Query sql table and get the average number of viewers for selected stream
@@ -98,8 +182,8 @@ def get_average_view_count(channel_name, start_time):
     
     channel_name = '\'' + channel_name + '\''
     start_time = '\'' + start_time + '\''
-    conn = sqlite3.connect(con_string)
     
+    conn = sqlite3.connect(con_string)
     
     average_views_query = '''
                         select round(avg(viewer_count)) as avg_viewers
@@ -124,8 +208,8 @@ def get_message_count(channel_name, start_time):
     
     channel_name = '\'' + channel_name + '\''
     start_time = '\'' + start_time + '\''
-    conn = sqlite3.connect(con_string)
     
+    conn = sqlite3.connect(con_string)
     
     total_messages_query = '''
                         select count(*) as total_messages
@@ -150,8 +234,8 @@ def get_average_sentiment(channel_name, start_time):
     """
     channel_name = '\'' + channel_name + '\''
     start_time = '\'' + start_time + '\''
-    conn = sqlite3.connect(con_string)
     
+    conn = sqlite3.connect(con_string)
     
     average_sentiment_query = '''
                         select avg(message_sentiment) as total_messages
@@ -176,8 +260,8 @@ def get_average_chatters(channel_name, start_time):
     """
     channel_name = '\'' + channel_name + '\''
     start_time = '\'' + start_time + '\''
-    conn = sqlite3.connect(con_string)
     
+    conn = sqlite3.connect(con_string)
     
     average_chatters_query = '''
                         select avg(chatter_count) as average_chatters
