@@ -359,6 +359,24 @@ def average_sentiment():
     average_sentiment = dg.get_average_sentiment(streamer_choose_id, streamer_choose_dt)
     return '<p>'+str(round(average_sentiment, 2))+'</p>'
 
+@blueprint.route('/chat_percentages')
+# @login_required
+def chat_percentages():
+    """
+    Calls get_average_sentiment and returns the average sentiment of the stream
+    output: average_sentiment (float)
+    """
+    streamer_choose_id = request.args.get('streamer_choose_id')
+    streamer_choose_dt = request.args.get('streamer_choose_dt')
+    print('---> avg_sentiment')
+    # set streamer name and datetime for now
+    streamer_choose_id = 'xeppaa'
+    streamer_choose_dt = '2022-07-27'
+    ################################################
+    
+    chat_percentages = dg.get_pct_positive_negative(streamer_choose_id, streamer_choose_dt)
+    return chat_percentages
+
 @blueprint.route('/avg_chatters')
 # @login_required
 def average_chatters():

@@ -252,6 +252,55 @@ def get_average_sentiment(channel_name, start_time):
 
     return average_sentiment[0][0] 
 
+def get_pct_positive_negative(channel_name, start_time):
+    """
+    Query sql table and get the percentage of positive, negative, and neutral chats
+    for selected stream
+    input: channel_name, start_time
+    output: pct_positive, negative, neutral
+    """
+    channel_name = '\'' + channel_name + '\''
+    start_time = '\'' + start_time + '\''
+    
+    conn = sqlite3.connect(con_string)
+    
+    sentiment_pct_query = '''
+                        with positive_chats as (select count(*) as chat_count
+                                                from chats_table_demo
+                                                where channel_name = {} 
+                                                and stream_date = {} 
+                                                and message_sentiment > 0)
+                            ,negative_chats as (select count(*) as chat_count
+                                                from chats_table_demo
+                                                where channel_name = {} 
+                                                and stream_date = {} 
+                                                and message_sentiment < 0)
+                            ,neutral_chats as (select count(*) as chat_count
+                                                from chats_table_demo
+                                                where channel_name = {} 
+                                                and stream_date = {} 
+                                                and message_sentiment = 0)
+                            select * from positive_chats
+                            UNION ALL select * from negative_chats
+                            UNION ALL select * from neutral_chats       
+                        '''.format(channel_name, start_time,channel_name, start_time,channel_name, start_time)
+    
+    cursor_obj = conn.cursor()
+    cursor_obj.execute(sentiment_pct_query)
+    sentiment_counts = cursor_obj.fetchall()
+    total_chats = sentiment_counts[0][0] + sentiment_counts[1][0] + sentiment_counts[2][0]
+    positive_chats = round( 100 * (sentiment_counts[0][0] / total_chats))
+    negative_chats = round(100* (sentiment_counts[1][0] / total_chats))
+    neutral_chats = round(100 * (sentiment_counts[2][0] / total_chats))
+    chat_percentages = """Positive Chats: {}% 
+                        Negative Chats: {}%
+                        Neutral Chats: {}%""".format(positive_chats, negative_chats, neutral_chats)
+    conn.commit()
+    conn.close()  
+
+
+    return chat_percentages 
+
 def get_average_chatters(channel_name, start_time):
     """
     Query sql table and get the average number of chatters for selected stream

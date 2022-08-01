@@ -160,9 +160,8 @@
 											<h3>Average Sentiment</h3>
 											<h1 class="mt-1 mb-3"><div id='avg_sentiment'></div></h1>
 											<div class="mb-1">
-												<!-- <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i><div id='subscriber_change'></div></span> -->
-												<!-- <span class="text-muted">Since last week</span> -->
-											</div>
+												<span class="text-muted"> <i class="mdi mdi-arrow-bottom-right"></i> <div id='chat_percentages'></div></span>
+										</div>
 										</div>
 									</div>
 									<div class="card">
@@ -235,7 +234,7 @@
 								<!-- temporary card to show emotions -->
 								<div class="card flex-fill">
 									<div class="card-header">
-										<h3>Example of stream chats</h3>
+										<h3>Stream Chats</h3>
 									</div>
 									<div class="card-body d-flex">
 										<div id='read_random_sentiments'></div>
@@ -245,7 +244,7 @@
 								<!-- card to show recommendation of channel -->
 								<div class="card flex-fill">
 									<div class="card-header">
-										<h3>Our recommendation for your channel</h3>
+										<h3>Stream Category Performance</h3>
 									</div>
 									<div class="card-header" id="sortable_ul">
 										<ul id="sortable1" class="connectedSortable">
@@ -1530,6 +1529,7 @@
 							call_streamer_func('/total_messages', strUser, strDate, '#total_messages');
 							call_streamer_func('/streamer_visitors_earnings', strUser, strDate, '#streamer_visitors_earnings');
 							call_streamer_func('/streamer_visitors_earnings_perc', strUser, strDate, '#streamer_visitors_earnings_perc');
+							call_streamer_func('/chat_percentages', strUser, strDate, '#chat_percentages');
 							// call_streamer_func('/rec_engine_output_table', strUser, strDate, '#rec_engine_output_table');
 							$("#rec_engine_output_table").html("");
 					}
