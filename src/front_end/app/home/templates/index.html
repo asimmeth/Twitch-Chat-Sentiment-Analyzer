@@ -12,11 +12,88 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css" />
+
 <style>
 	#sortable1 { list-style-type: none; margin: 0; padding: 0 0 2.5em; float: left; margin-right: 10px; }
 	#sortable1 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
 </style>
+
+<style>
+		body {font-family: Arial, Helvetica, sans-serif;}
+		/* The Modal (background) */
+		.modal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 1; /* Sit on top */
+		padding-top: 100px; /* Location of the box */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		}
+		
+		/* Modal Content */
+		.modal-content {
+		position: relative;
+		background-color: #fefefe;
+		margin: auto;
+		padding: 0;
+		border: 1px solid #888;
+		width: 50%;
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+		-webkit-animation-name: animatetop;
+		-webkit-animation-duration: 0.4s;
+		animation-name: animatetop;
+		animation-duration: 0.4s
+		}
+		
+		/* Add Animation */
+		@-webkit-keyframes animatetop {
+		from {top:-300px; opacity:0} 
+		to {top:0; opacity:1}
+		}
+		
+		@keyframes animatetop {
+		from {top:-300px; opacity:0}
+		to {top:0; opacity:1}
+		}
+		
+		/* The Close Button */
+		.close {
+		color: white;
+		float: right;
+		font-size: 28px;
+		font-weight: bold;
+		}
+		
+		.close:hover,
+		.close:focus {
+		color: #000;
+		text-decoration: none;
+		cursor: pointer;
+		}
+		
+		.modal-header {
+		padding: 2px 16px;
+		background-color: #BDB5D5;
+		color: white;
+		}
+		
+		.modal-body {padding: 2px 16px;}
+		
+		.modal-footer {
+		padding: 2px 16px;
+		background-color: #BDB5D5;
+		color: white;
+		}
+	</style>
+
 	<main class="content">
+
+
 
 		<div class="container-fluid p-0">
 
@@ -94,11 +171,35 @@
 												</td>
 												<td>	
 														<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-														<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
-														<label class="btn btn-outline-primary" for="btnradio1">Live</label>
-				
-														<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-														<label class="btn btn-outline-primary" for="btnradio2">Recorded</label>
+															<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+															<label class="btn btn-outline-primary" for="btnradio2">Recorded</label>
+
+															<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
+															<label class="btn btn-outline-primary" for="btnradio1">Live (Beta!)</label>
+
+															<!-- The Modal -->
+															<div id="myModal" class="modal">
+																<!-- Modal content -->
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<span class="close">&times;</span>
+																		<h5>&nbsp;&nbsp;&nbsp;&nbsp;</h5>
+																	</div>
+																	<div class="modal-body">
+																		<h3>
+																			<p>Welcome to the live section of the Twitch recommendation engine!</p>
+																			<p>This is still a work in progress and only a beta version for your review.</p>
+																			<p>Check back later for more!</p>
+																		</h3>
+																	</div>
+																	<div class="modal-footer">
+																		<h3>&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+																	</div>
+																</div>
+															</div>															
+															  
+															  
+
 														</div>
 													</td>
 												<td>
@@ -173,27 +274,7 @@
 									<div class="card">
 										<div class="card-body">
 											<h3>Average Chatters</h3>
-											<!-- <script>
-												fetch('/test')
-												.then(function (response) {
-													return response.json();
-												}).then(function (text) {
-													console.log('GET response:');
-													console.log(text.greeting); 
-												});
-											</script> -->
-	
-											
 											<h1 class="mt-1 mb-3"><div id='visitor_count'></div> <div id='avg_chatters'></div></h1>
-											   <!-- <script>
-												window.onload = function() {
-													var selItem = sessionStorage.getItem("selItem");  
-													console.log('inside window onload');
-													console.log(selItem);
-													$('#sort-item').val(selItem);
-													// refresh_sentiments_using_d3();
-													}
-											   </script>	 -->
 												<div class="mb-1">
 												<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> <div id='streamer_visitors'></div></span>
 												<!-- <span class="text-muted">Since last week</span> -->
@@ -357,19 +438,19 @@
 
 				<div class="col-xl-6 col-xxl-7" id="historic_feed" style="display:none">
 					<div class="card flex-fill w-100">
-						<div class="card-header">
+						<!-- <div class="card-header"> -->
 							<h3>Historic sentiments for our selected streams</h3>
-						</div>
+						<!-- </div> -->
 						<div class="card-body py-3">
-							<style>
+							<!-- <style>
 								div.video-background {
 									z-index: 99999;
 								}
 								div.video-background video {
 									z-index: 1 !important;
 								}
-							</style>
-							<div class="ratio ratio-16x9">
+							</style> -->
+							<!-- <div class="ratio ratio-16x9"> -->
 								<video controls width="100%" height="75%" loop autoplay>
 									<!-- <source src={{ url_for('static', filename="supcaitlin_twitch_recording_2022-07-15.mp4") }} type="video/mp4">
 									<source src={{ url_for('static', filename="supcaitlin_twitch_recording_2022-07-15 at 1.17.29 AM_2.mp4") }} type="video/mp4"> -->
@@ -377,8 +458,7 @@
 									<source src={{ url_for('static', filename="TwitchGif.mp4") }} type="video/mp4">
 									Your browser does not support the video tag.
 								</video>	
-							</div>
-							<!-- <svg width="800" height="200" id="chart"></svg>-->
+							<!-- </div> -->
 							<div class="card-header">
 								<h3>Detailed analysis of last 12 hours of livestream for the selected date</h3>
 							</div>
@@ -388,7 +468,7 @@
 							<div class="card-header">
 								<h3>Sentiment scores for last 2 weeks of livestream </h3>
 							</div>
-							<!-- <div id="observablehq-chart-3319f4c3"></div> -->
+							<!-- <div id="observablehq-chart-3319f4c3"></div> VB commenting this out since we need only 14 days worth of sentiments --> 
 							<div id="observablehq-chart-f868c6c8"></div>
 						</div>
 					</div>
@@ -1512,6 +1592,8 @@
 							// call_streamer_func('/streamer_visitors_earnings', strUser, strDate, '#streamer_visitors_earnings');
 							// call_streamer_func('/streamer_visitors_earnings_perc', strUser, strDate, '#streamer_visitors_earnings_perc');
 							// call_streamer_func('/rec_engine_output_table', strUser, strDate, '#rec_engine_output_table');
+
+							modal.style.display = "block"; // call modal here
 					}					
 
 					if ($(radio_selected2).is(':checked')) {
@@ -1622,5 +1704,38 @@
 		import define from "https://api.observablehq.com/@vbeohar/creating-legends-for-charts-forked-to-create-legend-for-my-w.js?v=3";
 		new Runtime().module(define, Inspector.into("#observablehq-ed107dc9"));
 		</script>
+		<!-- <script src="/static/assets/js/modal_example_w3schools.js"></script> -->
 
+
+		<script>
+			// https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal2
+			// Get the modal
+			var modal = document.getElementById("myModal");
+
+			// Get the button that opens the modal
+			var btn = document.getElementById("btnradio1");
+
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+
+			// When the user clicks the button, open the modal 
+			// VB --> I am commenting this piece since I dont want the modal to be called on any other button click, rather, when the refresh button is clicked
+			// and some explicit set of conditions are fulfilled.
+			// btn.onclick = function() {
+			// 	modal.style.display = "block"; ---> so this will be called later
+			// }
+
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+				modal.style.display = "none";
+			}
+
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+			}
+		</script>
+		
 {% endblock javascripts %}
