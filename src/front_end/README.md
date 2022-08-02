@@ -12,6 +12,11 @@ create virtual env using this link (https://packaging.python.org/en/latest/guide
 
 Then run instructions from here (https://dev.to/sm0ke/adminkit-a-modern-bootstrap-5-template-now-available-in-flask-and-django-5aj4) and more info here (https://github.com/app-generator/flask-adminkit)
 
+Also, make sure you have PYTHONPATH set up to your env (in case not already set on your user profile). 
+```
+export PYTHONPATH=PYTHONPATH=/home/w210/Twitch-chat-pioneers:/home/w210/Twitch-chat-pioneers/src:/home/w210/Twitch-chat-pioneers/src/front_end:/home/w210/Twitch-chat-pioneers/src/front_end/env/bin
+```
+
 ```bash
 - git clone https://github.com/app-generator/flask-adminkit.git
 - cd flask-adminkit

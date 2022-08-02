@@ -102,18 +102,32 @@
 					<h5>&nbsp;&nbsp;&nbsp;&nbsp;</h5>
 				</div>
 				<div class="modal-body">
-					<h3>
-						<p>Welcome to MakeSense! A Twitch analysis tool upcoming streamers. </p>
-						<ul>
-							<li>Select a streamer and a date from the dropdowns</li>
-							<li>Then choose "recorded" to see a detailed analysis of the given stream</li>
-							<li>Our live stream sentiment analysis tool is in beta mode at the moment</li>
-							<li>The recorded tab shows important metrics for the chosen stream on the top-left tiles</li>
-							<li>You can also see a recording of your video-on-demand as well as your streams' detailed analysis in graphs at the bottom</li>
-							<li>Finally, you can see a recommendation of your most optimal stream-topics, based on our analysis of your historic data</li>
-						  </ul>						
-						
-					</h3>
+					<table style="border:1px solid black;margin-left:auto;margin-right:auto;">
+						<tr>
+							<td>
+								<h3><p>Welcome to MakeSense - Making sense of data for upcoming streamers! </p></h3>
+							</td>
+							<td>
+								<img style="max-width: 45%;max-height: 45%;" src={{ url_for('static', filename="makesense_logo-removebg-preview.png") }}>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h4>
+									<ul>
+										<li>Select a streamer and a date from the dropdowns on top</li>
+										<li>Choose from an option of "recorded" OR "live" tabs on the input to enter the analysis sections</li>
+										<li>Note that the "live" mode for sentiment analysis tool is currently in beta mode</li>
+										<li>Metric tiles on the top left portion of the tool show important metrics to help summarize a stream quickly for the chosen date</li>
+										<li>A recording of video-on-demand, as well as a detailed analysis in graphs, of the chosen stream is on the right side of the tool</li>
+										<li>Stream category performance snapshot shows the "optimal stream-topic" recommendation exploratory tool based on stream history</li>
+										<li>Metrics can be ordered or shuffled as per streamer preference in the stream category performance tool</li>
+										<li>Stream chats tile shows sample chats and how the underlying fine-tuned BERT NLP model classifies sentiments of ongoing chats</li>
+									  </ul>
+								</h4>
+							</td>
+						</tr>
+					</table>
 				</div>
 				<div class="modal-footer">
 					<h3>&nbsp;&nbsp;&nbsp;&nbsp;</h3>
