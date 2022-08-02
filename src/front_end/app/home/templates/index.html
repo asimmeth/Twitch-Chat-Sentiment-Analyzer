@@ -1767,11 +1767,16 @@
 				// ############ ONE MORE ADDITIONAL INTRO MODEL ############ //
 				var intro_modal = document.getElementById("intro_modal");
 				span.onclick = function() {
+					modal.style.display = "none";
 					intro_modal.style.display = "none";
 				}
 				// When the user clicks anywhere outside of the modal, close it
 				window.onclick = function(event) {
+					if (event.target == modal) {
+						modal.style.display = "none";
+					}					
 					if (event.target == intro_modal) {
+						modal.style.display = "none";
 						intro_modal.style.display = "none";
 					}
 				}				
