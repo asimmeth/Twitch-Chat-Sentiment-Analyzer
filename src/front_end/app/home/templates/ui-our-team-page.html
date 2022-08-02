@@ -6,123 +6,174 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
+<style>
+	ul.nav {
+	padding-left: 0px;
+	background-color: white;
+	text-align: center;
+	}
+	ul.nav > li {
+	display: inline-block;
+	padding: 10px 20px;
+	}
+	ul.nav > li:hover {
+	/* background-color: #2779BF; */
+	background-color: white;
+	}
+	ul.nav > li > a {
+	/* color: white; */
+	text-decoration: none;
+	}
 
-	<main class="content">
-		<div class="container-fluid p-0">
 
-			<h1 class="h3 mb-3">Our Team</h1>
+</style>
 
-			<div class="row">
-				<div class="col-12 col-lg-6">
-						<div class="card">
-							<div class="card-header" id="headingTwo">
-								<h5 class="card-title my-2">
-<!-- 									<a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne"> -->
-										Alex Baude
-<!-- 									</a> -->
-								</h5>
+<main class="content">
+	<div class="container-fluid p-0">
+
+		<h1 class="h3 mb-3"><strong>Our Team</h1>
+
+		<div class="row">
+			<div class="col-xl-6 col-xxl-5 d-flex">
+				<div class="w-100">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+										<div class="col mt-0">
+											<!-- <h1 class="card-title"> --> 
+												<h1 class="mt-1 mb-3">Alex Baude</h1>
+										</div>
+										<div class="col-auto">
+											<div class="stat text-primary">
+												<!-- <i class="align-middle" data-feather="truck">
+												</i> -->
+												<img class="rounded mr-2 mb-2" style="max-width: 50%;max-height: 50%;"src="/static/assets/img/alex.png">
+												<a href="https://github.com/AlexandreBaude">
+													<img class="rounded mr-2 mb-2" style="max-width: 10%;max-height: 10%;"src="/static/head-silhouette-logo-17.png">
+												</a>
+												<a href="https://github.com/AlexandreBaude">
+													<img class="rounded mr-2 mb-2" style="max-width: 10%;max-height: 10%;"src="/static/Linkedin-Download-PNG.png">
+												</a>
+											</div>
+										</div>
+									</div>
+									<h4>
+										Alexandre Baude is a Data Engineer at ProcureAbility where he enables consultants to run RFx projects in an efficient manner. 
+										Alex leverages his background in statistics, computer science, and economics to push the boundaries of process automation at his company. 
+										He is currently wrapping up his Master's in Data Science at UC Berkeley, with a planned graduation in August 2022. Beyond his work, he is an avid gamer and world traveler where he is currently planning a six-week long backpacking trip around Ireland in the spring of 2023.
+									</h4>
+									<!-- <div class="mb-0">
+										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
+										<span class="text-muted">Since last week</span>
+									</div> -->
+								</div>
 							</div>
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+										<div class="col mt-0">
+											<!-- <h1 class="card-title"> --> <h1 class="mt-1 mb-3">Alex Baude</h1>
+										</div>
 
-						</div>
-						</div>
-
-					<div class="card-body">
-							<div class="text-center">
-								<img class="rounded mr-2 mb-2" style="max-width: 50%;max-height: 50%;"src="/static/assets/img/alex.png">
-							</div>
-						</div>
-					</div> 
-
-					<div class="card-body">
-									Alexandre Baude is a Data Engineer at ProcureAbility where he enables consultants to run RFx projects in an efficient manner. 
-									Alex leverages his background in statistics, computer science, and economics to push the boundaries of process automation at his company. 
-									He is currently wrapping up his Master's in Data Science at UC Berkeley, with a planned graduation in August 2022. Beyond his work, he is an avid gamer and world traveler where he is currently planning a six-week long backpacking trip around Ireland in the spring of 2023.
+										<div class="col-auto">
+											<div class="stat text-primary">
+												<!-- <i class="align-middle" data-feather="truck">
+												</i> -->
+												<img class="rounded mr-2 mb-2" style="max-width: 50%;max-height: 50%;"src="/static/assets/img/gauri.png">
+												<a href="https://github.com/gganjoo">
+													<img class="rounded mr-2 mb-2" style="max-width: 10%;max-height: 10%;"src="/static/head-silhouette-logo-17.png">
+												</a>
+												<a href="https://github.com/AlexandreBaude">
+													<img class="rounded mr-2 mb-2" style="max-width: 10%;max-height: 10%;"src="/static/Linkedin-Download-PNG.png">
+												</a>												
+											</div>
+										</div>
+									</div>
+									<h4>
+										Gauri Ganjoo is a Data Scientist who previously worked at a tech startup called X10Capital, where she worked as an analyst and programmer automating data processes. Gauri has been pursuing her Master’s in Data Science from UC Berkeley since January 2021 and is finishing in August 2022. She has a passion for telling stories through data. When Gauri is not looking at a computer screen, she enjoys doing the NYT crossword and sudoku puzzles. <br><br>&nbsp;
+									</h4>
+									<!-- <div class="mb-0">
+										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
+										<span class="text-muted">Since last week</span>
+									</div> -->
 								</div>
 							</div>
 						</div>
-					
-					</div>
+						<div class="col-sm-6">
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+										<div class="col mt-0">
+											<!-- <h1 class="card-title"> --> <h1 class="mt-1 mb-3">Vaibhav Beohar</h1>
+										</div>
 
-						<div class="card">
-							<div class="card-header" id="headingTwo">
-								<h5 class="card-title my-2">
-<!-- 									<a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne"> -->
-										Vaibhav Beohar
-<!-- 									</a> -->
-								</h5>
+										<div class="col-auto">
+											<div class="stat text-primary">
+												<img class="rounded mr-2 mb-2" style="max-width: 50%;max-height: 50%;"src="/static/assets/img/vaibhav.png">												
+												<a href="https://github.com/vbeohar">
+													<img class="rounded mr-2 mb-2" style="max-width: 10%;max-height: 10%;"src="/static/head-silhouette-logo-17.png">
+												</a>
+												<a href="https://www.linkedin.com/in/beohar/">
+													<img class="rounded mr-2 mb-2" style="max-width: 10%;max-height: 10%;"src="/static/Linkedin-Download-PNG.png">
+												</a>												
+											</div>
+										</div>
+									</div>
+									<h4>
+										Alexandre Baude is a Data Engineer at ProcureAbility where he enables consultants to run RFx projects in an efficient manner. 
+										Alex leverages his background in statistics, computer science, and economics to push the boundaries of process automation at his company. 
+										He is currently wrapping up his Master's in Data Science at UC Berkeley, with a planned graduation in August 2022. Beyond his work, he is an avid gamer and world traveler where he is currently planning a six-week long backpacking trip around Ireland in the spring of 2023.
+									</h4>
+									<!-- <div class="mb-0">
+										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
+										<span class="text-muted">Since last week</span>
+									</div> -->
+								</div>
 							</div>
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+										<div class="col mt-0">
+											<!-- <h1 class="card-title"> --> <h1 class="mt-1 mb-3">Anders Simmeth</h1>
+										</div>
 
-						</div>
-						</div>
-
-					<div class="card-body">
-							<div class="text-center">
-								<img class="rounded mr-2 mb-2" style="max-width: 50%;max-height: 50%;"src="/static/assets/img/vaibhav.png">
-							</div>
-						</div>
-					</div> 
-
-					<div class="card-body">
-									bio
+										<div class="col-auto">
+											<div class="stat text-primary">
+												<img class="rounded mr-2 mb-2" style="max-width: 50%;max-height: 50%;"src="/static/assets/img/anders.png">
+												<a href="https://github.com/asimmeth">
+													<img class="rounded mr-2 mb-2" style="max-width: 10%;max-height: 10%;"src="/static/head-silhouette-logo-17.png">
+												</a>
+												<a href="https://github.com/AlexandreBaude">
+													<img class="rounded mr-2 mb-2" style="max-width: 10%;max-height: 10%;"src="/static/Linkedin-Download-PNG.png">
+												</a>												
+											</div>
+										</div>
+									</div>
+									<h4>
+										Alexandre Baude is a Data Engineer at ProcureAbility where he enables consultants to run RFx projects in an efficient manner. 
+										Alex leverages his background in statistics, computer science, and economics to push the boundaries of process automation at his company. 
+										He is currently wrapping up his Master's in Data Science at UC Berkeley, with a planned graduation in August 2022. Beyond his work, he is an avid gamer and world traveler where he is currently planning a six-week long backpacking trip around Ireland in the spring of 2023.
+									</h4>
+									<!-- <div class="mb-0">
+										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
+										<span class="text-muted">Since last week</span>
+									</div> -->
 								</div>
 							</div>
 						</div>
-					
 					</div>
+				</div>
+			</div>
 
 
-					<div class="card">
-							<div class="card-header" id="headingTwo">
-								<h5 class="card-title my-2">
-										Anders Simmeth
-								</h5>
-							</div>
+		</div>
 
-						</div>
-						</div>
-
-					<div class="card-body">
-							<div class="text-center">
-								<img class="rounded mr-2 mb-2" style="max-width: 50%;max-height: 50%;"src="/static/assets/img/anders.png">
-							</div>
-						</div>
-					</div> 
-
-					<div class="card-body">
-									bio
-								</div>
-							</div>
-						</div>
-					
-					</div>
-
-										<div class="card">
-							<div class="card-header" id="headingTwo">
-								<h5 class="card-title my-2">
-										Gauri Ganjoo
-								</h5>
-							</div>
-
-						</div>
-						</div>
-
-					<div class="card-body">
-							<div class="text-center">
-								<img class="rounded mr-2 mb-2" style="max-width: 50%;max-height: 50%;"src="/static/assets/img/gauri.png">
-							</div>
-						</div>
-					</div> 
-
-					<div class="card-body">
-									Gauri Ganjoo is a Data Scientist who previously worked at a tech startup called X10Capital, where she worked as an analyst and programmer automating data processes. Gauri has been pursuing her Master’s in Data Science from UC Berkeley since January 2021 and is finishing in August 2022. She has a passion for telling stories through data. When Gauri is not looking at a computer screen, she enjoys doing the NYT crossword and sudoku puzzles. 
-								</div>
-							</div>
-						</div>
-					
-					</div>
+	</div>
+</main>
 
 
-	</main>
 
 {% endblock content %}
 
