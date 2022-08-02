@@ -366,11 +366,11 @@ def recommender_engine(channel_name, start_time, sorted_choices):
     cursor_obj = conn.cursor()
     cursor_obj.execute(distinct_topics_query)
     topics = cursor_obj.fetchall()
-    
+    print(topics)
     followers_list = []
     subscriber_list = []
-    for topic in topics[0]:
-        query_topic = '\'' + topic + '\''
+    for topic in topics:
+        query_topic = '\'' + topic[0] + '\''
         new_followers_query =  '''
                     with starting_followers as (
                         select follower_count
@@ -428,7 +428,7 @@ def recommender_engine(channel_name, start_time, sorted_choices):
         cursor_obj.execute(new_subscriber_query)
         subscriber_count = cursor_obj.fetchall()
         subscriber_change = subscriber_count[1][0] - subscriber_count[0][0]
-        subscriber_list.append(followers_list)
+        subscriber_list.append(subscriber_change)
         
     grouped_stream_query = '''with grouped_stream as (
                 select channel_name, 
@@ -453,7 +453,8 @@ def recommender_engine(channel_name, start_time, sorted_choices):
     
     df = pd.read_sql_query(grouped_stream_query, conn)
     df['subscriber_change'] = np.array(subscriber_list)
-    df['followers_change'] = np.array(subscriber_list)
+
+    df['followers_change'] = np.array(followers_list)
 
     df = df.append(pd.DataFrame({'channel_name':['xeppaa', 'xeppaa', 'xeppaa', 'xeppaa'], 'stream_topic':['VALORANT', 'VALORANT2', 'VALORANT3', 'VALORANT4'] , \
                                 'avg_viewers':[1000, 1040, 1100, 2000], 'average_sentiment':[0.1, 0.2, 0.3, 0.4], 'time':[8, 3, 5, 6], 'subscriber_change':[20, 30, 40, 50], 'followers_change':[20, 30, 40, 50]}))
