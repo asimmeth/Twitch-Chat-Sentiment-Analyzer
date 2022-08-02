@@ -263,7 +263,7 @@ def new_followers():
     if follower_change > 0:
          follower_change_str = '+' + '{:,}'.format(follower_change)
     elif follower_change < 0:
-      follower_change_str = '-' + '{:,}'.format(follower_change)
+         follower_change_str = '{:,}'.format(follower_change)
     else:
         follwer_change_str = '{:,}'.format(follower_change)
 
@@ -287,7 +287,14 @@ def pct_new_followers():
     
     follower_change_pct = dg.get_pct_follower_change(streamer_choose_id, streamer_choose_dt)
     
-    return str(follower_change_pct) + '% Change'
+    if follower_change_pct > 0:
+        follower_change_pct_str = str(follower_change_pct) + '% Gain'
+    elif follower_change_pct < 0:
+        follower_change_pct_str = str(follower_change_pct) + '% Loss'
+    else:
+        follower_change_pct_str = str(follower_change_pct) + '% Change'
+    
+    return follower_change_pct_str
 
 
 @blueprint.route('/subscriber_change')
@@ -314,7 +321,7 @@ def new_subscribers():
     if subscriber_change > 0:
          subscriber_change_str = '+' + '{:,}'.format(subscriber_change)
     elif subscriber_change < 0:
-      subscriber_change_str = '-' + '{:,}'.format(subscriber_change)
+        subscriber_change_str = '{:,}'.format(subscriber_change)
     else:
         subscriber_change_str = '{:,}'.format(subscriber_change)
 
@@ -338,7 +345,14 @@ def pct_new_subscribers():
     
     subscriber_change_pct = dg.get_pct_subscriber_change(streamer_choose_id, streamer_choose_dt)
     
-    return str(subscriber_change_pct) + '% Change'
+    if subscriber_change_pct > 0:
+        subscriber_change_pct_str = str(subscriber_change_pct) + '% Gain'
+    elif subscriber_change_pct < 0:
+        subscriber_change_pct_str = str(subscriber_change_pct) + '% Loss'
+    else:
+        subscriber_change_pct_str = str(subscriber_change_pct) + '% Change'
+    
+    return subscriber_change_pct_str
     
 
 @blueprint.route('/avg_sentiment')
