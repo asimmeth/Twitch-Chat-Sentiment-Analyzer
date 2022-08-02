@@ -93,6 +93,33 @@
 
 	<main class="content">
 
+		<!-- The Introduction Modal -->
+		<div id="intro_modal" class="modal">
+			<!-- Modal content -->
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="close">&times;</span>
+					<h5>&nbsp;&nbsp;&nbsp;&nbsp;</h5>
+				</div>
+				<div class="modal-body">
+					<h3>
+						<p>Welcome to MakeSense! A Twitch analysis tool upcoming streamers. </p>
+						<ul>
+							<li>Select a streamer and a date from the dropdowns</li>
+							<li>Then choose "recorded" to see a detailed analysis of the given stream</li>
+							<li>Our live stream sentiment analysis tool is in beta mode at the moment</li>
+							<li>The recorded tab shows important metrics for the chosen stream on the top-left tiles</li>
+							<li>You can also see a recording of your video-on-demand as well as your streams' detailed analysis in graphs at the bottom</li>
+							<li>Finally, you can see a recommendation of your most optimal stream-topics, based on our analysis of your historic data</li>
+						  </ul>						
+						
+					</h3>
+				</div>
+				<div class="modal-footer">
+					<h3>&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+				</div>
+			</div>
+		</div>				
 
 
 		<div class="container-fluid p-0">
@@ -197,8 +224,6 @@
 																	</div>
 																</div>
 															</div>															
-															  
-															  
 
 														</div>
 													</td>
@@ -1522,6 +1547,7 @@
 
 
 			$(document).ready(function () {
+				intro_modal.style.display = "block"; // call modal here
 				$("#sortable_ul").hide();
 
 				$('#submitBtn').click(function () {
@@ -1594,6 +1620,7 @@
 							// call_streamer_func('/rec_engine_output_table', strUser, strDate, '#rec_engine_output_table');
 
 							modal.style.display = "block"; // call modal here
+
 					}					
 
 					if ($(radio_selected2).is(':checked')) {
@@ -1708,34 +1735,47 @@
 
 
 		<script>
-			// https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal2
-			// Get the modal
-			var modal = document.getElementById("myModal");
 
-			// Get the button that opens the modal
-			var btn = document.getElementById("btnradio1");
+				// https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal2
+				// Get the modal
+				var modal = document.getElementById("myModal");
+				// Get the button that opens the modal
+				// var btn = document.getElementById("btnradio1");
 
-			// Get the <span> element that closes the modal
-			var span = document.getElementsByClassName("close")[0];
+				// Get the <span> element that closes the modal
+				var span = document.getElementsByClassName("close")[0];
 
-			// When the user clicks the button, open the modal 
-			// VB --> I am commenting this piece since I dont want the modal to be called on any other button click, rather, when the refresh button is clicked
-			// and some explicit set of conditions are fulfilled.
-			// btn.onclick = function() {
-			// 	modal.style.display = "block"; ---> so this will be called later
-			// }
+				// When the user clicks the button, open the modal 
+				// VB --> I am commenting this piece since I dont want the modal to be called on any other button click, rather, when the refresh button is clicked
+				// and some explicit set of conditions are fulfilled.
+				// btn.onclick = function() {
+				// 	modal.style.display = "block"; ---> so this will be called later
+				// }
 
-			// When the user clicks on <span> (x), close the modal
-			span.onclick = function() {
-				modal.style.display = "none";
-			}
+				// When the user clicks on <span> (x), close the modal
+				span.onclick = function() {
+					modal.style.display = "none";
+				}
 
-			// When the user clicks anywhere outside of the modal, close it
-			window.onclick = function(event) {
-			if (event.target == modal) {
-				modal.style.display = "none";
-			}
-			}
+				// When the user clicks anywhere outside of the modal, close it
+				window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+				}
+				}
+
+				// ############ ONE MORE ADDITIONAL INTRO MODEL ############ //
+				var intro_modal = document.getElementById("intro_modal");
+				span.onclick = function() {
+					intro_modal.style.display = "none";
+				}
+				// When the user clicks anywhere outside of the modal, close it
+				window.onclick = function(event) {
+					if (event.target == intro_modal) {
+						intro_modal.style.display = "none";
+					}
+				}				
+
 		</script>
 		
 {% endblock javascripts %}
