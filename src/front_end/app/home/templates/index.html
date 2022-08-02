@@ -386,9 +386,10 @@
 							<div id="observablehq-chart-fbd47c6c"></div>
 							<div id="observablehq-mystyle-fbd47c6c"></div>
 							<div class="card-header">
-								<h3>Sentiment scores for last 36 months of livestream</h3>
+								<h3>Sentiment scores for last 2 weeks of livestream </h3>
 							</div>
-							<div id="observablehq-chart-3319f4c3"></div>
+							<!-- <div id="observablehq-chart-3319f4c3"></div> -->
+							<div id="observablehq-chart-f868c6c8"></div>
 						</div>
 					</div>
 				</div>
@@ -1598,14 +1599,23 @@
 		</script>
 		
 
-		<script type="module">
+		<!-- <script type="module">
 		import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
 		import define from "https://api.observablehq.com/@vbeohar/line-chart-tooltip.js?v=3";
 		new Runtime().module(define, name => {
 		if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-3319f4c3"));
 		return ["focus"].includes(name);
 		});
-		</script>
+		</script> -->
+
+		<script type="module">
+		import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+		import define from "https://api.observablehq.com/@vbeohar/line-chart-tooltip-v2.js?v=3";
+		new Runtime().module(define, name => {
+		if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-f868c6c8"));
+		return ["focus"].includes(name);
+		});
+		</script>		
 
 		<script type="module">
 		import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
