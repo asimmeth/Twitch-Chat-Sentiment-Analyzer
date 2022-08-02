@@ -221,8 +221,8 @@ def total_chat_messages():
     ################################################
     
     total_messages = dg.get_message_count(streamer_choose_id, streamer_choose_dt)
-    
-    return '<p>'+str(total_messages)+'</p>'
+    str_total_messages = '{:,}'.format(round(total_messages))
+    return '<p>'+str_total_messages+'</p>'
 
 @blueprint.route('/average_viewers')
 # @login_required
@@ -240,8 +240,8 @@ def average_viewers():
     ################################################
     
     average_viewers = dg.get_average_view_count(streamer_choose_id, streamer_choose_dt)
-    
-    return '<p>'+str(round(average_viewers))+'</p>'
+    str_average_viewers = '{:,}'.format(round(average_viewers))
+    return '<p>'+str_average_viewers+'</p>'
 
 @blueprint.route('/followers_change')
 # @login_required
@@ -261,11 +261,11 @@ def new_followers():
     follower_change = dg.get_follower_change(streamer_choose_id, streamer_choose_dt)
     
     if follower_change > 0:
-         follower_change_str = '+' + str(follower_change)
+         follower_change_str = '+' + '{:,}'.format(follower_change)
     elif follower_change < 0:
-      follower_change_str = '-' +str(follower_change)
+      follower_change_str = '-' + '{:,}'.format(follower_change)
     else:
-        follwer_change_str = str(follower_change)
+        follwer_change_str = '{:,}'.format(follower_change)
 
     return follower_change_str
 
@@ -287,7 +287,7 @@ def pct_new_followers():
     
     follower_change_pct = dg.get_pct_follower_change(streamer_choose_id, streamer_choose_dt)
     
-    return str(follower_change_pct) + '%'
+    return str(follower_change_pct) + '% Change'
 
 
 @blueprint.route('/subscriber_change')
@@ -312,11 +312,11 @@ def new_subscribers():
     subscriber_change = dg.get_subscriber_change(streamer_choose_id, streamer_choose_dt)
 
     if subscriber_change > 0:
-         subscriber_change_str = '+' + str(subscriber_change)
+         subscriber_change_str = '+' + '{:,}'.format(subscriber_change)
     elif subscriber_change < 0:
-      subscriber_change_str = '-' +str(subscriber_change)
+      subscriber_change_str = '-' + '{:,}'.format(subscriber_change)
     else:
-        subscriber_change_str = str(subscriber_change)
+        subscriber_change_str = '{:,}'.format(subscriber_change)
 
     return subscriber_change_str
 
@@ -338,7 +338,7 @@ def pct_new_subscribers():
     
     subscriber_change_pct = dg.get_pct_subscriber_change(streamer_choose_id, streamer_choose_dt)
     
-    return str(subscriber_change_pct) + '%'
+    return str(subscriber_change_pct) + '% Change'
     
 
 @blueprint.route('/avg_sentiment')
@@ -393,8 +393,8 @@ def average_chatters():
     ################################################
     
     average_chatters = dg.get_average_chatters(streamer_choose_id, streamer_choose_dt)
-    
-    return '<p>'+str(round(average_chatters))+'</p>' 
+    str_average_chatters = '{:,}'.format(round(average_chatters))
+    return '<p>'+str_average_chatters+'</p>' 
 
 @blueprint.route('/rec_engine_output_table')
 # @login_required
