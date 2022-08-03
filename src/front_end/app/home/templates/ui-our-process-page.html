@@ -6,460 +6,185 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
+<style>
+	ul.nav {
+	padding-left: 0px;
+	background-color: white;
+	text-align: center;
+	}
+	ul.nav > li {
+	display: inline-block;
+	padding: 10px 20px;
+	}
+	ul.nav > li:hover {
+	/* background-color: #2779BF; */
+	background-color: white;
+	}
+	ul.nav > li > a {
+	/* color: white; */
+	text-decoration: none;
+	}
 
-	<main class="content">
-		<div class="container-fluid p-0">
 
-			<h1 class="h3 mb-3">Our Process</h1>
+</style>
 
-			<div class="row">
-				<div class="col-12 col-lg-6">
-					<div class="accordion" id="accordionExample">
-						<div class="card">
-							<div class="card-header" id="headingOne">
-								<h5 class="card-title my-2">
-									<font color="black" style="font-family: sans-serif;" size="3" >
-									<a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-										Architecture 
-									</a>
-								</h5>
-							</div>
-							<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-								<div class="card-body">
-									The user can choose to see their channel analytics during a livestream or after the stream. The Some of the audience insights and statistics are derived from the Twitch API (i.e., viewers, subs) while others are derived from models built into Nostra’s backend, like audience sentiment scores (created using a double tuned BERT model) and the topic recommendation algorithm. After pulling chat log data from Twitch's API, the data is run through our fine-tuned BERT model to assign each message a sentiment score and stored in a SQLite database. From there, the scores are aggregated by time and by category to feed into the live graphic on the dashboard and the topic recommendation respectively.
-								</div>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-header" id="headingTwo">
-								<h5 class="card-title my-2">
-									<a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">Pipeline</h5>
-<!-- 							<h6 class="card-subtitle text-muted">Lightweight styles for images.</h6> -->
-						</div>
-						<div class="card-body">
-							<div class="text-center">
-								<img class="rounded mr-2 mb-2" style="max-width: 80%;max-height: 80%;"src="/static/assets/img/makesense_pipeline.png">
-							</div>
-						</div>
-					</div> 
+<style type="text/css">
+	img{
+		width:850px;
+	}
+</style>
 
-				<div class="row">
-				<div class="col-12 col-lg-6">
-					<div class="accordion" id="accordionExample">
-						<div class="card">
-							<div class="card-header" id="headingOne">
-								<h5 class="card-title my-2">
-									<font color="black" style="font-family: sans-serif;" size="3" >
-									<a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-										NLP Model
-									</a>
-								</h5>
-							</div>
 
-					<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-								<div class="card-body">
-									Our sentiment scoring model is a fine-tuned Distilled BERT model trained on over 4000 labeled chat log messages. Part of the challenge training a model for Twitch chat data was in assigning meaning and sentiments to Twitch's emotes. Our approach was to create a nonexhaustive lookup table of Twitch emotes and their meanings that was used to help the model understand how emotes worked. Our final accuracy was over 80%.
-								</div>
-							</div>
-						</div>
 
-					</div> 
+<script type="text/javascript">
 
-					<div class="card-body">
-							<div class="text-center">
-								<img class="rounded mr-2 mb-2" style="max-width: 100%;max-height: 100%;"src="/static/assets/img/BERT_model.png">
-								<!-- <img class="rounded-circle rounded mr-2 mb-2" src="/static/assets/img/avatars/avatar.jpg" alt="Placeholder" width="140" height="140">
-								<img class="img-thumbnail rounded mr-2 mb-2" src="/static/assets/img/avatars/avatar.jpg" alt="Placeholder" width="140" height="140"> -->
-							</div>
-						</div>
-					</div> 
+	function imgEnlarge(e){
+		e.style.width="800px";
+		// if(e.style.width=="300px" || e.style.width=="" ){
+		// 	e.style.width="800px";
+		// }
+		// else{
+		// 	e.style.width="300px";
+		// }
 
-				<div class="row">
-				<div class="col-12 col-lg-6">
-					<div class="accordion" id="accordionExample">
-						<div class="card">
-							<div class="card-header" id="headingOne">
-								<h5 class="card-title my-2">
-									<font color="black" style="font-family: sans-serif;" size="3" >
-									<a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-										Recommendation System 
-									</a>
-								</h5>
-							</div>
+		// var imgLength = document.getElementsByTagName('img').length;
 
-					<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-								<div class="card-body">
-									Our recommendation system used metrics like viewership, subs, sentiment, etc, to suggest and rank the most "successful" topics for the user to stream. The recommendation system is highly customizable as the user will choose which metrics they wish to priortize when creating the recommendations.
-								</div>
-							</div>
-						</div>
+		// for(var i = 0; i<imgLength; i++){
+		// 	if(document.getElementsByTagName('img')[i].id==  e.id){
+		// 		continue;
+		// 	}
+		// 	document.getElementsByTagName('img')[i].style.width="300px";
 
-<!-- 				<div class="card-body">
-							<div class="text-center">
-								<img class="rounded mr-2 mb-2" style="max-width: 80%;max-height: 80%;"src="/static/assets/img/nostra_pipeline.png"> -->
-								<!-- <img class="rounded-circle rounded mr-2 mb-2" src="/static/assets/img/avatars/avatar.jpg" alt="Placeholder" width="140" height="140">
-								<img class="img-thumbnail rounded mr-2 mb-2" src="/static/assets/img/avatars/avatar.jpg" alt="Placeholder" width="140" height="140"> -->
-							</div>
-						</div>
-					</div> 
-							<!-- <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-								<div class="card-body">
-									Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-									Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch
-									et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
-									craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-								</div>
-							</div> -->
+		// }
+	}
+</script>
+
+<main class="content">
+
+	<div class="container">
+		<div class="row row-cols-2">
+		  <div class="col">
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<div class="col mt-0">
+							<h1 class="mt-1 mb-3">Architecture</h1>
 						</div>
 					</div>
-
-					<!-- <div class="card">
-						<div class="card-header">
-							<h5 class="card-title">Breadcrumbs</h5>
-							<h6 class="card-subtitle text-muted">Indicate the current page’s location within a navigational hierarchy.</h6>
-						</div>
-						<div class="card-body">
-							<nav aria-label="breadcrumb">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item active">Home</li>
-								</ol>
-							</nav>
-							<nav aria-label="breadcrumb">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-									<li class="breadcrumb-item active">Library</li>
-								</ol>
-							</nav>
-							<nav aria-label="breadcrumb">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-									<li class="breadcrumb-item"><a href="#">Library</a></li>
-									<li class="breadcrumb-item active">Data</li>
-								</ol>
-							</nav>
-						</div>
-					</div> -->
-
-<!-- 					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">Images</h5>
-							<h6 class="card-subtitle text-muted">Lightweight styles for images.</h6>
-						</div>
-						<div class="card-body">
-							<div class="text-center">
-								<img class="rounded mr-2 mb-2" src="/static/assets/img/avatars/avatar.jpg" alt="Placeholder" width="140" height="140">
-								<img class="rounded-circle rounded mr-2 mb-2" src="/static/assets/img/avatars/avatar.jpg" alt="Placeholder" width="140" height="140">
-								<img class="img-thumbnail rounded mr-2 mb-2" src="/static/assets/img/avatars/avatar.jpg" alt="Placeholder" width="140" height="140">
-							</div>
-						</div>
-					</div> -->
-
-					<!-- <div class="card">
-						<div class="card-header">
-							<h5 class="card-title">Popovers</h5>
-							<h6 class="card-subtitle text-muted">Examples for adding Bootstrap popovers.</h6>
-						</div>
-						<div class="card-body text-center">
-							<button class="btn btn-secondary" type="button" title="Popover on top" data-container="body" data-toggle="popover" data-placement="top" data-content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.">Popover on top</button>
-							<button class="btn btn-secondary" type="button" title="Popover on bottom" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.">Popover on bottom</button>
-							<button class="btn btn-secondary" type="button" title="Popover on left" data-container="body" data-toggle="popover" data-placement="left" data-content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.">Popover on left</button>
-							<button class="btn btn-secondary" type="button" title="Popover on right" data-container="body" data-toggle="popover" data-placement="right" data-content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.">Popover on right</button>
-						</div>
-					</div>
-
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">Tooltips</h5>
-							<h6 class="card-subtitle text-muted">Examples for adding custom Bootstrap tooltips.</h6>
-						</div>
-						<div class="card-body text-center">
-							<button class="btn btn-secondary" type="button" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
-							<button class="btn btn-secondary" type="button" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
-							<button class="btn btn-secondary" type="button" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
-							<button class="btn btn-secondary" type="button" data-toggle="tooltip" data-placement="right" data-container="body" title="Tooltip on right">Tooltip on right</button>
-						</div>
-					</div>
+					<h4>
+						<P>
+							The user can choose to see their channel analytics during a livestream or after the stream. The Some of the audience insights and statistics are derived from the Twitch API (i.e., viewers, subs) while others are derived from models built into the systems' backend, like audience sentiment scores (created using a double tuned BERT model) and the topic recommendation algorithm. After pulling chat log data from Twitch's API, the data is run through our fine-tuned BERT model to assign each message a sentiment score and stored in a SQLite database. 
+						</P><BR>
+						<P>
+							From there, the scores are aggregated by time and by category to feed into the live graphic on the dashboard and the topic recommendation respectively.
+						</P><BR><BR><BR>
+					</h4>
 				</div>
-				<div class="col-12 col-lg-6">
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">Badges</h5>
-							<h6 class="card-subtitle text-muted">Examples for badges.</h6>
+			</div>
+		  </div>
+		  <div class="col">
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<div class="col mt-0">
+							<h1 class="mt-1 mb-3">NLP Model</h1>
 						</div>
-						<div class="card-body">
-
-							<div class="mb-1">
-								<span class="badge bg-primary">Primary</span>
-								<span class="badge bg-secondary">Secondary</span>
-								<span class="badge bg-success">Success</span>
-								<span class="badge bg-danger">Danger</span>
-								<span class="badge bg-warning">Warning</span>
-								<span class="badge bg-info">Info</span>
+						<!-- <div class="col-auto">
+							<div class="stat text-primary">
+								<img id="img1" class="rounded mr-2 mb-2" style="max-width: 100%;max-height: 100%;" src="/static/assets/img/BERT_model.png" onclick="enlargeImg(this)"/>
+								<img id="img_0" onclick="imgEnlarge(this)" onclick="imgAssign()" src="/static/assets/img/BERT_model.png">
 							</div>
-
-							<div class="mt-1">
-								<span class="badge bg-primary rounded-pill">Primary</span>
-								<span class="badge bg-secondary rounded-pill">Secondary</span>
-								<span class="badge bg-success rounded-pill">Success</span>
-								<span class="badge bg-danger rounded-pill">Danger</span>
-								<span class="badge bg-warning rounded-pill">Warning</span>
-								<span class="badge bg-info rounded-pill">Info</span>
-							</div>
-
-						</div>
+						</div> -->
 					</div>
-
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">Dropdowns</h5>
-							<h6 class="card-subtitle text-muted">Toggle contextual overlays for displaying lists of links.</h6>
-						</div>
-						<div class="card-body pb-0">
-
-							<div class="row mb-3">
-								<div class="col-12 col-md-6 col-lg-12 col-xl-6 col-xxl-4">
-									<p class="mb-0">Basic:</p>
-									<div class="dropdown-menu mb-2" style="position:static;display:block;">
-										<a class="dropdown-item" href="#">Action</a>
-										<a class="dropdown-item" href="#">Another action</a>
-										<a class="dropdown-item" href="#">Something else here</a>
-									</div>
-								</div>
-								<div class="col-12 col-md-6 col-lg-12 col-xl-6 col-xxl-4">
-									<p class="mb-0">Active:</p>
-									<div class="dropdown-menu mb-2" style="position:static;display:block;">
-										<a class="dropdown-item" href="#">Regular link</a>
-										<a class="dropdown-item active" href="#">Active link</a>
-										<a class="dropdown-item" href="#">Another link</a>
-									</div>
-								</div>
-								<div class="col-12 col-md-6 col-lg-12 col-xl-6 col-xxl-4">
-									<p class="mb-0">Disabled:</p>
-									<div class="dropdown-menu mb-2" style="position:static;display:block;">
-										<a class="dropdown-item" href="#">Regular link</a>
-										<a class="dropdown-item disabled" href="#">Disabled link</a>
-										<a class="dropdown-item" href="#">Another link</a>
-									</div>
-								</div>
-								<div class="col-12 col-md-6 col-lg-12 col-xl-6 col-xxl-4">
-									<p class="mb-0">Header:</p>
-									<div class="dropdown-menu mb-2" style="position:static;display:block;">
-										<h6 class="dropdown-header">Dropdown header</h6>
-										<a class="dropdown-item" href="#">Action</a>
-										<a class="dropdown-item" href="#">Another action</a>
-										<a class="dropdown-item" href="#">Something else here</a>
-									</div>
-								</div>
-								<div class="col-12 col-md-6 col-lg-12 col-xl-6 col-xxl-4">
-									<p class="mb-0">Dividers:</p>
-									<div class="dropdown-menu mb-2" style="position:static;display:block;">
-										<a class="dropdown-item" href="#">Action</a>
-										<a class="dropdown-item" href="#">Another action</a>
-										<a class="dropdown-item" href="#">Something else here</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">Separated link</a>
-									</div>
-								</div>
-								<div class="col-12 col-md-6 col-lg-12 col-xl-6 col-xxl-4">
-									<p class="mb-0">Text:</p>
-									<div class="dropdown-menu p-4 text-muted" style="max-width: 200px;position:static;display:block;">
-										<p class="mb-0">
-											Some example text that's free-flowing within the dropdown menu.
-										</p>
-									</div>
-								</div>
-							</div> -->
-							<!-- /.row -->
-
-<!-- 						</div>
-					</div>
-
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">Pagination</h5>
-							<h6 class="card-subtitle text-muted">Examples for showing pagination.</h6>
-						</div>
-						<div class="card-body">
-							<nav aria-label="Page navigation example">
-								<ul class="pagination pagination-sm">
-									<li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-left"></i></a></li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item active"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#">4</a></li>
-									<li class="page-item"><a class="page-link" href="#">5</a></li>
-									<li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>
-								</ul>
-							</nav>
-							<nav aria-label="Page navigation example">
-								<ul class="pagination pagination-md">
-									<li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-left"></i></a></li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item active"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#">4</a></li>
-									<li class="page-item"><a class="page-link" href="#">5</a></li>
-									<li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>
-								</ul>
-							</nav>
-							<nav aria-label="Page navigation example">
-								<ul class="pagination pagination-lg">
-									<li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-left"></i></a></li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item active"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#">4</a></li>
-									<li class="page-item"><a class="page-link" href="#">5</a></li>
-									<li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>
-								</ul>
-							</nav>
-						</div>
-					</div>
-
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">Progress Bars</h5>
-							<h6 class="card-subtitle text-muted">Examples for using Bootstrap custom progress bars.</h6>
-						</div>
-						<div class="card-body">
-							<div class="progress mb-3">
-								<div class="progress-bar bg-primary" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Default</div>
-							</div>
-
-							<div class="progress mb-3">
-								<div class="progress-bar progress-bar-striped" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Striped</div>
-							</div>
-
-							<div class="progress mb-3">
-								<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">Animated</div>
-							</div>
-
-							<div class="progress">
-								<div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Stacked</div>
-								<div class="progress-bar bg-warning" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">15%</div>
-								<div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
-								<div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20%</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">Spinners</h5>
-							<h6 class="card-subtitle text-muted">Indicate the loading state of a component with Bootstrap spinners.</h6>
-						</div>
-						<div class="card-body">
-
-							<div class="mb-2">
-								<div class="spinner-border text-dark mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-border text-primary mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-border text-secondary mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-border text-success mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-border text-danger mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-border text-warning mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-border text-info mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-							</div>
-
-							<div class="mb-2">
-								<div class="spinner-border spinner-border-sm text-dark mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-border spinner-border-sm text-primary mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-border spinner-border-sm text-secondary mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-border spinner-border-sm text-success mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-border spinner-border-sm text-danger mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-border spinner-border-sm text-warning mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-border spinner-border-sm text-info mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-							</div>
-
-							<hr />
-
-							<div class="mb-2">
-								<div class="spinner-grow text-dark mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-grow text-primary mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-grow text-secondary mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-grow text-success mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-grow text-danger mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-grow text-warning mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-grow text-info mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-							</div>
-
-							<div class="mb-2">
-								<div class="spinner-grow spinner-grow-sm text-dark mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-grow spinner-grow-sm text-primary mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-grow spinner-grow-sm text-secondary mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-grow spinner-grow-sm text-success mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-grow spinner-grow-sm text-danger mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-grow spinner-grow-sm text-warning mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-								<div class="spinner-grow spinner-grow-sm text-info mr-2" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-							</div>
-
-						</div>
-					</div>
+					<h4>
+						<P>
+							Our sentiment scoring model is a combination of a series of fine-tuned Base-BERT models, first trained on a Masked Language Modeling task and then trained on over 5,000 annotated chat log messages downloaded from Twitch. Part of the challenge of training a model for Twitch chat data was in assigning meaning and sentiments to Twitch's emotes. Our approach was to create a nonexhaustive lookup table of Twitch emotes and their meanings that was used to help the model understand how emotes worked. 
+						</P><BR>
+						<P>
+							Addtionally, the rationale for performing a Masked Language Modeling task as an initial fine-tuning step was to "teach" the BaseBERT model, Twitch specific language. Then the same model was further refined using the 5,000 annotated chats with a multilabel classification task of sentiment analysis. We used PyTorch for fine-tuning tasks. Our final accuracy was over 85%.
+						</P>							
+					</h4>
 				</div>
-			</div> -->
-
+			</div>			
+		  </div>
+		  <div class="col">
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<div class="col mt-0">
+							<h1 class="mt-1 mb-3">Data Engineering Pipeline</h1>
+						</div>
+					</div>
+					<h4>
+						Our data engineering pipeline is a combination of two asynchronously communicating instances on Google Cloud. The first instance, a GPU specific high compute instance with two Tesla K8-NVidia GPUs, was set up for BERT fine-tuning tasks. The second and primary instance, a more simplified Ubuntu 20.04 CPU instance, hosts our primary deployed BERT model and other backend scripts running behind a Flask microserver. 
+						
+						Further, the interactivity of the webapplication, running on the Flask microservice, is shielded using a combination of Gunicorn webserver and Nginx HTTP server for production scalability and security reasons. We have a host of other scripts and services (such as a SQLite and/or PostGreSQL instance) running on the CPU instance, asynchronously communicating with the Flask microarchitecture to download chats and other meta-data information from Twitch for analysis and machine learning tasks. We serve webpages using a combination of jQuery, AJAX and D3.js Javascript technologies.
+					</h4>
+				</div>
+			</div>			
+		  </div>
+		  <div class="col">
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<div class="col mt-0">
+							<!-- <h1 class="card-title"> --> <h1 class="mt-1 mb-3">Content Recommendation Exploratory Tool</h1>
+						</div>
+					</div>
+					<h4>
+						<P>We serve recommendations to our content creators using a simplified, but continuously refined recommendation/exploratory tool. </P>
+						<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+					</h4>
+				</div>
+			</div>			
+		  </div>
 		</div>
-	</main>
+	  </div>
+
+
+	  <div class="col-sm-12">
+		<div class="card">
+			<div class="card-header">
+				<h1 class="mt-1 mb-3">Data Engineering Pipeline</h1>
+			</div>
+			<div class="card-body py-3">
+				<img class="rounded mr-2 mb-2" src="/static/assets/img/makesense_pipeline.png"/>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-12">
+		<div class="card">
+			<div class="card-header">
+				<h1 class="mt-1 mb-3">Natural Language Processing Model</h1>
+			</div>
+			<div class="card-body py-3">
+				<img class="rounded mr-2 mb-2" src="/static/assets/img/BERT_model.png"/>
+			</div>
+		</div>
+	</div>	
+
+</main>
+
+
 
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
+<!-- script to set display property -->
+
+<!-- script to set display property
+<script>
+	// Function to increase image size
+	function enlargeImg(img) {
+		img.style.transform = "scale(1.5)";
+		img.style.transition =
+		  "transform 0.25s ease";
+	}
+</script> -->
+
+
+
+
+
 {% block javascripts %}{% endblock javascripts %}
