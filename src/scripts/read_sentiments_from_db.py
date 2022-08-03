@@ -37,11 +37,18 @@ def read_sentiments(model, tokenizer):
 	_, prediction = torch.max(output, dim=1)
 
 	pred_class = class_names[prediction]
+	pred_class = '<h1 style="font-family:verdana;color:green;">'+pred_class+'</h1>' if pred_class=='Positive' \
+						else '<h1 style="font-family:verdana;color:red;">'+pred_class+'</h1>' \
+							if pred_class=='Negative' else '<h1 style="font-family:verdana;color:gray;">'+pred_class+'</h1>'
 	pred_proba = format(top_prob[0], '.6f') if pred_class=='Positive' else format(top_prob[0] * -1, '.6f') if pred_class=='Negative' else 0
 	# print(f'Review text: {msg}')
 	# print(f'Sentiment  : {class_names[prediction]}')
 
 	return json.dumps([{
-		'sentiment_display': '<p>Sentiment for: <B>'+ msg + '</B> sent by user: <B>'+ uname + '</B> is: <B>' + pred_class + '</B></p>', 
-		'prob_score' : pred_proba
+		# 'sentiment_display': '<p>Sentiment for: <B>'+ msg + '</B> sent by user: <B>'+ uname + '</B> is: <B>' + pred_class + '</B></p>', 
+		# 'prob_score' : pred_proba
+		'sentiment_display': '<p> "'+ msg + ' " <i> -'+uname+'</i></p>',
+		'user': '<p> -'+uname+'</p>',
+		'pred_class':pred_class, 
+		'prob_score' : pred_proba		
 	}])

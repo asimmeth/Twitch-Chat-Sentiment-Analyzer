@@ -34,7 +34,22 @@
 		background-color: rgb(0,0,0); /* Fallback color */
 		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 		}
-		
+
+		.stylish select   { 
+			/* background: transparent; */
+			width: 175px;
+			font-size:17pt;
+			color:black;
+			border: 2;
+			border-radius: 2;
+			/* height: px; */
+			/* -webkit-appearance: none;  */
+		}
+
+		/* div-custom-sentiment {
+			overflow:visible;
+		} */
+
 		/* Modal Content */
 		.modal-content {
 		position: relative;
@@ -143,11 +158,13 @@
 					<h3><strong>Twitch Sentiment Analytics</strong> Dashboard</h3>
 									<div class="col-sm-12">
 										<div class="card">
+										<!-- <div class="card-body d-flex">	 -->
 											<table style="border:1px solid black;margin-left:auto;margin-right:auto;border-spacing:33px;border-collapse:separate;">
 												<tr>
 												<td>
-														<label>Choose streamer</label>
-														<select id="streamer_choose" style="width:150px;">
+													<div class="stylish">
+														<label><h3>Choose streamer</h3></label>
+														<select id="streamer_choose">
 															<option value="" selected>Select streamer</option>
 															<!-- <option value="xQcOW">xQcOW</option> -->
 															<!-- <option value="Summit1G">Summit1G</option> -->
@@ -158,9 +175,11 @@
 															<option value="sweetdreams">sweetdreams</option>
 															<option value="chenny323">chenny323</option>
 														</select>
+														</div>
 													</td>
 												<td>
-													<label>Choose stream date</label>
+													<div class="stylish">
+														<label><h3>Choose date</h3></label>
 														<select id="streamer_date" style="width:150px;">
 															<option value="" selected>Select date</option>
 															<!-- <option value="07-26-2022">Jul 26, 2022</option> -->
@@ -173,7 +192,8 @@
 															<option value="07-19-2022">Jul 19, 2022</option>
 															<option value="2022-07-30">Jul 30, 2022</option>
 															<option value="2022-08-02">Aug 2nd, 2022</option>
-														</select>											
+														</select>
+													</div>
 												</td>
 												<td>	
 														<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
@@ -318,38 +338,49 @@
 								</div>
 
 								<!-- card to show recommendation of channel -->
-								<div class="card flex-fill">
-									<div class="card-header">
-										<h3>Stream Category Performance</h3>
-									</div>
-									<div class="card-header" id="sortable_ul">
-										<ul id="sortable1" class="connectedSortable">
-											<li class="ui-state-default" id="subscriber_change">Subscribers</li>
-											<li class="ui-state-default" id="followers_change">Followers</li>
-											<li class="ui-state-default" id="average_sentiment">Sentiment</li>
-										  </ul>
-										   <!-- <input type="submit" class="btn btn-primary" value="Submit" onclick="submit()"> -->
-										   <button type="button" id="recEngineBtn" class="btn btn-primary">Refresh</button>
-										   <div class="card-header">
-												<h5><i>Drag and arrange these metrics in order of your preference to obtain topic recommendations</i></h5>
-										   </div>
-	
-									</div>
-									<!-- <div class="card-body d-flex"> -->
-									<div width="100%">	
-										<div id='rec_engine_output_table'></div>
+								<div class="col-sm-12">
+									<div class="card flex-fill">
+
+										<div class="card-header">
+											<h3>Stream Category Performance</h3>
+										</div>
+										<div class="card-header" id="sortable_ul">
+											<ul id="sortable1" class="connectedSortable">
+												<li class="ui-state-default" id="subscriber_change">Subscribers</li>
+												<li class="ui-state-default" id="followers_change">Followers</li>
+												<li class="ui-state-default" id="average_sentiment">Sentiment</li>
+											</ul>
+											<!-- <input type="submit" class="btn btn-primary" value="Submit" onclick="submit()"> -->
+											<button type="button" id="recEngineBtn" class="btn btn-primary">Refresh</button>
+											<div class="card-header">
+													<h5><i>Drag and arrange these metrics in order of your preference to obtain topic recommendations</i></h5>
+											</div>
+		
+										</div>
+										<!-- <div class="card-body d-flex"> -->
+										<div width="100%">	
+											<div id='rec_engine_output_table'></div>
+										</div>
 									</div>
 								</div>
 								<!-- card to show recommendation of channel -->
 
 								<!-- temporary card to show emotions -->
-								<div class="card flex-fill">
-									<div class="card-header">
-										<h3>Stream Chats</h3>
-										<h5><i>Below chats are directly interpreted by our custom TwitchBERT model and scored in real time</i></h5>
-									</div>
-									<div class="card-body d-flex">
-										<div id='read_random_sentiments'></div>
+								
+								<div class="col-sm-12">
+									<div class="card">
+										<div class="card-body">
+											<h3>Stream Chat Sentiments</h3>
+											<h5><i>Below chats are directly interpreted by our custom TwitchBERT model and scored in real time</i></h5>
+											<br>
+											<!-- <h1 class="mt-1 mb-3"> -->
+												<div id='read_random_sentiments'>
+													<h3 class="mt-1 mb-3"><div id='read_random_sentiments_label'></div></h3>
+													<!-- <h2 class="mt-1 mb-3"><div id='read_random_sentiments_user'></div></h2> -->
+													<h3 class="mt-1 mb-3"><div id='read_random_sentiments_value'></div></h3>
+												</div>
+											<!-- </h1> -->
+										</div>
 									</div>
 								</div>
 								<!-- temporary card to show emotions -->								
@@ -1476,7 +1507,9 @@
 										// console.log(response);
 										console.log(response[0].sentiment_display);
 										console.log(response[0].prob_score);
-										$("#read_random_sentiments").html(response[0].sentiment_display);
+										$("#read_random_sentiments_label").html(response[0].sentiment_display);
+										$("#read_random_sentiments_user").html(response[0].user);
+										$("#read_random_sentiments_value").html(response[0].pred_class);
 										data.push(response[0].prob_score);
 										// $("#data").html(data[0].sentiment_display);
 									},
