@@ -466,15 +466,15 @@ def recommender_engine(channel_name, start_time, sorted_choices):
     df.loc[:,'Followers Δ'] = df['followers_change']
 
     # df = df.sample(4)
-    # print(df)
     # topics = [1, 2, 3, 5, 5]
     
     if len(topics) > 1:
         for col in ['avg_viewers','average_sentiment','subscriber_change','followers_change']:
             df[col] = (df[col] - df[col].min()) / (df[col].max() - df[col].min())
         # df['Score'] = df.apply(recommendation, args=(sorted_choices), axis = 1, ) --> this was hard to use because of multiple **kwargs
+        df = df.fillna(0)
         scores = sorted_choices.split(',')
-        print(scores)
+        # print(scores)
         df.loc[:, 'Score %'] = [(i*.35 + i*.30 + k*.25 + l*.10)/time for i, j, k, l, time in zip(df[scores[0]], df[scores[1]], df[scores[2]], df[scores[3]], df['time'])]
     else:
         df['Score %'] = 100

@@ -1497,28 +1497,28 @@
 							
 
 
-							setInterval(function(){ 
-								//code goes here that will be run every 5 seconds.    
-								$.ajax({
-										url: "/read_random_sentiments",
-										type: "get",
-										data: {},
-										dataType:"JSON",
-									success: function(response) {
-										// console.log(response);
-										console.log(response[0].sentiment_display);
-										console.log(response[0].prob_score);
-										$("#read_random_sentiments_label").html(response[0].sentiment_display);
-										$("#read_random_sentiments_user").html(response[0].user);
-										$("#read_random_sentiments_value").html(response[0].pred_class);
-										data.push(response[0].prob_score);
-										// $("#data").html(data[0].sentiment_display);
-									},
-									error: function(xhr) {
-									//Do Something to handle error
-									}
-								});
-							}, 3000);
+							// setInterval(function(){ 
+							// 	//code goes here that will be run every 5 seconds.    
+							// 	$.ajax({
+							// 			url: "/read_random_sentiments",
+							// 			type: "get",
+							// 			data: {},
+							// 			dataType:"JSON",
+							// 		success: function(response) {
+							// 			// console.log(response);
+							// 			console.log(response[0].sentiment_display);
+							// 			console.log(response[0].prob_score);
+							// 			$("#read_random_sentiments_label").html(response[0].sentiment_display);
+							// 			$("#read_random_sentiments_user").html(response[0].user);
+							// 			$("#read_random_sentiments_value").html(response[0].pred_class);
+							// 			data.push(response[0].prob_score);
+							// 			// $("#data").html(data[0].sentiment_display);
+							// 		},
+							// 		error: function(xhr) {
+							// 		//Do Something to handle error
+							// 		}
+							// 	});
+							// }, 3000);
 					}
 					
 				});
