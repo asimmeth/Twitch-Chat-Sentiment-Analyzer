@@ -471,14 +471,32 @@
 							<object type="image/svg+xml" data={{ url_for('static', filename="legend.svg") }}></object>
 							<!-- ####### STATIC SVGs FOR STREAMERs  ####### -->							
 							<div id="lirik_svg">
-								<div id="observablehq-chart-fbd47c6c"></div>
-								<div id="observablehq-mystyle-fbd47c6c"></div>
+								<!-- 
+									These were the original ones manually made... beautiful but not useful for our analysis
+									from here: https://observablehq.com/@vbeohar/experimentation-for-w210-capstone-twitch-sentiments-grap
+									<div id="observablehq-chart-fbd47c6c"></div>
+									<div id="observablehq-mystyle-fbd47c6c"></div> 
+								-->
+								<div id="observablehq-chart-d047c6bc"></div>
+								<div id="observablehq-mystyle-d047c6bc"></div>
+							</div>
+							<div id="sweetdreams_svg">
+								<div id="observablehq-chart-d368df83"></div>
+								<div id="observablehq-mystyle-d368df83"></div>
+							</div>
+							<div id="chenny323_svg">
+								<div id="observablehq-chart-ef230ae4"></div>
+								<div id="observablehq-mystyle-ef230ae4"></div>
+							</div>
+							<div id="shivfps_svg">
+								<div id="observablehq-chart-ba6c7733"></div>
+								<div id="observablehq-mystyle-ba6c7733"></div>
+							</div>	
+							<div id="gmhikaru_svg">
+								<div id="observablehq-chart-be8d8888"></div>
+								<div id="observablehq-mystyle-be8d8888"></div>
 							</div>
 
-							<div id="sweetdreams_svg">
-								<div id="observablehq-chart-cc08d71b"></div>
-								<div id="observablehq-mystyle-cc08d71b"></div>
-							</div>
 							<!-- ####### STATIC SVGs FOR STREAMERs  ####### -->
 
 							<div class="card-header">
@@ -1407,13 +1425,39 @@
 							// call_streamer_func('/rec_engine_output_table', strUser, strDate, '#rec_engine_output_table');
 							$("#rec_engine_output_table").html("");
 
+
 							if(text=='sweetdreams'){
 								$("#lirik_svg").hide();
+								$("#chenny323_svg").hide();
+								$("#shivfps_svg").hide();
 								$("#sweetdreams_svg").show();
+								$("#gmhikaru_svg").hide();
+							}else if(text=='chenny323'){
+								$("#lirik_svg").hide();
+								$("#sweetdreams_svg").hide();
+								$("#chenny323_svg").show();
+								$("#shivfps_svg").hide();
+								$("#gmhikaru_svg").hide();
+							}else if(text=='shivfps'){
+								$("#lirik_svg").hide();
+								$("#sweetdreams_svg").hide();
+								$("#chenny323_svg").hide();
+								$("#shivfps_svg").show();
+								$("#gmhikaru_svg").hide();
+							}else if(text=='gmhikaru'){
+								$("#lirik_svg").hide();
+								$("#sweetdreams_svg").hide();
+								$("#chenny323_svg").hide();
+								$("#shivfps_svg").hide();
+								$("#gmhikaru_svg").show();
 							}else {
 								$("#lirik_svg").show();
 								$("#sweetdreams_svg").hide();
+								$("#chenny323_svg").hide();
+								$("#shivfps_svg").hide();
+								$("#gmhikaru_svg").hide();
 							}
+							
 
 
 							setInterval(function(){ 
@@ -1492,16 +1536,17 @@
 
 		</script>	
 		
-
-		<script type="module">
-			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
-			import define from "https://api.observablehq.com/@vbeohar/experimentation-for-w210-capstone-twitch-sentiments-grap.js?v=3";
-			new Runtime().module(define, name => {
-			  if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-fbd47c6c"));
-			  if (name === "mystyle") return new Inspector(document.querySelector("#observablehq-mystyle-fbd47c6c"));
-			});
-		</script>
-		
+		<!-- This was the original stacked line chart made for analysis
+			https://observablehq.com/@vbeohar/experimentation-for-w210-capstone-twitch-sentiments-grap
+			<script type="module">
+				import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+				import define from "https://api.observablehq.com/@vbeohar/experimentation-for-w210-capstone-twitch-sentiments-grap.js?v=3";
+				new Runtime().module(define, name => {
+				if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-fbd47c6c"));
+				if (name === "mystyle") return new Inspector(document.querySelector("#observablehq-mystyle-fbd47c6c"));
+				});
+			</script> 
+		-->
 
 		<script type="module">
 		import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
@@ -1518,16 +1563,59 @@
 		new Runtime().module(define, Inspector.into("#observablehq-ed107dc9"));
 		</script>
 
-		<!-- ####### STATIC SVG FOR SWEETDREAMS STREAMER  ####### -->
+		<!-- ####### STATIC SVGs FOR STREAMERs  ####### -->
+		<!-- sweetdreams -->
 		<script type="module">
 			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
 			import define from "https://api.observablehq.com/@vbeohar/w210_streamer_chart_sample_1.js?v=3";
 			new Runtime().module(define, name => {
-			if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-cc08d71b"));
-			if (name === "mystyle") return new Inspector(document.querySelector("#observablehq-mystyle-cc08d71b"));
+			if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-d368df83"));
+			if (name === "mystyle") return new Inspector(document.querySelector("#observablehq-mystyle-d368df83"));
 			});
 		</script>
-		<!-- ####### STATIC SVG FOR SWEETDREAMS STREAMER  ####### --> 
+
+		<!-- chenny323 -->
+		<script type="module">
+			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+			import define from "https://api.observablehq.com/@vbeohar/chenny323twitch_streamer.js?v=3";
+			new Runtime().module(define, name => {
+			if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-ef230ae4"));
+			if (name === "mystyle") return new Inspector(document.querySelector("#observablehq-mystyle-ef230ae4"));
+			});
+		</script>
+
+		<!-- shivfps -->
+		<script type="module">
+			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+			import define from "https://api.observablehq.com/@vbeohar/shivfps_streamer_twitch.js?v=3";
+			new Runtime().module(define, name => {
+			if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-ba6c7733"));
+			if (name === "mystyle") return new Inspector(document.querySelector("#observablehq-mystyle-ba6c7733"));
+			});
+		</script>
+
+		<!-- gmhikaru -->
+		<script type="module">
+			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+			import define from "https://api.observablehq.com/@vbeohar/gmhikaru-streamer-static-svg-line-chart-for-w210.js?v=3";
+			new Runtime().module(define, name => {
+			if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-be8d8888"));
+			if (name === "mystyle") return new Inspector(document.querySelector("#observablehq-mystyle-be8d8888"));
+			});
+		</script>
+
+		<!-- lirik -->
+		<script type="module">
+			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+			import define from "https://api.observablehq.com/@vbeohar/lirik-streamer-static-svg-line-chart-for-w210.js?v=3";
+			new Runtime().module(define, name => {
+			if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-d047c6bc"));
+			if (name === "mystyle") return new Inspector(document.querySelector("#observablehq-mystyle-d047c6bc"));
+			});
+		</script>		
+
+
+		<!-- ####### STATIC SVGs FOR STREAMERs  ####### -->
 
 
 		<script>
