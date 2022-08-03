@@ -141,46 +141,6 @@
 			<div class="row mb-2 mb-xl-3">
 				<div class="col-auto d-none d-sm-block">
 					<h3><strong>Twitch Sentiment Analytics</strong> Dashboard</h3>
-									<!-- <label for="cars">Choose a streamer:</label>
-									<select id="streamer_choose" style="width:150px;">
-										<option value="" selected>Select streamer</option>
-										<option value="xQcOW">xQcOW</option>
-										<option value="Summit1G">Summit1G</option>
-										<option value="Shroud">Shroud</option>
-										<option value="lirik">lirik</option>
-									</select>
-									<label for="cars"></label>
-									<label for="cars"></label>
-									<label for="cars"></label>
-									<label for="cars">Choose a date:</label>
-									<select id="streamer_date" style="width:150px;">
-										<option value="" selected>Select date</option>
-										<option value="07-26-2022">Jul 26, 2022</option>
-										<option value="07-25-2022">Jul 25, 2022</option>
-										<option value="07-24-2022">Jul 24, 2022</option>
-										<option value="07-23-2022">Jul 23, 2022</option>
-										<option value="07-22-2022">Jul 22, 2022</option>
-										<option value="07-21-2022">Jul 21, 2022</option>
-										<option value="07-20-2022">Jul 20, 2022</option>
-										<option value="07-19-2022">Jul 19, 2022</option>
-										<option value="07-18-2022">Jul 18, 2022</option>
-										<option value="2022-07-30">Jul 30, 2022</option>
-									</select>
-									<label for="cars"></label>
-									<label for="cars"></label>
-									<label for="cars"></label>
-									<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-										<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
-										<label class="btn btn-outline-primary" for="btnradio1">Live</label>
-
-										<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-										<label class="btn btn-outline-primary" for="btnradio2">Recorded</label>
-									</div>
-									<label for="cars"></label>
-									<label for="cars"></label>
-									<label for="cars"></label>
-									<button type="button" id="submitBtn" class="btn btn-primary">Refresh</button> -->
-
 									<div class="col-sm-12">
 										<div class="card">
 											<table style="border:1px solid black;margin-left:auto;margin-right:auto;border-spacing:33px;border-collapse:separate;">
@@ -356,16 +316,7 @@
 										</div>
 									</div>								
 								</div>
-								<!-- temporary card to show emotions -->
-								<div class="card flex-fill">
-									<div class="card-header">
-										<h3>Stream Chats</h3>
-									</div>
-									<div class="card-body d-flex">
-										<div id='read_random_sentiments'></div>
-									</div>
-								</div>
-								<!-- temporary card to show emotions -->
+
 								<!-- card to show recommendation of channel -->
 								<div class="card flex-fill">
 									<div class="card-header">
@@ -386,6 +337,17 @@
 									</div>
 								</div>
 								<!-- card to show recommendation of channel -->
+
+								<!-- temporary card to show emotions -->
+								<div class="card flex-fill">
+									<div class="card-header">
+										<h3>Stream Chats</h3>
+									</div>
+									<div class="card-body d-flex">
+										<div id='read_random_sentiments'></div>
+									</div>
+								</div>
+								<!-- temporary card to show emotions -->								
 							</div>
 						</div>
 					</div>
@@ -507,8 +469,18 @@
 								<h3>Detailed analysis of last 12 hours of livestream for the selected date</h3>
 							</div>
 							<object type="image/svg+xml" data={{ url_for('static', filename="legend.svg") }}></object>
-							<div id="observablehq-chart-fbd47c6c"></div>
-							<div id="observablehq-mystyle-fbd47c6c"></div>
+							<!-- ####### STATIC SVGs FOR STREAMERs  ####### -->							
+							<div id="lirik_svg">
+								<div id="observablehq-chart-fbd47c6c"></div>
+								<div id="observablehq-mystyle-fbd47c6c"></div>
+							</div>
+
+							<div id="sweetdreams_svg">
+								<div id="observablehq-chart-cc08d71b"></div>
+								<div id="observablehq-mystyle-cc08d71b"></div>
+							</div>
+							<!-- ####### STATIC SVGs FOR STREAMERs  ####### -->
+
 							<div class="card-header">
 								<h3>Sentiment scores for last 2 weeks of livestream </h3>
 							</div>
@@ -1304,265 +1276,35 @@
 
 		</script>
 		<script>
-			// $(document).ready(function() {
-			// 	$('#streamer_choose').change(function(){
-			// 		var selVal = $(this).val();
-			// 		sessionStorage.setItem("SelItem", selVal);												  
-			// 		console.log(selVal);
-			// 		$.ajax({
-			// 			url: "/recieve_streamer_visitors",
-			// 			type: "get",
-			// 			data: {streamer_choose_id: selVal},
-			// 		success: function(response) {
-			// 		$("#streamer_visitors").html(response);
-			// 		},
-			// 		error: function(xhr) {
-			// 		//Do Something to handle error
-			// 		}
-			// 	});
-			// 	});
+
+
+			// $('#streamer_choose').change(function(){
+			// 	var selVal = $(this).val();
+			// 	console.log('Inside the continuous looping function', selVal)
+			// 	// if (selVal == ""){
+			// 			setInterval(function(){ 
+			// 			//code goes here that will be run every 5 seconds.    
+			// 			$.ajax({
+			// 					url: "/read_random_sentiments",
+			// 					type: "get",
+			// 					data: {},
+			// 					dataType:"JSON",
+			// 				success: function(response) {
+			// 					// console.log(response);
+           	// 					console.log(response[0].sentiment_display);
+			// 					console.log(response[0].prob_score);
+			// 					$("#read_random_sentiments").html(response[0].sentiment_display);
+			// 					data.push(response[0].prob_score);
+			// 					// $("#data").html(data[0].sentiment_display);
+			// 				},
+			// 				error: function(xhr) {
+			// 				//Do Something to handle error
+			// 				}
+			// 			});
+			// 		}, 3000);
+			// 	// }
 			// });
 
-			// $(document).ready(function() {
-			// 	$('#streamer_choose').change(function(){
-			// 		var selVal = $(this).val();
-			// 		sessionStorage.setItem("SelItem", selVal);												  
-			// 		$.ajax({
-			// 			url: "/streamer_visitors_perc",
-			// 			type: "get",
-			// 			data: {streamer_choose_id: selVal},
-			// 		success: function(response) {
-			// 		$("#streamer_visitors_perc").html(response);
-			// 		},
-			// 		error: function(xhr) {
-			// 		//Do Something to handle error
-			// 		}
-			// 	});
-			// 	});
-			// });
-			// $(document).ready(function() {
-			// 	$('#streamer_choose').change(function(){
-			// 		var selVal = $(this).val();
-			// 		sessionStorage.setItem("SelItem", selVal);												  
-			// 		$.ajax({
-			// 			url: "/streamer_visitors_earnings",
-			// 			type: "get",
-			// 			data: {streamer_choose_id: selVal},
-			// 		success: function(response) {
-			// 		$("#streamer_visitors_earnings").html(response);
-			// 		},
-			// 		error: function(xhr) {
-			// 		//Do Something to handle error
-			// 		}
-			// 	});
-			// 	});
-			// });
-			// $(document).ready(function() {
-			// 	$('#streamer_choose').change(function(){
-			// 		var selVal = $(this).val();
-			// 		sessionStorage.setItem("SelItem", selVal);												  
-			// 		$.ajax({
-			// 			url: "/streamer_visitors_earnings_perc",
-			// 			type: "get",
-			// 			data: {streamer_choose_id: selVal},
-			// 		success: function(response) {
-			// 		$("#streamer_visitors_earnings").html(response);
-			// 		},
-			// 		error: function(xhr) {
-			// 		//Do Something to handle error
-			// 		}
-			// 	});
-			// 	});
-			// });			
-			// $(document).ready(function() {
-			// 	$('#streamer_choose').change(function(){
-			// 		var selVal = $(this).val();
-			// 		sessionStorage.setItem("SelItem", selVal);												  
-			// 		$.ajax({
-			// 			url: "/livestreamed_min",
-			// 			type: "get",
-			// 			data: {streamer_choose_id: selVal},
-			// 		success: function(response) {
-			// 		$("#livestreamed_min").html(response);
-			// 		},
-			// 		error: function(xhr) {
-			// 		//Do Something to handle error
-			// 		}
-			// 	});
-			// 	});
-			// });					
-			// $(document).ready(function() {
-			// 	$('#streamer_choose').change(function(){
-			// 		var selVal = $(this).val();
-			// 		console.log(selVal)
-			// 		sessionStorage.setItem("SelItem", selVal);												  
-			// 		$.ajax({
-			// 			url: "/livestreamed_min_perc",
-			// 			type: "get",
-			// 			data: {streamer_choose_id: selVal},
-			// 		success: function(response) {
-			// 		$("#livestreamed_min_perc").html(response);
-			// 		},
-			// 		error: function(xhr) {
-			// 		//Do Something to handle error
-			// 		}
-			// 	});
-			// 	});
-			// });		
-
-			// $(document).ready(function() {
-			// 	$('#streamer_choose').change(function(){
-			// 		var selVal = $(this).val();
-			// 		console.log(selVal)
-			// 		sessionStorage.setItem("SelItem", selVal);												  
-			// 		$.ajax({
-			// 			url: "/streamer_chats_count",
-			// 			type: "get",
-			// 			data: {streamer_choose_id: selVal},
-			// 		success: function(response) {
-			// 		$("#streamer_chats_count").html(response);
-			// 		},
-			// 		error: function(xhr) {
-			// 		//Do Something to handle error
-			// 		}
-			// 	});
-			// 	});
-			// });		
-			
-			// $(document).ready(function() {
-			// 	$('#streamer_choose').change(function(){
-			// 		var selVal = $(this).val();
-			// 		console.log(selVal)
-			// 		sessionStorage.setItem("SelItem", selVal);												  
-			// 		$.ajax({
-			// 			url: "/streamer_chats_perc",
-			// 			type: "get",
-			// 			data: {streamer_choose_id: selVal},
-			// 		success: function(response) {
-			// 		$("#streamer_chats_perc").html(response);
-			// 		},
-			// 		error: function(xhr) {
-			// 		//Do Something to handle error
-			// 		}
-			// 	});
-			// 	});
-			// });
-
-			$('#streamer_choose').change(function(){
-				var selVal = $(this).val();
-				console.log('Inside the continuous looping function', selVal)
-				// if (selVal == ""){
-						setInterval(function(){ 
-						//code goes here that will be run every 5 seconds.    
-						$.ajax({
-								url: "/read_random_sentiments",
-								type: "get",
-								data: {},
-								dataType:"JSON",
-							success: function(response) {
-								// console.log(response);
-           						console.log(response[0].sentiment_display);
-								console.log(response[0].prob_score);
-								$("#read_random_sentiments").html(response[0].sentiment_display);
-								data.push(response[0].prob_score);
-								// $("#data").html(data[0].sentiment_display);
-							},
-							error: function(xhr) {
-							//Do Something to handle error
-							}
-						});
-					}, 3000);
-				// }
-			});
-
-			// $(document).ready(function(){
-			// 	//   refreshTable();
-			// 	//   refresh_sentiments_using_d3();
-			// 	read_random_sentiments();
-			// });
-			
-			// function read_random_sentiments(){
-			// 	$.ajax({
-			// 		url: "/read_random_sentiments",
-			// 		type: "get",
-			// 		success:function(data){
-			// 			$("#read_random_sentiments").html(response);
-			// 			setTimeout(function(){
-			// 				read_random_sentiments(); //this will send request again and again;
-			// 			}, 5000);
-			// 		}
-			// 	});
-			// }
-
-			// function valueChanged(){
-			// 	if($('.historic_or_live_feed').is(":checked")){
-			// 		$("#live_feed").show();
-			// 		$("#historic_feed").hide();
-			// 	}else{
-			// 		$("#live_feed").hide();
-			// 		$("#historic_feed").show();
-			// 	}
-			// }
-			// $(document).ready(valueChanged);
-
-			$(document).ready(function () {
-				$('#btnradio1').click(function () {
-					// var e = document.getElementById("streamer_choose");
-					// var strUser = e.value;
-					// var text = e.options[e.selectedIndex].text;				
-					// console.log('----> ', strUser)
-					// console.log('----> ', text)
-
-					// var eDate = document.getElementById("streamer_date");
-					// var strDate = eDate.value;
-					// var strDateText = eDate.options[eDate.selectedIndex].text;				
-					// console.log('----> ', strDate)
-					// console.log('----> ', strDateText)					
-
-					// if ($(this).is(':checked')) {
-					// 	$("#live_feed").show();
-					// 	$("#historic_feed").hide();
-					// }
-				});
-
-				$('#btnradio2').click(function () {
-					// var e = document.getElementById("streamer_choose");
-					// var strUser = e.value;
-					// var text = e.options[e.selectedIndex].text;				
-					// console.log('----> ', strUser)
-					// console.log('----> ', text)
-
-					// var eDate = document.getElementById("streamer_date");
-					// var strDate = eDate.value;
-					// var strDateText = eDate.options[eDate.selectedIndex].text;				
-					// console.log('----> ', strDate)
-					// console.log('----> ', strDateText)					
-
-					// var radio_selected = document.getElementById("live_feed");
-					// var radio_selected_val = radio_selected.value;
-					// var radio_selected_text = radio_selected.options[radio_selected.selectedIndex].text;				
-					// console.log('----> ', radio_selected_val)
-					// console.log('----> ', radio_selected_text)	
-
-					
-					// if ($(this).is(':checked')) {
-					// 		$("#live_feed").hide();
-					// 		$("#historic_feed").show();
-
-					// 		$.ajax({
-					// 			url: "/streamer_chats_perc",
-					// 			type: "get",
-					// 			data: {streamer_choose_id: strDate},
-					// 		success: function(response) {
-					// 			$("#streamer_chats_perc").html(response);
-					// 		},
-					// 		error: function(xhr) {
-					// 			//Do Something to handle error
-					// 		}
-					// 	});
-					// }
-				});
-			});
 
 
 			$(document).ready(function () {
@@ -1628,6 +1370,9 @@
 							$("#rec_engine_output_table").html("");
 							$("#rec_engine_output_table").html('<p style="font-family:georgia,garamond,serif;font-size:16px;font-style:italic;color:blue;">Go to the recordings tab to access your recommended streams based your history</p>');	
 
+							$("#read_random_sentiments").html("");
+							$("#read_random_sentiments").html('<p style="font-family:georgia,garamond,serif;font-size:16px;font-style:italic;color:blue;">Go to the recordings tab to access your recommended streams based your history</p>');	
+
 							// call_streamer_func('/average_viewers', strUser, strDate, '#average_viewers');
 							// call_streamer_func('/followers_change', strUser, strDate, '#followers_change');
 							// call_streamer_func('/subscriber_change', strUser, strDate, '#subscriber_change');
@@ -1661,7 +1406,38 @@
 							call_streamer_func('/chat_percentages', strUser, strDate, '#chat_percentages');
 							// call_streamer_func('/rec_engine_output_table', strUser, strDate, '#rec_engine_output_table');
 							$("#rec_engine_output_table").html("");
+
+							if(text=='sweetdreams'){
+								$("#lirik_svg").hide();
+								$("#sweetdreams_svg").show();
+							}else {
+								$("#lirik_svg").show();
+								$("#sweetdreams_svg").hide();
+							}
+
+
+							setInterval(function(){ 
+								//code goes here that will be run every 5 seconds.    
+								$.ajax({
+										url: "/read_random_sentiments",
+										type: "get",
+										data: {},
+										dataType:"JSON",
+									success: function(response) {
+										// console.log(response);
+										console.log(response[0].sentiment_display);
+										console.log(response[0].prob_score);
+										$("#read_random_sentiments").html(response[0].sentiment_display);
+										data.push(response[0].prob_score);
+										// $("#data").html(data[0].sentiment_display);
+									},
+									error: function(xhr) {
+									//Do Something to handle error
+									}
+								});
+							}, 3000);
 					}
+					
 				});
 
 
@@ -1727,15 +1503,6 @@
 		</script>
 		
 
-		<!-- <script type="module">
-		import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
-		import define from "https://api.observablehq.com/@vbeohar/line-chart-tooltip.js?v=3";
-		new Runtime().module(define, name => {
-		if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-3319f4c3"));
-		return ["focus"].includes(name);
-		});
-		</script> -->
-
 		<script type="module">
 		import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
 		import define from "https://api.observablehq.com/@vbeohar/line-chart-tooltip-v2.js?v=3";
@@ -1750,7 +1517,17 @@
 		import define from "https://api.observablehq.com/@vbeohar/creating-legends-for-charts-forked-to-create-legend-for-my-w.js?v=3";
 		new Runtime().module(define, Inspector.into("#observablehq-ed107dc9"));
 		</script>
-		<!-- <script src="/static/assets/js/modal_example_w3schools.js"></script> -->
+
+		<!-- ####### STATIC SVG FOR SWEETDREAMS STREAMER  ####### -->
+		<script type="module">
+			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+			import define from "https://api.observablehq.com/@vbeohar/w210_streamer_chart_sample_1.js?v=3";
+			new Runtime().module(define, name => {
+			if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-cc08d71b"));
+			if (name === "mystyle") return new Inspector(document.querySelector("#observablehq-mystyle-cc08d71b"));
+			});
+		</script>
+		<!-- ####### STATIC SVG FOR SWEETDREAMS STREAMER  ####### --> 
 
 
 		<script>
