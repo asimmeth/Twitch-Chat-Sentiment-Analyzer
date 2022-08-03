@@ -319,7 +319,7 @@
 									</div>
 									<div class="card">
 										<div class="card-body">
-											<h3>Change in Followers</h3>
+											<h3>Followers Growth</h3>
 											<h1 class="mt-1 mb-3"><div id='followers_change'></div></h1>
 											<div class="mb-1">
 												<span class="text-muted"> <i class="mdi mdi-arrow-bottom-right"></i><div id='pct_follower_change'></div></span>
@@ -328,7 +328,7 @@
 									</div>
 									<div class="card">
 										<div class="card-body">
-											<h3>Change in Subscribers</h3>
+											<h3>Subscribers Growth</h3>
 											<h1 class="mt-1 mb-3"><div id='subscriber_change'></div></h1>
 											<div class="mb-1">
 													<span class="text-muted"> <i class="mt-1 mb-3"></i><div id='pct_subscriber_change'></div></span>
@@ -481,32 +481,34 @@
 
 				<div class="col-xl-6 col-xxl-7" id="historic_feed" style="display:none">
 					<div class="card flex-fill w-100">
-						<!-- <div class="card-header"> -->
+						<div class="card-header">
 							<h3>Historic sentiments for our selected streams</h3>
-						<!-- </div> -->
+						</div>
 						<div class="card-body py-3">
-							<!-- <style>
-								div.video-background {
-									z-index: 99999;
-								}
-								div.video-background video {
-									z-index: 1 !important;
-								}
-							</style> -->
-							<!-- <div class="ratio ratio-16x9"> -->
+							<div id="video1">
 								<video controls width="100%" height="75%" loop autoplay>
-									<!-- <source src={{ url_for('static', filename="supcaitlin_twitch_recording_2022-07-15.mp4") }} type="video/mp4">
-									<source src={{ url_for('static', filename="supcaitlin_twitch_recording_2022-07-15 at 1.17.29 AM_2.mp4") }} type="video/mp4"> -->
-									<!-- <source src={{ url_for('static', filename="criticalrole_twitch_recording_2022-07-15 at 1.14.40 AM.mp4") }} type="video/mp4"> -->
 									<source src={{ url_for('static', filename="TwitchGif.mp4") }} type="video/mp4">
 									Your browser does not support the video tag.
-								</video>	
-							<!-- </div> -->
+								</video>
+							</div>
+							<div id="video2">
+								<video controls width="100%" height="75%" loop autoplay>
+									<source src={{ url_for('static', filename="TwitchGif_2.mp4") }} type="video/mp4">
+									Your browser does not support the video tag.
+								</video>
+							</div>
+							<div id="video3">
+								<video controls width="100%" height="75%" loop autoplay>
+									<source src={{ url_for('static', filename="TwitchGif_3.mp4") }} type="video/mp4">
+									Your browser does not support the video tag.
+								</video>
+							</div>															
 							<div class="card-header">
 								<h3>Detailed analysis of last 12 hours of livestream for the selected date</h3>
 							</div>
 							<object type="image/svg+xml" data={{ url_for('static', filename="legend.svg") }}></object>
-							<!-- ####### STATIC SVGs FOR STREAMERs  ####### -->							
+
+							<!-- ####### STATIC SVGs FOR STREAMERs BELOW ####### -->							
 							<div id="lirik_svg">
 								<!-- 
 									These were the original ones manually made... beautiful but not useful for our analysis
@@ -1492,30 +1494,52 @@
 								$("#shivfps_svg").hide();
 								$("#sweetdreams_svg").show();
 								$("#gmhikaru_svg").hide();
+
+								$("#video1").hide();
+								$("#video2").hide();
+								$("#video3").show();
 							}else if(text=='chenny323'){
 								$("#lirik_svg").hide();
 								$("#sweetdreams_svg").hide();
 								$("#chenny323_svg").show();
 								$("#shivfps_svg").hide();
 								$("#gmhikaru_svg").hide();
+
+								$("#video1").hide();
+								$("#video2").show();
+								$("#video3").hide();
 							}else if(text=='shivfps'){
 								$("#lirik_svg").hide();
 								$("#sweetdreams_svg").hide();
 								$("#chenny323_svg").hide();
 								$("#shivfps_svg").show();
 								$("#gmhikaru_svg").hide();
+
+								$("#video1").show();
+								$("#video2").hide();
+								$("#video3").hide();
 							}else if(text=='gmhikaru'){
 								$("#lirik_svg").hide();
 								$("#sweetdreams_svg").hide();
 								$("#chenny323_svg").hide();
 								$("#shivfps_svg").hide();
 								$("#gmhikaru_svg").show();
+
+								$("#video1").hide();
+								$("#video2").show();
+								$("#video3").hide();
 							}else {
 								$("#lirik_svg").show();
 								$("#sweetdreams_svg").hide();
 								$("#chenny323_svg").hide();
 								$("#shivfps_svg").hide();
 								$("#gmhikaru_svg").hide();
+
+								$("#video1").show();
+								$("#video2").hide();
+								$("#video3").hide();
+
+
 							}
 							
 							setInterval(function(){ 
