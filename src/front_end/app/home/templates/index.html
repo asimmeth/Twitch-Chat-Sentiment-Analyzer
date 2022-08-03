@@ -504,7 +504,7 @@
 								</video>
 							</div>															
 							<div class="card-header">
-								<h3>Detailed analysis of last 12 hours of livestream for the selected date</h3>
+								<h3>Detailed Breakdown of Stream</h3>
 							</div>
 							<object type="image/svg+xml" data={{ url_for('static', filename="legend.svg") }}></object>
 
@@ -542,7 +542,23 @@
 								<h3>Sentiment scores for last 2 weeks of livestream </h3>
 							</div>
 							<!-- <div id="observablehq-chart-3319f4c3"></div> VB commenting this out since we need only 14 days worth of sentiments --> 
-							<div id="observablehq-chart-f868c6c8"></div>
+							<div id="default_2week_svg">
+								<div id="observablehq-chart-f868c6c8"></div>
+							</div>	
+							<div id="lirik_2week_svg">
+								<div id="observablehq-chart-f868c6c8"></div>
+							</div>	
+							<div id="sweetdreams_2week_svg">
+								<div id="observablehq-chart-8d913776"></div>
+							</div>	
+							<div id="gmhikaru_2week_svg">
+								<div id="observablehq-chart-1137147d"></div>
+							</div>	
+							<div id="chenny323_2week_svg">
+								<div id="observablehq-chart-965d74ea"></div>
+							</div>								
+							
+
 						</div>
 					</div>
 				</div>
@@ -1498,6 +1514,12 @@
 								$("#video1").hide();
 								$("#video2").hide();
 								$("#video3").show();
+
+								$("#sweetdreams323_2week_svg").show();
+								$("#gmhikaru_2week_svg").hide();
+								$("#default_2week_svg").hide();
+								$("#chenny323_2week_svg").hide();
+								$("#lirik_2week_svg").hide();
 							}else if(text=='chenny323'){
 								$("#lirik_svg").hide();
 								$("#sweetdreams_svg").hide();
@@ -1508,6 +1530,12 @@
 								$("#video1").hide();
 								$("#video2").show();
 								$("#video3").hide();
+
+								$("#sweetdreams323_2week_svg").hide();
+								$("#gmhikaru_2week_svg").hide();
+								$("#default_2week_svg").hide();
+								$("#chenny323_2week_svg").show();
+								$("#lirik_2week_svg").hide();
 							}else if(text=='shivfps'){
 								$("#lirik_svg").hide();
 								$("#sweetdreams_svg").hide();
@@ -1518,6 +1546,12 @@
 								$("#video1").show();
 								$("#video2").hide();
 								$("#video3").hide();
+
+								$("#sweetdreams323_2week_svg").hide();
+								$("#gmhikaru_2week_svg").hide();
+								$("#default_2week_svg").show();
+								$("#chenny323_2week_svg").hide();
+								$("#lirik_2week_svg").hide();
 							}else if(text=='gmhikaru'){
 								$("#lirik_svg").hide();
 								$("#sweetdreams_svg").hide();
@@ -1528,6 +1562,12 @@
 								$("#video1").hide();
 								$("#video2").show();
 								$("#video3").hide();
+
+								$("#sweetdreams323_2week_svg").hide();
+								$("#gmhikaru_2week_svg").show();
+								$("#default_2week_svg").hide();
+								$("#chenny323_2week_svg").hide();
+								$("#lirik_2week_svg").hide();
 							}else {
 								$("#lirik_svg").show();
 								$("#sweetdreams_svg").hide();
@@ -1539,7 +1579,11 @@
 								$("#video2").hide();
 								$("#video3").hide();
 
-
+								$("#sweetdreams323_2week_svg").hide();
+								$("#gmhikaru_2week_svg").hide();
+								$("#default_2week_svg").show();
+								$("#chenny323_2week_svg").hide();
+								$("#lirik_2week_svg").hide();
 							}
 							
 							setInterval(function(){ 
@@ -1657,6 +1701,15 @@
 			if (name === "mystyle") return new Inspector(document.querySelector("#observablehq-mystyle-d368df83"));
 			});
 		</script>
+		<script type="module">
+			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+			import define from "https://api.observablehq.com/@vbeohar/line-chart-tooltip-sweetdreams-w210-capstone.js?v=3";
+			new Runtime().module(define, name => {
+				if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-8d913776"));
+				return ["focus"].includes(name);
+			});
+		</script>
+
 
 		<!-- chenny323 -->
 		<script type="module">
@@ -1667,6 +1720,15 @@
 			if (name === "mystyle") return new Inspector(document.querySelector("#observablehq-mystyle-ef230ae4"));
 			});
 		</script>
+		<script type="module">
+			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+			import define from "https://api.observablehq.com/@vbeohar/line-chart-tooltip-chenny323-w210-capstone.js?v=3";
+			new Runtime().module(define, name => {
+			if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-965d74ea"));
+			return ["focus"].includes(name);
+			});
+		</script>
+
 
 		<!-- shivfps -->
 		<script type="module">
@@ -1687,6 +1749,15 @@
 			if (name === "mystyle") return new Inspector(document.querySelector("#observablehq-mystyle-be8d8888"));
 			});
 		</script>
+
+		<script type="module">
+			import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+			import define from "https://api.observablehq.com/@vbeohar/line-chart-tooltip-gmhikaru-w210-capstone.js?v=3";
+			new Runtime().module(define, name => {
+			if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-1137147d"));
+			return ["focus"].includes(name);
+			});
+		</script>		
 
 		<!-- lirik -->
 		<script type="module">
