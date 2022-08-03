@@ -456,15 +456,17 @@ def recommender_engine(channel_name, start_time, sorted_choices):
 
     df['followers_change'] = np.array(followers_list)
 
-    df = df.append(pd.DataFrame({'channel_name':['xeppaa', 'xeppaa', 'xeppaa', 'xeppaa'], 'stream_topic':['VALORANT', 'VALORANT2', 'VALORANT3', 'VALORANT4'] , \
-                                'avg_viewers':[1000, 1040, 1100, 2000], 'average_sentiment':[0.1, 0.2, 0.3, 0.4], 'time':[8, 3, 5, 6], 'subscriber_change':[20, 30, 40, 50], 'followers_change':[20, 30, 40, 50]}))
+    df = df.append(pd.DataFrame({'channel_name':['random', 'random', 'random', 'random'], 'stream_topic':['VALORANT', 'POLITICS', 'MINECRAFT', 'MULTIVERSUS'] , \
+                                'avg_viewers':[1000, 1040, 1100, 2000], 'average_sentiment':[0.4, 0.14, 0.87, 0.54], 'time':[8, 3, 5, 6], 'subscriber_change':[500, 799, -200, 1230], 'followers_change':[25, 94, 12, 73]}))
 
     df.loc[:,'Topic'] = df['stream_topic']
     df.loc[:,'Avg viewers'] = df['avg_viewers']
     df.loc[:,'Avg sentiment'] = df['average_sentiment']
     df.loc[:,'Subscriber Δ'] = df['subscriber_change']
     df.loc[:,'Followers Δ'] = df['followers_change']
-    print(df)
+
+    df = df.sample(4)
+    # print(df)
     topics = [1, 2, 3, 5, 5]
     
     if len(topics) > 1:
