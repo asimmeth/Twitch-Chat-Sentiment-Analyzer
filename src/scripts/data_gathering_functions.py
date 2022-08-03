@@ -475,7 +475,7 @@ def recommender_engine(channel_name, start_time, sorted_choices):
         # df['Score'] = df.apply(recommendation, args=(sorted_choices), axis = 1, ) --> this was hard to use because of multiple **kwargs
         scores = sorted_choices.split(',')
         print(scores)
-        df.loc[:, 'Score %'] = [(i*.35 + i*.30 + k*.25 + l*.10)/time for i, j, k, l, time in zip(df[scores[0]], df[scores[1]], df[scores[2]], df['avg_viewers'], df['time'])]
+        df.loc[:, 'Score %'] = [(i*.35 + i*.30 + k*.25 + l*.10)/time for i, j, k, l, time in zip(df[scores[0]], df[scores[1]], df[scores[2]], df[scores[3]], df['time'])]
     else:
         df['Score %'] = 100
      
